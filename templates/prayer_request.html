@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Prayer Request | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#fffbea;
+color:#333;
+}
+
+/* HEADER */
+
+header{
+background:linear-gradient(135deg,#FFD700,#ffffff);
+padding:80px 20px;
+text-align:center;
+}
+
+header h1{
+font-size:45px;
+margin-bottom:15px;
+color:#333;
+}
+
+header p{
+max-width:850px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+color:#555;
+}
+
+/* FLASH MESSAGE */
+
+.flash{
+width:90%;
+max-width:1200px;
+margin:30px auto;
+padding:15px;
+border-radius:8px;
+text-align:center;
+font-weight:600;
+}
+
+.flash.success{
+background:#d4edda;
+color:#155724;
+border:1px solid #c3e6cb;
+}
+
+.flash.error{
+background:#f8d7da;
+color:#721c24;
+border:1px solid #f5c6cb;
+}
+
+/* MAIN CONTAINER */
+
+.container{
+width:90%;
+max-width:1200px;
+margin:60px auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+}
+
+/* CARD */
+
+.form-card,
+.info{
+background:#fff;
+padding:40px;
+border-radius:18px;
+border-top:6px solid #FFD700;
+box-shadow:0 12px 30px rgba(255,215,0,.25);
+transition:.3s;
+}
+
+.form-card:hover,
+.info:hover{
+transform:translateY(-5px);
+}
+
+.form-card h2,
+.info h2{
+color:#b8860b;
+margin-bottom:20px;
+}
+
+/* FORM */
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:#555;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:14px;
+border:1px solid #FFD700;
+border-radius:8px;
+font-size:15px;
+outline:none;
+transition:.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+border-color:#e6c200;
+box-shadow:0 0 8px rgba(255,215,0,.4);
+}
+
+textarea{
+resize:vertical;
+min-height:170px;
+}
+
+.checkbox{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:15px;
+}
+
+.checkbox input{
+width:18px;
+height:18px;
+accent-color:#FFD700;
+}
+
+button{
+margin-top:25px;
+width:100%;
+padding:15px;
+background:#FFD700;
+color:#333;
+border:none;
+border-radius:8px;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#e6c200;
+color:#fff;
+}
+
+/* SCRIPTURE */
+
+.scripture{
+background:#FFD700;
+padding:25px;
+border-radius:12px;
+margin-top:20px;
+}
+
+.scripture h3{
+margin-bottom:15px;
+}
+
+.scripture p{
+line-height:1.8;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.container{
+grid-template-columns:1fr;
+}
+
+header h1{
+font-size:35px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>🙏 Prayer Request</h1>
+
+<p>
+
+We believe in the power of prayer.
+
+Share your prayer request with us and our prayer ministry will stand with you in faith.
+
+Every request is handled with love, care and confidentiality.
+
+</p>
+
+</header>
+
+<!-- Flash Messages -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+{% for category, message in messages %}
+
+<div class="flash {{ category }}">
+{{ message }}
+</div>
+
+{% endfor %}
+
+{% endif %}
+{% endwith %}
+
+<div class="container">
+
+<div class="form-card">
+
+<h2>Submit Your Prayer Request</h2>
+
+<form method="POST" action="{{ url_for('prayer_request') }}">
+
+<!-- ==========================
+     PRAYER REQUEST FORM
+========================== -->
+
+<div class="form-group">
+
+<label for="full_name">Full Name <span style="color:red;">*</span></label>
+
+<input
+type="text"
+id="full_name"
+name="full_name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label for="email">Email Address</label>
+
+<input
+type="email"
+id="email"
+name="email"
+placeholder="Enter your email address">
+
+</div>
+
+<div class="form-group">
+
+<label for="phone">Phone Number</label>
+
+<input
+type="tel"
+id="phone"
+name="phone"
+placeholder="+254 7XX XXX XXX">
+
+</div>
+
+<div class="form-group">
+
+<label for="category">Prayer Category</label>
+
+<select
+id="category"
+name="category"
+required>
+
+<option value="">-- Select Category --</option>
+
+<option value="Healing">Healing</option>
+
+<option value="Thanksgiving">Thanksgiving</option>
+
+<option value="Family">Family</option>
+
+<option value="Marriage">Marriage</option>
+
+<option value="Children">Children</option>
+
+<option value="Financial Breakthrough">Financial Breakthrough</option>
+
+<option value="Employment">Employment</option>
+
+<option value="Education">Education</option>
+
+<option value="Business">Business</option>
+
+<option value="Travel Mercy">Travel Mercy</option>
+
+<option value="Deliverance">Deliverance</option>
+
+<option value="Spiritual Growth">Spiritual Growth</option>
+
+<option value="Church">Church</option>
+
+<option value="Other">Other</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label for="prayer">
+Prayer Request <span style="color:red;">*</span>
+</label>
+
+<textarea
+id="prayer"
+name="prayer"
+placeholder="Write your prayer request here..."
+required></textarea>
+
+</div>
+
+<div class="checkbox">
+
+<input
+type="checkbox"
+id="confidential"
+name="confidential">
+
+<label for="confidential">
+
+Keep my prayer request confidential.
+
+</label>
+
+</div>
+
+<button type="submit">
+
+🙏 Submit Prayer Request
+
+</button>
+
+</form>
+
+</div>
+
+<!-- ==========================
+     INFORMATION PANEL
+========================== -->
+
+<div class="info">
+
+<h2>🙏 We Are Here To Pray With You</h2>
+
+<p>
+
+No matter what season of life you are going through,
+our church believes that God hears every sincere prayer.
+
+</p>
+
+<p>
+
+Our prayer ministry faithfully prays for individuals,
+families, the church and our community.
+
+Every prayer request submitted is handled with
+love, compassion and confidentiality.
+
+</p>
+
+<p>
+
+Whether you need healing, guidance,
+restoration, encouragement or thanksgiving,
+we are honored to stand with you in prayer.
+
+</p>
+
+<div class="scripture">
+
+<h3>📖 Jeremiah 33:3</h3>
+
+<p>
+
+"Call to me and I will answer you,
+and tell you great and unsearchable things
+you do not know."
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================
+     PRAYER TEAM
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:20px auto 60px;">
+
+<div style="background:#fff;padding:40px;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.08);">
+
+<h2 style="color:#b8860b;text-align:center;margin-bottom:20px;">
+🙏 Our Prayer Ministry
+</h2>
+
+<p style="text-align:center;color:#666;line-height:1.8;max-width:850px;margin:auto;">
+
+Our dedicated prayer ministry faithfully intercedes for individuals,
+families, the church, and our community. Every prayer request is
+handled with love, compassion, respect, and confidentiality.
+
+</p>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:40px;">
+
+<div style="background:#fffbea;padding:25px;border-radius:15px;text-align:center;border-top:5px solid #FFD700;">
+
+<h3 style="color:#b8860b;">🙏 Daily Prayer</h3>
+
+<p style="margin-top:10px;color:#666;line-height:1.7;">
+
+Our prayer team prays every day for all submitted
+prayer requests.
+
+</p>
+
+</div>
+
+<div style="background:#fffbea;padding:25px;border-radius:15px;text-align:center;border-top:5px solid #FFD700;">
+
+<h3 style="color:#b8860b;">❤️ Confidential Care</h3>
+
+<p style="margin-top:10px;color:#666;line-height:1.7;">
+
+Confidential requests are only shared with
+authorized church prayer leaders.
+
+</p>
+
+</div>
+
+<div style="background:#fffbea;padding:25px;border-radius:15px;text-align:center;border-top:5px solid #FFD700;">
+
+<h3 style="color:#b8860b;">🤝 Spiritual Support</h3>
+
+<p style="margin-top:10px;color:#666;line-height:1.7;">
+
+We provide prayer, encouragement,
+pastoral care and biblical counseling.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     GOD'S PROMISES
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:auto;">
+
+<h2 style="text-align:center;color:#b8860b;margin-bottom:40px;">
+
+📖 God's Promises
+
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;">
+
+<div style="background:#FFD700;color:#333;padding:30px;border-radius:18px;">
+
+<h3>Philippians 4:6</h3>
+
+<p style="margin-top:15px;line-height:1.8;">
+
+"Do not be anxious about anything, but in every situation,
+by prayer and petition, with thanksgiving,
+present your requests to God."
+
+</p>
+
+</div>
+
+<div style="background:#FFD700;color:#333;padding:30px;border-radius:18px;">
+
+<h3>Matthew 7:7</h3>
+
+<p style="margin-top:15px;line-height:1.8;">
+
+"Ask and it will be given to you;
+seek and you will find;
+knock and the door will be opened to you."
+
+</p>
+
+</div>
+
+<div style="background:#FFD700;color:#333;padding:30px;border-radius:18px;">
+
+<h3>James 5:16</h3>
+
+<p style="margin-top:15px;line-height:1.8;">
+
+"The prayer of a righteous person
+is powerful and effective."
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     CONTACT PRAYER MINISTRY
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:70px auto;">
+
+<h2 style="text-align:center;color:#b8860b;margin-bottom:40px;">
+
+📞 Contact Our Prayer Ministry
+
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;">
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#b8860b;">📞 Phone</h3>
+
+<p style="margin-top:15px;">
+
+<a href="tel:+254702098431"
+style="text-decoration:none;color:#333;">
+
++254702098431
+
+</a>
+
+</p>
+
+</div>
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#b8860b;">✉ Email</h3>
+
+<p style="margin-top:15px;">
+
+<a href="mailto:prayer@ackstpaulsmafisini.org"
+style="text-decoration:none;color:#333;">
+
+prayer@ackstpaulsmafisini.org
+
+</a>
+
+</p>
+
+</div>
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#b8860b;">🕘 Office Hours</h3>
+
+<p style="margin-top:15px;color:#555;line-height:1.8;">
+
+Monday – Friday<br>
+
+8:00 AM – 5:00 PM
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+     FOOTER
+========================== -->
+
+<footer style="background:#0d47a1;color:#fff;text-align:center;padding:45px 20px;margin-top:50px;">
+
+<p>
+"Devote yourselves to prayer, being watchful and thankful." – Colossians 4:2
+</p>
+
+<p style="margin-top:20px;">
+&copy; 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+</p>
+
+</footer>
+
+<!-- ==========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function(e){
+
+const fullName = document.getElementById("full_name").value.trim();
+const prayer = document.getElementById("prayer").value.trim();
+
+if(fullName === ""){
+
+alert("Please enter your full name.");
+e.preventDefault();
+return;
+
+}
+
+if(prayer.length < 10){
+
+alert("Please provide a more detailed prayer request.");
+e.preventDefault();
+return;
+
+}
+
+const btn = form.querySelector("button[type='submit']");
+
+btn.disabled = true;
+btn.innerHTML = "⏳ Submitting Prayer Request...";
+
+});
+
+</script>
+
+</body>
+</html>    

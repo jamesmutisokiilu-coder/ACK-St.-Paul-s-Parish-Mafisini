@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#333;
+}
+
+/* Header */
+
+header{
+background:linear-gradient(135deg,#0d47a1,#1976d2);
+color:white;
+text-align:center;
+padding:80px 20px;
+}
+
+header h1{
+font-size:45px;
+margin-bottom:15px;
+}
+
+header p{
+font-size:18px;
+max-width:800px;
+margin:auto;
+line-height:1.8;
+}
+
+.container{
+width:90%;
+max-width:1300px;
+margin:60px auto;
+}
+
+/* Filter Buttons */
+
+.filters{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+margin-bottom:50px;
+}
+
+.filters button{
+padding:12px 28px;
+border:none;
+border-radius:30px;
+background:#1976d2;
+color:white;
+cursor:pointer;
+font-size:15px;
+transition:.3s;
+}
+
+.filters button:hover{
+background:#0d47a1;
+transform:translateY(-3px);
+}
+
+/* Gallery */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+transition:.5s;
+}
+
+.card:hover img{
+transform:scale(1.08);
+}
+
+.content{
+padding:20px;
+}
+
+.content h3{
+color:#0d47a1;
+margin-bottom:10px;
+}
+
+.content p{
+color:#666;
+line-height:1.7;
+margin-bottom:15px;
+}
+
+.date{
+font-size:14px;
+color:#1976d2;
+font-weight:bold;
+}
+
+@media(max-width:768px){
+
+header h1{
+font-size:34px;
+}
+
+header p{
+font-size:16px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Church Gallery</h1>
+
+<p>
+Explore memorable moments from worship services,
+youth conferences, choir ministry, evangelism,
+community outreach, and special church events.
+</p>
+
+</header>
+
+<div class="container">
+
+<div class="filters">
+
+<button>All</button>
+
+<button>Sunday Worship</button>
+
+<button>Youth</button>
+
+<button>Choir</button>
+
+<button>Events</button>
+
+<button>Outreach</button>
+
+</div>
+
+<div class="gallery">
+
+<!-- Image 1 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=1" alt="Sunday Worship">
+
+<div class="content">
+
+<h3>Sunday Worship Service</h3>
+
+<p>
+Our congregation worshipping together in praise,
+prayer and thanksgiving.
+</p>
+
+<div class="date">
+📅 6 July 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 2 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=2" alt="Choir">
+
+<div class="content">
+
+<h3>Church Choir</h3>
+
+<p>
+The church choir leading the congregation
+in joyful worship and praise.
+</p>
+
+<div class="date">
+📅 12 June 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 3 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=3" alt="Youth">
+
+<div class="content">
+
+<h3>Youth Fellowship</h3>
+
+<p>
+Young people growing spiritually
+through fellowship and worship.
+</p>
+
+<div class="date">
+📅 18 June 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 4 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=4" alt="Bible Study">
+
+<div class="content">
+
+<h3>Bible Study</h3>
+
+<p>
+Members sharing God's Word and
+encouraging one another in faith.
+</p>
+
+<div class="date">
+📅 Every Wednesday
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 5 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=5" alt="Community Outreach">
+
+<div class="content">
+
+<h3>Community Outreach</h3>
+
+<p>
+Serving the community through
+evangelism and acts of compassion.
+</p>
+
+<div class="date">
+📅 22 May 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 6 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=6" alt="Children Ministry">
+
+<div class="content">
+
+<h3>Children Ministry</h3>
+
+<p>
+Helping children know Christ
+through Bible stories and worship.
+</p>
+
+<div class="date">
+📅 3 June 2026
+</div>
+
+</div>
+
+</div>
+<!-- Image 7 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=7" alt="Women's Fellowship">
+
+<div class="content">
+
+<h3>Women's Fellowship</h3>
+
+<p>
+Women gathering together for prayer,
+Bible study and fellowship.
+</p>
+
+<div class="date">
+📅 15 April 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 8 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=8" alt="Men's Fellowship">
+
+<div class="content">
+
+<h3>Men's Fellowship</h3>
+
+<p>
+Men encouraging one another through
+prayer, discipleship and service.
+</p>
+
+<div class="date">
+📅 8 May 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 9 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=9" alt="Youth Conference">
+
+<div class="content">
+
+<h3>Youth Conference</h3>
+
+<p>
+A memorable youth conference filled
+with worship, teachings and fellowship.
+</p>
+
+<div class="date">
+📅 10 August 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 10 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=10" alt="Baptism Service">
+
+<div class="content">
+
+<h3>Baptism Service</h3>
+
+<p>
+Celebrating new believers publicly
+declaring their faith in Jesus Christ.
+</p>
+
+<div class="date">
+📅 24 March 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 11 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=11" alt="Family Day">
+
+<div class="content">
+
+<h3>Family Thanksgiving</h3>
+
+<p>
+Families celebrating God's goodness
+through thanksgiving and fellowship.
+</p>
+
+<div class="date">
+📅 22 August 2026
+</div>
+
+</div>
+
+</div>
+
+<!-- Image 12 -->
+
+<div class="card">
+
+<img src="https://picsum.photos/600/400?random=12" alt="Church Anniversary">
+
+<div class="content">
+
+<h3>Church Anniversary</h3>
+
+<p>
+Celebrating another year of God's
+faithfulness and abundant blessings.
+</p>
+
+<div class="date">
+📅 5 January 2026
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Video Gallery -->
+
+<section style="margin-top:80px;">
+
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:40px;font-size:34px;">
+Recent Videos
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:30px;">
+
+<div style="background:#fff;border-radius:18px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.08);">
+
+<iframe
+width="100%"
+height="220"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="Sunday Worship"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+<h3 style="margin-top:20px;color:#0d47a1;">
+Sunday Worship Service
+</h3>
+
+<p style="color:#666;margin-top:10px;">
+Watch our latest Sunday worship service
+and be blessed by God's Word.
+</p>
+
+</div>
+
+<div style="background:#fff;border-radius:18px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.08);">
+
+<iframe
+width="100%"
+height="220"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="Youth Conference"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+<h3 style="margin-top:20px;color:#0d47a1;">
+Youth Conference Highlights
+</h3>
+
+<p style="color:#666;margin-top:10px;">
+Highlights from our annual youth conference
+filled with worship and inspiration.
+</p>
+
+</div>
+
+<div style="background:#fff;border-radius:18px;padding:20px;box-shadow:0 10px 25px rgba(0,0,0,.08);">
+
+<iframe
+width="100%"
+height="220"
+src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+title="Choir Ministry"
+frameborder="0"
+allowfullscreen>
+</iframe>
+
+<h3 style="margin-top:20px;color:#0d47a1;">
+Choir Ministry
+</h3>
+
+<p style="color:#666;margin-top:10px;">
+Enjoy powerful praise and worship
+from our church choir.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Footer -->
+
+<footer style="margin-top:80px;background:#0d47a1;color:white;text-align:center;padding:40px 20px;">
+
+<p>
+✉ info@ackstpaulsmafisini.org
+</p>
+
+<p>
+© 2026 ACK St. Paul's Parish Mafisini.
+All Rights Reserved.
+</p>
+
+</footer>
+
+</div>
+
+</body>
+</html>

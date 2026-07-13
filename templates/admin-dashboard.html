@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard | ACK St. Paul's Parish Mafisini</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:#f5f7fb;
+
+color:#333;
+
+display:flex;
+
+}
+
+
+
+/* Sidebar */
+
+.sidebar{
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+width:260px;
+
+height:100vh;
+
+background:#0d47a1;
+
+padding:25px;
+
+overflow-y:auto;
+
+}
+
+
+.sidebar h2{
+
+color:white;
+
+text-align:center;
+
+font-size:22px;
+
+margin-bottom:30px;
+
+}
+
+
+.sidebar a{
+
+display:block;
+
+padding:14px;
+
+margin:8px 0;
+
+color:white;
+
+text-decoration:none;
+
+border-radius:8px;
+
+transition:.3s;
+
+}
+
+
+.sidebar a:hover,
+.sidebar .active{
+
+background:#1976d2;
+
+}
+
+
+
+
+/* Main */
+
+.main{
+
+margin-left:260px;
+
+width:calc(100% - 260px);
+
+}
+
+
+
+/* Top Bar */
+
+.topbar{
+
+background:white;
+
+padding:20px 35px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.topbar h1{
+
+color:#0d47a1;
+
+font-size:28px;
+
+}
+
+
+
+.admin{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+
+
+.admin img{
+
+width:60px;
+
+height:60px;
+
+border-radius:50%;
+
+border:3px solid #1976d2;
+
+}
+
+
+
+.admin h3{
+
+font-size:18px;
+
+}
+
+
+
+.admin p{
+
+color:#666;
+
+font-size:14px;
+
+}
+
+
+
+
+/* Welcome */
+
+.welcome{
+
+margin:35px;
+
+background:linear-gradient(
+135deg,
+#0d47a1,
+#1976d2
+);
+
+padding:40px;
+
+border-radius:20px;
+
+color:white;
+
+}
+
+
+
+.welcome h2{
+
+font-size:34px;
+
+margin-bottom:15px;
+
+}
+
+
+
+.welcome p{
+
+font-size:17px;
+
+line-height:1.8;
+
+}
+
+
+
+/* Cards */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+margin:35px;
+
+}
+
+
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+
+
+.card:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+.card span{
+
+font-size:40px;
+
+}
+
+
+
+.card h4{
+
+margin-top:15px;
+
+color:#666;
+
+}
+
+
+
+.card h1{
+
+color:#0d47a1;
+
+font-size:38px;
+
+margin-top:10px;
+
+}
+
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+
+
+<h2>
+⛪ Church Admin
+</h2>
+
+
+<a href="{{ url_for('dashboard') }}" class="active">
+
+🏠 Dashboard
+
+</a>
+
+
+
+<a href="{{ url_for('reports') }}">
+
+📊 Reports
+
+</a>
+
+
+
+
+
+<a href="{{ url_for('logout') }}">
+
+🚪 Logout
+
+</a>
+
+
+</div>
+
+
+
+
+
+<div class="main">
+
+
+
+<div class="topbar">
+
+
+<h1>
+Administrator Dashboard
+</h1>
+
+
+
+<div class="admin">
+
+
+<img src="https://picsum.photos/100">
+
+
+
+<div>
+
+<h3>
+{{ admin_name }}
+</h3>
+
+
+<p>
+{{ admin_email }}
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="welcome">
+
+
+<h2>
+
+Welcome Back, {{ admin_name }} 👋
+
+</h2>
+
+
+<p>
+
+Manage registered members, prayer requests,
+church events, sermons and all church activities
+from this administration panel.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="stats">
+
+
+
+<div class="card">
+
+<span>
+👥
+</span>
+
+<h4>
+Registered Members
+</h4>
+
+<h1>
+{{ total_users }}
+</h1>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<span>
+🙏
+</span>
+
+<h4>
+Prayer Requests
+</h4>
+
+<h1>
+{{ total_prayers }}
+</h1>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<span>
+📅
+</span>
+
+<h4>
+Upcoming Events
+</h4>
+
+<h1>
+{{ total_events }}
+</h1>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<span>
+🎤
+</span>
+
+<h4>
+Sermons
+</h4>
+
+<h1>
+{{ total_sermons }}
+</h1>
+
+</div>
+
+
+
+</div>
+<!-- REGISTERED MEMBERS -->
+
+<div style="
+margin:35px;
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+">
+
+
+<h2 style="
+color:#0d47a1;
+margin-bottom:20px;
+">
+
+👥 Recently Registered Members
+
+</h2>
+
+
+
+<table style="
+width:100%;
+border-collapse:collapse;
+">
+
+
+<tr style="
+background:#1976d2;
+color:white;
+">
+
+
+<th style="padding:15px;">
+ID
+</th>
+
+
+<th>
+Name
+</th>
+
+
+<th>
+Email
+</th>
+
+
+<th>
+Role
+</th>
+
+
+</tr>
+
+
+
+{% for user in users %}
+
+
+<tr>
+
+
+<td style="padding:15px;">
+{{ user.id }}
+</td>
+
+
+<td>
+{{ user.name }}
+</td>
+
+
+<td>
+{{ user.email }}
+</td>
+
+
+<td>
+
+
+<span style="
+background:#28a745;
+color:white;
+padding:6px 12px;
+border-radius:20px;
+">
+
+{{ user.role }}
+
+</span>
+
+
+</td>
+
+
+</tr>
+
+
+
+{% else %}
+
+
+<tr>
+
+<td colspan="4" style="padding:20px;text-align:center;">
+
+No registered members found
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+<!-- PRAYER REQUESTS -->
+
+
+<div style="
+margin:35px;
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+">
+
+
+<h2 style="
+color:#0d47a1;
+margin-bottom:20px;
+">
+
+🙏 Latest Prayer Requests
+
+</h2>
+
+
+
+<table style="
+width:100%;
+border-collapse:collapse;
+">
+
+
+<tr style="
+background:#1976d2;
+color:white;
+">
+
+
+<th style="padding:15px;">
+Name
+</th>
+
+
+<th>
+Prayer Request
+</th>
+
+
+<th>
+Date
+</th>
+
+
+</tr>
+
+
+
+{% for prayer in prayers %}
+
+
+
+<tr>
+
+
+<td style="padding:15px;">
+{{ prayer.name }}
+</td>
+
+
+<td>
+{{ prayer.prayer }}
+</td>
+
+
+<td>
+{{ prayer.date }}
+</td>
+
+
+</tr>
+
+
+
+{% else %}
+
+
+<tr>
+
+<td colspan="3" style="padding:20px;text-align:center;">
+
+No prayer requests available
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+<!-- EVENTS -->
+
+
+<div style="
+margin:35px;
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+">
+
+
+<h2 style="
+color:#0d47a1;
+margin-bottom:20px;
+">
+
+📅 Upcoming Church Events
+
+</h2>
+
+
+
+
+<table style="
+width:100%;
+border-collapse:collapse;
+">
+
+
+
+<tr style="
+background:#1976d2;
+color:white;
+">
+
+
+<th style="padding:15px;">
+Event
+</th>
+
+
+<th>
+Date
+</th>
+
+
+<th>
+Description
+</th>
+
+
+</tr>
+
+
+
+{% for event in events %}
+
+
+
+<tr>
+
+
+<td style="padding:15px;">
+{{ event.title }}
+</td>
+
+
+<td>
+{{ event.date }}
+</td>
+
+
+<td>
+{{ event.description }}
+</td>
+
+
+</tr>
+
+
+
+{% else %}
+
+
+<tr>
+
+<td colspan="3" style="padding:20px;text-align:center;">
+
+No events added
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
+<!-- SERMONS -->
+
+
+<div style="
+margin:35px;
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+">
+
+
+<h2 style="
+color:#0d47a1;
+margin-bottom:20px;
+">
+
+🎤 Latest Sermons
+
+</h2>
+
+
+
+
+<table style="
+width:100%;
+border-collapse:collapse;
+">
+
+
+
+<tr style="
+background:#1976d2;
+color:white;
+">
+
+
+<th style="padding:15px;">
+Title
+</th>
+
+
+<th>
+Pastor
+</th>
+
+
+<th>
+Date
+</th>
+
+
+</tr>
+
+
+
+{% for sermon in sermons %}
+
+
+
+<tr>
+
+
+<td style="padding:15px;">
+{{ sermon.title }}
+</td>
+
+
+<td>
+{{ sermon.pastor }}
+</td>
+
+
+<td>
+{{ sermon.date }}
+</td>
+
+
+</tr>
+
+
+
+{% else %}
+
+
+<tr>
+
+<td colspan="3" style="padding:20px;text-align:center;">
+
+No sermons uploaded
+
+</td>
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
+<!-- QUICK ACTIONS -->
+
+
+<div style="
+margin:35px;
+background:white;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+">
+
+
+<h2 style="
+color:#0d47a1;
+margin-bottom:20px;
+">
+
+⚡ Quick Actions
+
+</h2>
+
+
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+">
+
+
+
+<a href="{{ url_for('users') }}"
+style="
+background:#1976d2;
+color:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+text-decoration:none;
+">
+
+👥 Manage Members
+
+</a>
+
+
+
+
+<a href="{{ url_for('prayer_request') }}"
+style="
+background:#4caf50;
+color:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+text-decoration:none;
+">
+
+🙏 Prayer Requests
+
+</a>
+
+
+
+
+
+<a href="{{ url_for('events') }}"
+style="
+background:#ff9800;
+color:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+text-decoration:none;
+">
+
+📅 Manage Events
+
+</a>
+
+
+
+
+
+<a href="{{ url_for('sermons') }}"
+style="
+background:#9c27b0;
+color:white;
+padding:15px;
+border-radius:10px;
+text-align:center;
+text-decoration:none;
+">
+
+🎤 Manage Sermons
+
+</a>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<footer style="
+margin:35px;
+background:#0d47a1;
+color:white;
+padding:30px;
+text-align:center;
+border-radius:18px;
+">
+
+
+<h2>
+ACK St. Paul's Parish Mafisini
+</h2>
+
+
+<p>
+Church Management System - Administrator Dashboard
+</p>
+
+
+<p style="margin-top:10px;">
+© 2026 All Rights Reserved
+</p>
+
+
+</footer>
+
+
+
+
+</div>
+
+
+</body>
+
+</html>

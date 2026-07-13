@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Settings | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f4f7fc;
+display:flex;
+color:#333;
+}
+
+/* =======================
+   SIDEBAR
+======================= */
+
+.sidebar{
+width:260px;
+height:100vh;
+background:#0d47a1;
+position:fixed;
+left:0;
+top:0;
+padding:25px;
+overflow-y:auto;
+box-shadow:4px 0 12px rgba(0,0,0,.15);
+}
+
+.sidebar h2{
+color:#fff;
+text-align:center;
+margin-bottom:35px;
+font-size:24px;
+}
+
+.sidebar a{
+display:block;
+padding:14px 18px;
+margin:10px 0;
+color:#fff;
+text-decoration:none;
+border-radius:10px;
+transition:.3s;
+font-size:15px;
+font-weight:500;
+}
+
+.sidebar a:hover,
+.sidebar .active{
+background:#1976d2;
+padding-left:24px;
+}
+
+/* =======================
+   MAIN CONTENT
+======================= */
+
+.main{
+margin-left:260px;
+width:calc(100% - 260px);
+padding:35px;
+}
+
+.header{
+margin-bottom:35px;
+}
+
+.header h1{
+color:#0d47a1;
+font-size:34px;
+margin-bottom:8px;
+}
+
+.header p{
+color:#666;
+font-size:16px;
+}
+
+/* =======================
+   SETTINGS CARDS
+======================= */
+
+.settings-card{
+background:#fff;
+border-radius:18px;
+padding:30px;
+margin-bottom:30px;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.settings-card:hover{
+transform:translateY(-3px);
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+}
+
+.settings-card h2{
+color:#0d47a1;
+margin-bottom:25px;
+padding-bottom:10px;
+border-bottom:2px solid #f1f1f1;
+font-size:22px;
+}
+
+/* =======================
+   GRID
+======================= */
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:25px;
+}
+
+.form-group{
+margin-bottom:22px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
+color:#444;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:13px 15px;
+font-size:15px;
+border:1px solid #ddd;
+border-radius:10px;
+outline:none;
+transition:.3s;
+background:#fff;
+}
+
+textarea{
+resize:vertical;
+min-height:120px;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+border-color:#1976d2;
+box-shadow:0 0 8px rgba(25,118,210,.2);
+}
+
+/* =======================
+   LOGO
+======================= */
+
+.logo-box{
+text-align:center;
+margin-bottom:30px;
+}
+
+.logo-box img{
+width:140px;
+height:140px;
+border-radius:50%;
+border:5px solid #1976d2;
+object-fit:cover;
+box-shadow:0 8px 18px rgba(0,0,0,.15);
+}
+
+.logo-box input{
+margin-top:18px;
+}
+
+/* =======================
+   BUTTONS
+======================= */
+
+.button-group{
+text-align:center;
+}
+
+.button-group button{
+padding:14px 35px;
+margin:10px;
+font-size:16px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+font-weight:600;
+}
+
+.save-btn{
+background:#1976d2;
+color:#fff;
+}
+
+.save-btn:hover{
+background:#125bb5;
+transform:translateY(-2px);
+}
+
+.reset-btn{
+background:#dc3545;
+color:#fff;
+}
+
+.reset-btn:hover{
+background:#bb2d3b;
+transform:translateY(-2px);
+}
+
+.cancel-btn{
+background:#757575;
+color:#fff;
+}
+
+.cancel-btn:hover{
+background:#555;
+transform:translateY(-2px);
+}
+
+/* =======================
+   FOOTER
+======================= */
+
+footer{
+margin-top:35px;
+background:#0d47a1;
+color:#fff;
+padding:35px;
+border-radius:18px;
+text-align:center;
+}
+
+footer h2{
+margin-bottom:10px;
+}
+
+footer p{
+margin:8px 0;
+}
+
+footer hr{
+width:80%;
+margin:20px auto;
+border:.5px solid rgba(255,255,255,.3);
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+
+@media(max-width:900px){
+
+.sidebar{
+width:220px;
+}
+
+.main{
+margin-left:220px;
+width:calc(100% - 220px);
+}
+
+}
+
+@media(max-width:768px){
+
+body{
+display:block;
+}
+
+.sidebar{
+position:relative;
+width:100%;
+height:auto;
+}
+
+.main{
+margin-left:0;
+width:100%;
+padding:20px;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.button-group button{
+width:100%;
+margin:8px 0;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>⛪ Church Admin</h2>
+
+<a href="{{ url_for('dashboard') }}">🏠 Dashboard</a>
+
+<a href="{{ url_for('logout') }}">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<div class="header">
+
+<h1>⚙ Website Settings</h1>
+
+<p>
+Manage your church website information, preferences and security from one place.
+</p>
+
+</div>
+
+<form method="POST" enctype="multipart/form-data">
+
+
+<!-- ==========================
+     Church Information
+========================== -->
+
+<div class="settings-card">
+
+<h2>⛪ Church Information</h2>
+
+<div class="logo-box">
+
+<img
+id="logoPreview"
+src="{{ url_for('static', filename='images/church_logo.png') }}"
+alt="Church Logo">
+
+<br><br>
+
+<input
+type="file"
+name="church_logo"
+accept="image/*"
+onchange="previewLogo(event)">
+
+</div>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Church Name</label>
+
+<input
+type="text"
+name="church_name"
+value="ACK St. Paul's Parish Mafisini"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Church Motto</label>
+
+<input
+type="text"
+name="church_motto"
+value="Walking Together in Faith, Hope and Love">
+
+</div>
+
+<div class="form-group">
+
+<label>Parish Priest / Vicar</label>
+
+<input
+type="text"
+name="vicar"
+placeholder="Enter Parish Priest or Vicar">
+
+</div>
+
+<div class="form-group">
+
+<label>Year Established</label>
+
+<input
+type="number"
+name="established"
+placeholder="e.g. 1998">
+
+</div>
+
+<div class="form-group">
+
+<label>Church Address</label>
+
+<textarea
+name="address">Mafisini, Kenya</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>Church Description</label>
+
+<textarea
+name="description">Welcome to ACK St. Paul's Parish Mafisini.
+
+We are committed to worship, discipleship, evangelism, community outreach and serving God faithfully.
+
+Everyone is welcome to worship with us.</textarea>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     Contact Information
+========================== -->
+
+<div class="settings-card">
+
+<h2>📞 Contact Information</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Phone Number</label>
+
+<input
+type="text"
+name="phone"
+value="+254 700 000 000">
+
+</div>
+
+<div class="form-group">
+
+<label>Alternative Phone</label>
+
+<input
+type="text"
+name="alt_phone"
+placeholder="+254 711 111 111">
+
+</div>
+
+<div class="form-group">
+
+<label>Email Address</label>
+
+<input
+type="email"
+name="email"
+value="info@ackstpaulsmafisini.org">
+
+</div>
+
+<div class="form-group">
+
+<label>Website</label>
+
+<input
+type="url"
+name="website"
+placeholder="https://www.ackstpaulsmafisini.org">
+
+</div>
+
+<div class="form-group">
+
+<label>Office Hours</label>
+
+<input
+type="text"
+name="office_hours"
+value="Monday - Friday | 8:00 AM - 5:00 PM">
+
+</div>
+
+<div class="form-group">
+
+<label>Postal Address</label>
+
+<input
+type="text"
+name="postal_address"
+placeholder="P.O. Box">
+
+</div>
+
+<div class="form-group">
+
+<label>County</label>
+
+<input
+type="text"
+name="county"
+placeholder="Kwale County">
+
+</div>
+
+<div class="form-group">
+
+<label>Physical Location</label>
+
+<input
+type="text"
+name="location"
+placeholder="Mafisini, Kenya">
+
+</div>
+
+<div class="form-group" style="grid-column:1/-1;">
+
+<label>Google Maps Link</label>
+
+<input
+type="url"
+name="google_maps"
+placeholder="Paste Google Maps URL">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     Website Preferences
+========================== -->
+
+<div class="settings-card">
+
+<h2>⚙ Website Preferences</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Website Theme</label>
+
+<select name="theme">
+
+<option value="blue" selected>Blue (Default)</option>
+<option value="green">Green</option>
+<option value="brown">Brown</option>
+<option value="dark">Dark Mode</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Default Language</label>
+
+<select name="language">
+
+<option value="English" selected>English</option>
+<option value="Kiswahili">Kiswahili</option>
+
+</select>
+
+</div>
+
+<div class="form-group" style="grid-column:1/-1;">
+
+<label>Homepage Welcome Message</label>
+
+<textarea name="welcome_message">
+Welcome to ACK St. Paul's Parish Mafisini.
+
+We are delighted to worship with you.
+May the Lord bless you and your family abundantly.
+
+Feel free to join our worship services, ministries and community outreach programmes.
+</textarea>
+
+</div>
+
+<div class="form-group">
+
+<label>Display Latest Sermons on Homepage</label>
+
+<select name="show_sermons">
+
+<option value="Yes" selected>Enabled</option>
+<option value="No">Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Display Upcoming Events</label>
+
+<select name="show_events">
+
+<option value="Yes" selected>Enabled</option>
+<option value="No">Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Allow Online Prayer Requests</label>
+
+<select name="prayer_requests">
+
+<option value="Yes" selected>Enabled</option>
+<option value="No">Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Allow Visitor Registration</label>
+
+<select name="visitor_registration">
+
+<option value="Yes">Enabled</option>
+<option value="No" selected>Disabled</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     Notification Settings
+========================== -->
+
+<div class="settings-card">
+
+<h2>🔔 Notification Settings</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Email Notifications</label>
+
+<select name="email_notifications">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Prayer Request Notifications</label>
+
+<select name="prayer_notifications">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Event Notifications</label>
+
+<select name="event_notifications">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Newsletter Notifications</label>
+
+<select name="newsletter_notifications">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>System Update Alerts</label>
+
+<select name="system_alerts">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Backup Reminder</label>
+
+<select name="backup_reminder">
+
+<option selected>Weekly</option>
+<option>Daily</option>
+<option>Monthly</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+     Security Settings
+========================== -->
+
+<div class="settings-card">
+
+<h2>🔒 Security Settings</h2>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Current Password</label>
+
+<input
+type="password"
+name="current_password"
+placeholder="Enter current password">
+
+</div>
+
+<div class="form-group">
+
+<label>New Password</label>
+
+<input
+type="password"
+name="new_password"
+placeholder="Enter new password">
+
+</div>
+
+<div class="form-group">
+
+<label>Confirm New Password</label>
+
+<input
+type="password"
+name="confirm_password"
+placeholder="Confirm new password">
+
+</div>
+
+<div class="form-group">
+
+<label>Session Timeout</label>
+
+<select name="session_timeout">
+
+<option selected>30 Minutes</option>
+<option>1 Hour</option>
+<option>2 Hours</option>
+<option>Never</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Enable Two-Step Verification</label>
+
+<select name="two_factor">
+
+<option>No</option>
+<option>Yes</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Automatic Backup</label>
+
+<select name="auto_backup">
+
+<option selected>Enabled</option>
+<option>Disabled</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================
+     ACTION BUTTONS
+========================== -->
+
+<div class="settings-card">
+
+<div class="button-group">
+
+<button
+type="submit"
+class="save-btn">
+💾 Save Changes
+</button>
+
+<button
+type="reset"
+class="reset-btn">
+↺ Reset Form
+</button>
+
+<button
+type="button"
+class="cancel-btn"
+onclick="history.back();">
+✖ Cancel
+</button>
+
+</div>
+
+</div>
+
+</form>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+
+<footer>
+
+<h2>⛪ ACK St. Paul's Parish Mafisini</h2>
+
+<p>
+Church Website Administration Panel
+</p>
+
+<p>
+Manage your church website securely, efficiently and professionally.
+</p>
+
+<hr>
+
+<p>
+&copy; 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+</p>
+
+</footer>
+
+</div>
+
+<!-- ==========================
+     JAVASCRIPT
+========================== -->
+
+<script>
+
+// Logo Preview
+function previewLogo(event){
+
+const file = event.target.files[0];
+
+if(file){
+
+document.getElementById("logoPreview").src =
+URL.createObjectURL(file);
+
+}
+
+}
+
+// Confirm before resetting the form
+document.querySelector(".reset-btn").addEventListener("click",function(e){
+
+if(!confirm("Are you sure you want to reset all unsaved changes?")){
+
+e.preventDefault();
+
+}
+
+});
+
+// Confirm before saving
+document.querySelector("form").addEventListener("submit",function(e){
+
+if(!confirm("Save all changes to the website settings?")){
+
+e.preventDefault();
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>

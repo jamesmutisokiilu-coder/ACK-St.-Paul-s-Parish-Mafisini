@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Church Books | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+color:#333;
+}
+
+/* Navigation */
+
+nav{
+background:#0d47a1;
+padding:15px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+.logo{
+color:#fff;
+font-size:24px;
+font-weight:700;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:25px;
+}
+
+nav ul li a{
+color:#fff;
+text-decoration:none;
+font-weight:500;
+transition:.3s;
+}
+
+nav ul li a:hover{
+color:#FFD700;
+}
+
+/* Hero */
+
+.hero{
+background:linear-gradient(rgba(13,71,161,.75),rgba(13,71,161,.75)),
+url("https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=1500&q=80");
+background-size:cover;
+background-position:center;
+padding:90px 20px;
+text-align:center;
+color:white;
+}
+
+.hero h1{
+font-size:48px;
+margin-bottom:20px;
+}
+
+.hero p{
+max-width:800px;
+margin:auto;
+line-height:1.8;
+font-size:18px;
+}
+
+/* Search */
+
+.search-section{
+width:90%;
+max-width:1200px;
+margin:50px auto;
+text-align:center;
+}
+
+.search-section input{
+width:100%;
+max-width:650px;
+padding:15px;
+border:2px solid #0d47a1;
+border-radius:30px;
+font-size:16px;
+outline:none;
+}
+
+.categories{
+margin-top:30px;
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.categories button{
+padding:10px 22px;
+border:none;
+background:#1976d2;
+color:white;
+border-radius:25px;
+cursor:pointer;
+transition:.3s;
+font-size:15px;
+}
+
+.categories button:hover{
+background:#FFD700;
+color:#333;
+}
+
+/* Books */
+
+.books{
+width:90%;
+max-width:1200px;
+margin:auto;
+padding-bottom:50px;
+}
+
+.books h2{
+text-align:center;
+font-size:35px;
+color:#0d47a1;
+margin-bottom:40px;
+}
+
+.book-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.book-card{
+background:white;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+transition:.3s;
+}
+
+.book-card:hover{
+transform:translateY(-8px);
+}
+
+.book-card img{
+width:100%;
+height:320px;
+object-fit:cover;
+}
+
+.book-content{
+padding:25px;
+}
+
+.book-content h3{
+color:#0d47a1;
+margin-bottom:12px;
+}
+
+.book-content p{
+color:#666;
+line-height:1.7;
+margin-bottom:20px;
+}
+
+.book-content a{
+display:inline-block;
+background:#FFD700;
+color:#333;
+text-decoration:none;
+padding:12px 22px;
+border-radius:8px;
+font-weight:600;
+transition:.3s;
+}
+
+.book-content a:hover{
+background:#1976d2;
+color:white;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+nav{
+flex-direction:column;
+gap:15px;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+⛪ ACK Mafisini
+</div>
+
+<ul>
+
+<li><a href="{{ url_for('home') }}">Home</a></li>
+
+<li><a href="{{ url_for('about') }}">About</a></li>
+
+<li><a href="{{ url_for('sermons') }}">Sermons</a></li>
+
+<li><a href="{{ url_for('events') }}">Events</a></li>
+
+<li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<h1>📚 Church Library</h1>
+
+<p>
+
+Access worship books, hymn books and Anglican Church resources
+to strengthen your faith and worship experience.
+
+</p>
+
+</section>
+
+<section class="search-section">
+
+<input
+type="text"
+id="searchBook"
+placeholder="Search for a church book...">
+
+<div class="categories">
+
+<button>All Books</button>
+
+<button>Hymn Books</button>
+
+<button>Prayer Books</button>
+
+<button>Worship</button>
+
+<button>Devotion</button>
+
+</div>
+
+</section>
+
+<div class="book-grid">
+
+<!-- NYIMBO STANDARD -->
+
+<div class="book-card">
+
+<img src="/static/images/nyimbo.jpg"
+alt="Nyimbo Standard">
+
+<div class="book-content">
+
+<h3>📖 Nyimbo Standard</h3>
+
+<p>
+
+The official Anglican Church of Kenya Kiswahili hymn book (Nyimbo Standard),
+used during Sunday worship, weddings, funerals and other church services.
+
+</p>
+
+<p><strong>Category:</strong> Hymn Book</p>
+
+<p><strong>Publisher:</strong> ACK Uzima Publishing House</p>
+
+<div class="book-buttons">
+
+<a class="details-btn"
+href="https://ackuzimapublishinghouse.or.ke/product/kiswahili-hymn-book/"
+target="_blank">
+
+ℹ Details
+
+</a>
+
+<a class="buy-btn"
+href="https://ackuzimapublishinghouse.or.ke/product/kiswahili-hymn-book/"
+target="_blank">
+
+🛒 Buy Book
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- KITABU KIPYA CHA IBADA -->
+
+<div class="book-card">
+
+<img src="/static/images/ibada.jpg"
+alt="Kitabu Kipya Cha Ibada">
+
+<div class="book-content">
+
+<h3>⛪ Kitabu Kipya Cha Ibada</h3>
+
+<p>
+
+The official Anglican Church of Kenya liturgy book containing Holy Communion,
+Morning Prayer, Evening Prayer and other worship services.
+
+</p>
+
+<p><strong>Category:</strong> Liturgy</p>
+
+<p><strong>Publisher:</strong> ACK Uzima Publishing House</p>
+
+<div class="book-buttons">
+
+<a class="details-btn"
+href="https://ackuzimapublishinghouse.or.ke/product-category/liturgy/"
+target="_blank">
+
+ℹ Details
+
+</a>
+
+<a class="app-btn"
+href="https://play.google.com/store/apps/details?id=or.ke.ackuzima.kitabukipya"
+target="_blank">
+
+📱 Official App
+
+</a>
+
+<a class="buy-btn"
+href="https://ackuzimapublishinghouse.or.ke/product-category/liturgy/"
+target="_blank">
+
+🛒 Buy Book
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TENZI ZA ROHONI -->
+
+<div class="book-card">
+
+<img src="/static/images/tenzi.png"
+alt="Tenzi za Rohoni">
+
+<div class="book-content">
+
+<h3>🎵 Tenzi za Rohoni</h3>
+
+<p>
+
+A popular collection of Swahili Christian hymns used for worship,
+evangelism, revival meetings and Christian fellowship.
+
+</p>
+
+<p><strong>Category:</strong> Hymn Book</p>
+
+<p><strong>Language:</strong> Kiswahili</p>
+
+<div class="book-buttons">
+
+<a class="details-btn"
+href="https://play.google.com/store/search?q=tenzi+za+rohoni&c=apps"
+target="_blank">
+
+ℹ Find App
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- HOLY BIBLE -->
+
+<div class="book-card">
+
+<img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&w=800&q=80"
+alt="Holy Bible">
+
+<div class="book-content">
+
+<h3>📜 Holy Bible</h3>
+
+<p>
+
+Read the Holy Bible online in English and Kiswahili from trusted Bible resources.
+
+</p>
+
+<p><strong>Category:</strong> Bible</p>
+
+<div class="book-buttons">
+
+<a class="details-btn"
+href="https://www.biblegateway.com/"
+target="_blank">
+
+📖 Bible Gateway
+
+</a>
+
+<a class="app-btn"
+href="https://www.youversion.com/the-bible-app/"
+target="_blank">
+
+📱 Bible App
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================
+     FEATURED BOOKS
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:70px auto;">
+
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:40px;">
+⭐ Featured Resources
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;">
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);border-top:5px solid #FFD700;">
+
+<h3 style="color:#0d47a1;">📖 Daily Bible Reading</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.8;">
+
+Spend time with God's Word every day.
+Regular Bible reading strengthens faith,
+builds spiritual maturity and provides guidance
+for daily living.
+
+</p>
+
+</div>
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);border-top:5px solid #FFD700;">
+
+<h3 style="color:#0d47a1;">🙏 Prayer & Worship</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.8;">
+
+Use the worship and prayer books during
+personal devotion, family fellowship and
+church services to deepen your relationship
+with God.
+
+</p>
+
+</div>
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);border-top:5px solid #FFD700;">
+
+<h3 style="color:#0d47a1;">🎵 Worship Through Music</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.8;">
+
+Praise God through hymns from
+Nyimbo Standard and Tenzi za Rohoni.
+Music is an important part of Christian worship
+and fellowship.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     LIBRARY GUIDELINES
+========================== -->
+
+<section style="background:#ffffff;padding:60px 20px;">
+
+<div style="width:90%;max-width:1200px;margin:auto;">
+
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:35px;">
+📚 Church Library Guidelines
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;">
+
+<div style="background:#f5f7fb;padding:25px;border-radius:15px;">
+
+<h3 style="color:#1976d2;">📖 Respect the Books</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.7;">
+
+Handle all church books with care and
+return borrowed copies in good condition.
+
+</p>
+
+</div>
+
+<div style="background:#f5f7fb;padding:25px;border-radius:15px;">
+
+<h3 style="color:#1976d2;">⏰ Return on Time</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.7;">
+
+Please return borrowed books promptly
+so that other church members may also
+benefit from them.
+
+</p>
+
+</div>
+
+<div style="background:#f5f7fb;padding:25px;border-radius:15px;">
+
+<h3 style="color:#1976d2;">🤝 Share God's Word</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.7;">
+
+Encourage family and friends to read
+Christian books that strengthen faith
+and spiritual growth.
+
+</p>
+
+</div>
+
+<div style="background:#f5f7fb;padding:25px;border-radius:15px;">
+
+<h3 style="color:#1976d2;">🙏 Pray Before Reading</h3>
+
+<p style="margin-top:15px;color:#666;line-height:1.7;">
+
+Ask God for wisdom and understanding
+before beginning your Bible study or
+devotional reading.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     BIBLE VERSE
+========================== -->
+
+<section style="width:90%;max-width:1100px;margin:70px auto;">
+
+<div style="background:#0d47a1;color:#ffffff;padding:45px;border-radius:20px;text-align:center;">
+
+<h2 style="margin-bottom:20px;">
+📖 Bible Verse
+</h2>
+
+<p style="font-size:20px;line-height:1.9;max-width:850px;margin:auto;">
+
+"Your word is a lamp to my feet
+and a light to my path."
+
+</p>
+
+<p style="margin-top:20px;font-size:18px;font-weight:bold;">
+
+— Psalm 119:105
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     READING HOURS
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:70px auto;">
+
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:35px;">
+🕘 Church Library Hours
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;">
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">Monday - Friday</h3>
+
+<p style="margin-top:15px;color:#666;">
+8:00 AM – 5:00 PM
+</p>
+
+</div>
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">Saturday</h3>
+
+<p style="margin-top:15px;color:#666;">
+9:00 AM – 1:00 PM
+</p>
+
+</div>
+
+<div style="background:#ffffff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">Sunday</h3>
+
+<p style="margin-top:15px;color:#666;">
+Available After Church Services
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+     CONTACT SECTION
+========================== -->
+
+<section style="width:90%;max-width:1200px;margin:70px auto;">
+
+<h2 style="text-align:center;color:#0d47a1;margin-bottom:40px;">
+📞 Church Library Contact
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;">
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">📍 Location</h3>
+
+<p style="margin-top:15px;color:#555;line-height:1.8;">
+ACK St. Paul's Parish Mafisini<br>
+Church Library
+</p>
+
+</div>
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">📞 Phone</h3>
+
+<p style="margin-top:15px;">
+<a href="tel:+254700000000" style="text-decoration:none;color:#333;">
++254 700 000 000
+</a>
+</p>
+
+</div>
+
+<div style="background:#fff;padding:30px;border-radius:18px;box-shadow:0 10px 25px rgba(0,0,0,.08);text-align:center;">
+
+<h3 style="color:#1976d2;">✉ Email</h3>
+
+<p style="margin-top:15px;">
+<a href="mailto:library@ackstpaulsmafisini.org"
+style="text-decoration:none;color:#333;">
+library@ackstpaulsmafisini.org
+</a>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+     FOOTER
+========================== -->
+
+<footer style="background:#0d47a1;color:#fff;padding:45px 20px;text-align:center;">
+
+<h2>⛪ ACK St. Paul's Parish Mafisini</h2>
+
+<p>
+© 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+</p>
+
+</footer>
+
+<!-- ==========================
+     SEARCH SCRIPT
+========================== -->
+
+<script>
+
+const searchInput = document.getElementById("searchBook");
+
+searchInput.addEventListener("keyup", function(){
+
+let filter = searchInput.value.toLowerCase();
+
+let books = document.querySelectorAll(".book-card");
+
+books.forEach(function(book){
+
+let title = book.querySelector("h3").textContent.toLowerCase();
+
+let description = book.querySelector("p").textContent.toLowerCase();
+
+if(title.includes(filter) || description.includes(filter)){
+
+book.style.display="block";
+
+}else{
+
+book.style.display="none";
+
+}
+
+});
+
+});
+
+</script>
+</body>
+</html>    

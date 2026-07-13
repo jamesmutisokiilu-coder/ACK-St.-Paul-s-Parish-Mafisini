@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Church Leadership | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+    color:#333;
+}
+
+/* Header */
+header{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:#fff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+header p{
+    max-width:700px;
+    margin:auto;
+    font-size:17px;
+    opacity:.95;
+}
+
+/* Section */
+.section{
+    width:90%;
+    max-width:1300px;
+    margin:60px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.section-title h2{
+    color:#0d47a1;
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.section-title p{
+    color:#666;
+}
+
+/* Grid */
+.leaders{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+/* Card */
+.card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.info{
+    padding:25px;
+}
+
+.info h3{
+    color:#0d47a1;
+    margin-bottom:8px;
+}
+
+.position{
+    color:#1976d2;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.info p{
+    color:#666;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+/* Contact */
+.contact{
+    border-top:1px solid #eee;
+    padding-top:15px;
+}
+
+.contact a{
+    display:block;
+    text-decoration:none;
+    color:#333;
+    margin:10px 0;
+    transition:.3s;
+}
+
+.contact a:hover{
+    color:#1976d2;
+    padding-left:8px;
+}
+
+/* Leadership Quote */
+.quote{
+    margin-top:70px;
+    background:#1976d2;
+    color:#fff;
+    padding:60px 30px;
+    text-align:center;
+    border-radius:18px;
+}
+
+.quote h2{
+    margin-bottom:20px;
+}
+
+.quote p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.9;
+}
+
+/* Footer */
+footer{
+    margin-top:70px;
+    background:#0d47a1;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:768px){
+
+header h1{
+    font-size:32px;
+}
+
+.card img{
+    height:280px;
+}
+
+.section-title h2{
+    font-size:28px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Church Leadership</h1>
+    <p>
+        Meet the dedicated servants of God who provide spiritual guidance,
+        leadership, and support to the congregation of ACK St. Paul's Parish Mafisini.
+    </p>
+</header>
+
+<div class="leaders">
+
+<!-- Parish Vicar -->
+
+<div class="card">
+
+<img src="/static/images/rev.jpeg">
+
+<div class="info">
+
+<h3>Rev. Jackson Ruwa</h3>
+
+<div class="position">Parish Vicar</div>
+
+<p>
+Provides spiritual leadership to the parish through preaching,
+pastoral care, administration of the sacraments, discipleship,
+and oversight of all church ministries.
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000001">
+📞 0702098431
+</a>
+
+<a href="mailto:vicar@ackstpaulsmafisini.org">
+✉ vicar@ackstpaulsmafisini.org
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Vicar's Warden -->
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/vicar_warden.jpg') }}" alt="Vicar's Warden">
+
+<div class="info">
+
+<h3>[Vicar's Warden Name]</h3>
+
+<div class="position">Vicar's Warden</div>
+
+<p>
+Works closely with the Parish Vicar in church leadership,
+administration, worship coordination and parish development
+to ensure the smooth running of church activities.
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000002">
+📞 +254 700 000 002
+</a>
+
+<a href="mailto:vicarwarden@ackstpaulsmafisini.org">
+✉ vicarwarden@ackstpaulsmafisini.org
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- People's Warden -->
+
+<div class="card">
+
+<img src="/static/images/pple.jpeg">
+
+<div class="info">
+
+<h3>Benson Mutiso</h3>
+
+<div class="position">People's Warden</div>
+
+<p>
+Represents the congregation by supporting church administration,
+promoting unity among members and assisting in parish activities
+and church development.
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000003">
+📞 0713376415
+</a>
+
+<a href="mailto:peoplewarden@ackstpaulsmafisini.org">
+✉ peoplewarden@ackstpaulsmafisini.org
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Church Treasurer -->
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/treasurer.jpg') }}" alt="Church Treasurer">
+
+<div class="info">
+
+<h3>[Treasurer Name]</h3>
+
+<div class="position">Church Treasurer</div>
+
+<p>
+Manages the financial affairs of the parish, prepares budgets,
+maintains financial records and promotes accountability in the
+use of church resources.
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000004">
+📞 +254 700 000 004
+</a>
+
+<a href="mailto:treasurer@ackstpaulsmafisini.org">
+✉ treasurer@ackstpaulsmafisini.org
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Church Secretary -->
+
+<div class="card">
+
+<img src="/static/images/le.jpeg">
+
+<div class="info">
+
+<h3></h3>
+
+<div class="position"></div>
+
+<p>
+To faithfully serve God's people by providing spiritual guidance, spreading
+the Gospel of Jesus Christ, and leading the church towards growth, unity,
+and meaningful service to the community.
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000005">
+📞 +254 700 000 005
+</a>
+
+<a href="mailto:secretary@ackstpaulsmafisini.org">
+✉ secretary@ackstpaulsmafisini.org
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="quote">
+<h2>Our Calling</h2>
+<p>
+"Our leadership is committed to serving Christ by nurturing faith,
+building strong families, reaching the community with God's love,
+and creating an environment where every believer can grow spiritually
+and use their gifts in ministry."
+</p>
+</div>
+
+</section>
+
+<footer>
+<p>
+© 2026 ACK St. Paul's Parish Mafisini | All Rights Reserved.
+</p>
+</footer>
+
+</body>
+</html>

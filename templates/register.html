@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:40px 20px;
+
+    background:
+    linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+    url('https://images.unsplash.com/photo-1519491050282-cf00c82424b3?auto=format&fit=crop&w=1600&q=80');
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+}
+
+
+
+.container{
+
+    width:95%;
+    max-width:800px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    padding:45px;
+
+    border-radius:20px;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.2);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+}
+
+
+
+.container h2{
+
+    text-align:center;
+
+    color:#FFD700;
+
+    font-size:34px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+.container p{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    font-size:17px;
+
+}
+
+
+
+form{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+
+label{
+
+    margin-bottom:8px;
+
+    font-weight:500;
+
+}
+
+
+
+input,
+select{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+
+
+input:focus,
+select:focus{
+
+    border:2px solid #FFD700;
+
+}
+
+
+
+.full-width{
+
+    grid-column:1/3;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#FFD700;
+
+    color:#222;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    background:white;
+
+    transform:translateY(-2px);
+
+}
+
+
+
+.link{
+
+    grid-column:1/3;
+
+    text-align:center;
+
+}
+
+
+
+.link a{
+
+    color:#FFD700;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+
+
+.alert{
+
+    background:#ffdddd;
+
+    color:#900;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    margin-bottom:20px;
+
+    text-align:center;
+
+}
+
+
+
+@media(max-width:768px){
+
+
+form{
+
+    grid-template-columns:1fr;
+
+}
+
+
+.full-width,
+.link{
+
+    grid-column:1;
+
+}
+
+
+.container{
+
+    padding:30px;
+
+}
+
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h2>Create Your Account</h2>
+
+
+<p>
+
+Welcome to <strong>ACK St. Paul's Parish Mafisini</strong>
+
+</p>
+
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+
+{% if messages %}
+
+{% for category,message in messages %}
+
+<div class="alert">
+
+{{message}}
+
+</div>
+
+{% endfor %}
+
+{% endif %}
+
+{% endwith %}
+
+
+
+
+<form method="POST" action="{{ url_for('register') }}">
+
+
+
+<div class="input-group">
+
+<label>Full Name</label>
+
+<input 
+type="text"
+name="name"
+placeholder="Enter your full name"
+required>
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Email Address</label>
+
+<input 
+type="email"
+name="email"
+placeholder="Enter email address"
+required>
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Password</label>
+
+<input 
+type="password"
+name="password"
+placeholder="Create password"
+required>
+
+</div>
+
+
+
+<div class="input-group">
+
+<label>Role</label>
+
+<select name="role">
+
+<option value="Member">
+Member
+</option>
+
+
+<option value="Admin">
+Admin
+</option>
+
+
+</select>
+
+</div>
+
+
+
+<div class="full-width">
+
+<button type="submit">
+
+Create Account
+
+</button>
+
+</div>
+
+
+
+<div class="link">
+
+Already have an account?
+
+<a href="{{ url_for('login') }}">
+
+Login Here
+
+</a>
+
+
+</div>
+
+
+</form>
+
+
+</div>
+
+
+</body>
+
+</html>

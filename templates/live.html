@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Watch Live | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f4f7fb;
+    color:#333;
+}
+
+/* Header */
+header{
+    background:linear-gradient(135deg,#0d47a1,#1976d2);
+    color:#fff;
+    text-align:center;
+    padding:70px 20px;
+}
+
+header h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+header p{
+    font-size:18px;
+    opacity:.9;
+}
+
+/* Container */
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+/* Live Section */
+.live-section{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+}
+
+.video-card{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.video-card iframe{
+    width:100%;
+    height:500px;
+    border:none;
+}
+
+.video-info{
+    padding:25px;
+}
+
+.live-badge{
+    display:inline-block;
+    background:red;
+    color:#fff;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.video-info h2{
+    margin-bottom:10px;
+}
+
+.video-info p{
+    color:#666;
+    line-height:1.7;
+}
+
+/* Sidebar */
+.sidebar{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.card{
+    background:#fff;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:#0d47a1;
+    margin-bottom:20px;
+}
+
+.next-service{
+    font-size:17px;
+    line-height:2;
+}
+
+.countdown{
+    text-align:center;
+}
+
+#timer{
+    font-size:34px;
+    font-weight:bold;
+    color:#1976d2;
+    margin-top:15px;
+}
+
+/* Previous Broadcasts */
+.broadcasts{
+    margin-top:60px;
+}
+
+.broadcasts h2{
+    text-align:center;
+    margin-bottom:40px;
+    color:#0d47a1;
+}
+
+.broadcast-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:25px;
+}
+
+.broadcast{
+    background:#fff;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+    transition:.3s;
+}
+
+.broadcast:hover{
+    transform:translateY(-8px);
+}
+
+.broadcast iframe{
+    width:100%;
+    height:220px;
+}
+
+.broadcast-content{
+    padding:20px;
+}
+
+.broadcast-content h4{
+    margin-bottom:10px;
+}
+
+.broadcast-content p{
+    color:#666;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.watch-btn{
+    display:inline-block;
+    margin-top:18px;
+    background:#1976d2;
+    color:#fff;
+    padding:10px 22px;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.watch-btn:hover{
+    background:#0d47a1;
+}
+
+/* CTA */
+.cta{
+    margin-top:70px;
+    background:linear-gradient(135deg,#1976d2,#0d47a1);
+    color:#fff;
+    text-align:center;
+    padding:50px 20px;
+    border-radius:15px;
+}
+
+.cta h2{
+    margin-bottom:15px;
+}
+
+.cta a{
+    display:inline-block;
+    margin-top:20px;
+    background:#fff;
+    color:#0d47a1;
+    text-decoration:none;
+    padding:14px 35px;
+    border-radius:30px;
+    font-weight:600;
+}
+
+.cta a:hover{
+    background:#f5f5f5;
+}
+
+/* Footer */
+footer{
+    margin-top:70px;
+    background:#0d47a1;
+    color:#fff;
+    text-align:center;
+    padding:25px;
+}
+
+@media(max-width:900px){
+
+.live-section{
+grid-template-columns:1fr;
+}
+
+.video-card iframe{
+height:320px;
+}
+
+header h1{
+font-size:32px;
+}
+
+#timer{
+font-size:26px;
+}
+
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Watch Live Worship Service</h1>
+<p>Join us every Sunday as we worship together from anywhere in the world.</p>
+</header>
+
+<div class="container">
+
+<div class="live-section">
+
+<div class="video-card">
+
+<iframe src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID"
+allowfullscreen></iframe>
+
+<div class="video-info">
+
+<span class="live-badge">🔴 LIVE</span>
+
+<h2>Sunday Worship Service</h2>
+
+<p>
+Experience inspiring worship, uplifting praise, and the life-changing Word of God.
+Whether you are at home, travelling, or abroad, you are welcome to worship with
+ACK St. Paul's Parish Mafisini online.
+</p>
+
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div class="card">
+
+<h3>Next Service</h3>
+
+<div class="next-service">
+
+<strong>Sunday Worship</strong><br>
+
+🗓 Every Sunday<br>
+
+🕘 9:00 AM - 12:00 PM<br>
+
+📍 ACK St. Paul's Parish Mafisini
+
+</div>
+
+</div>
+
+<div class="card countdown">
+
+<h3>Countdown</h3>
+
+<div id="timer">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<section class="broadcasts">
+
+<h2>Previous Live Broadcasts</h2>
+
+<div class="broadcast-grid">
+
+<div class="broadcast">
+
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen></iframe>
+
+<div class="broadcast-content">
+
+<h4>Sunday Worship Service</h4>
+
+<p>Theme: Walking by Faith</p>
+
+<a href="#" class="watch-btn">Watch Again</a>
+
+</div>
+
+</div>
+
+<div class="broadcast">
+
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen></iframe>
+
+<div class="broadcast-content">
+
+<h4>Youth Sunday Service</h4>
+
+<p>Theme: Living for Christ</p>
+
+<a href="#" class="watch-btn">Watch Again</a>
+
+</div>
+
+</div>
+
+<div class="broadcast">
+
+<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+allowfullscreen></iframe>
+
+<div class="broadcast-content">
+
+<h4>Prayer & Thanksgiving</h4>
+
+<p>Special Prayer Meeting</p>
+
+<a href="#" class="watch-btn">Watch Again</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="cta">
+
+<h2>Never Miss a Service</h2>
+
+<p>
+Subscribe to our YouTube Channel and follow our Facebook Page to receive live
+notifications whenever we go live.
+</p>
+
+<a href="#">Subscribe Now</a>
+
+</section>
+
+</div>
+
+<footer>
+
+<p>
+© 2026 ACK St. Paul's Parish Mafisini | All Rights Reserved.
+</p>
+
+</footer>
+
+<script>
+
+const countdownDate = new Date("July 12, 2026 09:00:00").getTime();
+
+const timer = setInterval(function(){
+
+const now = new Date().getTime();
+
+const distance = countdownDate - now;
+
+const days = Math.floor(distance/(1000*60*60*24));
+
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+const seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("timer").innerHTML =
+days+"d "+hours+"h "+minutes+"m "+seconds+"s";
+
+if(distance<0){
+
+clearInterval(timer);
+
+document.getElementById("timer").innerHTML="🔴 We Are Live!";
+
+}
+
+},1000);
+
+</script>
+
+</body>
+</html>

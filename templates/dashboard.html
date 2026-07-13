@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+Admin Dashboard | ACK St. Paul's Parish Mafisini
+</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* ===========================
+   GOOGLE FONT
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+
+
+/* ===========================
+   GENERAL
+=========================== */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+
+body{
+
+    background:#F8F6F0;
+    color:#2C2C2C;
+
+}
+
+
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:#C9A227;
+    border-radius:20px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#f1f1f1;
+
+}
+
+
+
+/* ===========================
+   GLOBAL LINKS
+=========================== */
+
+a{
+
+    transition:.3s;
+
+}
+
+
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container{
+
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+
+}
+
+
+
+/* ===========================
+   TEXT COLORS
+=========================== */
+
+.gold{
+
+    color:#C9A227;
+
+}
+
+
+
+.blue{
+
+    color:#0B3D91;
+
+}
+
+
+
+</style>
+
+</head>
+<style>
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    width:260px;
+    height:100vh;
+
+    background:linear-gradient(
+        180deg,
+        #0B3D91,
+        #082C68
+    );
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    padding:25px;
+
+    overflow-y:auto;
+
+    box-shadow:
+    5px 0 20px rgba(0,0,0,.15);
+
+    z-index:1000;
+
+}
+
+
+
+.sidebar h2{
+
+    color:#ffffff;
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+
+
+/* Normal Sidebar Links */
+
+.sidebar>a{
+
+    display:block;
+
+    color:#ffffff;
+
+    text-decoration:none;
+
+    padding:14px 18px;
+
+    margin:10px 0;
+
+    border-radius:12px;
+
+    font-weight:500;
+
+    background:rgba(255,255,255,.05);
+
+}
+
+
+
+.sidebar>a:hover,
+.sidebar>a.active{
+
+    background:#C9A227;
+
+    color:#ffffff;
+
+    transform:translateX(5px);
+
+}
+
+
+
+/* ===========================
+   DROPDOWN MENU
+=========================== */
+
+
+.menu-group{
+
+    margin-top:10px;
+
+}
+
+
+
+.menu-group details{
+
+    margin-bottom:12px;
+
+}
+
+
+
+.menu-group summary{
+
+    list-style:none;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    background:rgba(255,255,255,.08);
+
+    transition:.3s;
+
+    position:relative;
+
+}
+
+
+
+.menu-group summary::-webkit-details-marker{
+
+    display:none;
+
+}
+
+
+
+.menu-group summary::after{
+
+    content:"▼";
+
+    position:absolute;
+
+    right:18px;
+
+    font-size:12px;
+
+    transition:.3s;
+
+}
+
+
+
+.menu-group details[open] summary::after{
+
+    transform:rotate(180deg);
+
+}
+
+
+
+.menu-group summary:hover{
+
+    background:#C9A227;
+
+}
+
+
+
+.menu-group details[open] summary{
+
+    background:#C9A227;
+
+}
+
+
+
+/* Dropdown Items */
+
+.submenu{
+
+    margin-top:8px;
+
+    margin-left:10px;
+
+    padding-left:10px;
+
+    border-left:
+
+    2px solid rgba(255,255,255,.3);
+
+}
+
+
+
+.submenu a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:11px 15px;
+
+    margin:6px 0;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    background:rgba(255,255,255,.05);
+
+    transition:.3s;
+
+}
+
+
+
+.submenu a:hover{
+
+    background:#ffffff;
+
+    color:#0B3D91;
+
+    transform:translateX(5px);
+
+}
+
+
+
+/* Sidebar Scrollbar */
+
+.sidebar::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:#C9A227;
+
+    border-radius:20px;
+
+}
+/* ===========================
+   MAIN CONTENT
+=========================== */
+
+
+.main{
+
+    margin-left:260px;
+
+    padding:35px;
+
+    min-height:100vh;
+
+}
+
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+
+.header{
+
+    background:#ffffff;
+
+    padding:22px 30px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+}
+
+
+
+.header h1{
+
+    color:#0B3D91;
+
+    font-size:30px;
+
+    font-weight:700;
+
+}
+
+
+
+/* ===========================
+   PROFILE
+=========================== */
+
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+
+.profile img{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+
+    4px solid #C9A227;
+
+}
+
+
+
+.profile h3{
+
+    color:#0B3D91;
+
+    font-size:20px;
+
+}
+
+
+
+.profile p{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+
+
+/* ===========================
+   WELCOME SECTION
+=========================== */
+
+
+.welcome{
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #0B3D91,
+        #1E5DB8
+    );
+
+    color:#ffffff;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    margin-bottom:35px;
+
+    box-shadow:
+
+    0 12px 30px rgba(11,61,145,.25);
+
+}
+
+
+
+.welcome h2{
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.welcome p{
+
+    line-height:1.9;
+
+    font-size:16px;
+
+}
+
+
+
+/* ===========================
+   PAGE TITLE
+=========================== */
+
+
+.page-title{
+
+    color:#0B3D91;
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+    font-weight:700;
+
+}
+
+
+/* ===========================
+   STATISTICS CARDS
+=========================== */
+
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(230px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.card{
+
+    background:#ffffff;
+
+    padding:28px;
+
+    border-radius:18px;
+
+    border-top:6px solid #C9A227;
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+
+    0 20px 35px rgba(0,0,0,.15);
+
+}
+
+
+
+.icon{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+    color:#C9A227;
+
+}
+
+
+
+.card h3{
+
+    color:#666;
+
+    margin-bottom:10px;
+
+    font-size:18px;
+
+}
+
+
+
+.card h1{
+
+    font-size:40px;
+
+    color:#0B3D91;
+
+}
+
+
+
+.card p{
+
+    color:#777;
+
+    margin-top:12px;
+
+}
+
+
+
+/* ===========================
+   CONTENT SECTIONS
+=========================== */
+
+
+.section{
+
+    background:#ffffff;
+
+    margin-top:35px;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    border-left:
+
+    6px solid #C9A227;
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.08);
+
+}
+
+
+
+.section h2{
+
+    color:#0B3D91;
+
+    margin-bottom:20px;
+
+    font-size:26px;
+
+}
+
+
+
+/* ===========================
+   ADMIN BOX
+=========================== */
+
+
+.admin-box{
+
+    min-height:120px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+
+/* ===========================
+   TABLE
+=========================== */
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+}
+
+
+
+th{
+
+    background:#0B3D91;
+
+    color:#ffffff;
+
+    padding:16px;
+
+    text-align:left;
+
+}
+
+
+
+td{
+
+    padding:15px;
+
+    border-bottom:
+
+    1px solid #ececec;
+
+}
+
+
+
+tr:hover{
+
+    background:#F8F6F0;
+
+}
+
+
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+
+button{
+
+    background:#C9A227;
+
+    color:#ffffff;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+
+button:hover{
+
+    background:#0B3D91;
+
+    transform:scale(1.05);
+
+}
+
+
+
+/* ===========================
+   STATUS BADGES
+=========================== */
+
+
+.status{
+
+    display:inline-block;
+
+    background:#0B3D91;
+
+    color:#ffffff;
+
+    padding:7px 16px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+
+.status.pending{
+
+    background:#C9A227;
+
+}
+
+
+
+.status.active{
+
+    background:#28a745;
+
+}
+
+
+
+.status.inactive{
+
+    background:#dc3545;
+
+}
+
+
+
+/* ===========================
+   FORM ELEMENTS
+=========================== */
+
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:12px 15px;
+
+    border:
+
+    1px solid #ddd;
+
+    border-radius:8px;
+
+    outline:none;
+
+    margin-top:8px;
+
+    margin-bottom:18px;
+
+    transition:.3s;
+
+}
+
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#0B3D91;
+
+    box-shadow:
+
+    0 0 8px rgba(11,61,145,.2);
+
+}
+
+
+
+/* ===========================
+   SEARCH BOX
+=========================== */
+
+
+.search-box{
+
+    width:100%;
+
+    max-width:350px;
+
+}
+
+
+
+.search-box input{
+
+    border-radius:30px;
+
+    padding-left:20px;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+
+footer{
+
+    margin-top:40px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #0B3D91,
+        #082C68
+    );
+
+    color:#ffffff;
+
+    text-align:center;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:
+
+    0 10px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+footer p{
+
+    line-height:1.8;
+
+}
+
+
+
+/* ===========================
+   NOTIFICATIONS
+=========================== */
+
+
+.notifications{
+
+    list-style:none;
+
+}
+
+
+
+.notifications li{
+
+    background:#F8F6F0;
+
+    margin:10px 0;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    border-left:
+
+    5px solid #C9A227;
+
+}
+
+
+
+/* ===========================
+   RESPONSIVE DESIGN
+=========================== */
+
+
+@media(max-width:900px){
+
+
+.sidebar{
+
+    width:220px;
+
+}
+
+
+
+.main{
+
+    margin-left:220px;
+
+    padding:25px;
+
+}
+
+
+
+.header{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    text-align:center;
+
+}
+
+
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+.sidebar{
+
+    position:relative;
+
+    width:100%;
+
+    height:auto;
+
+}
+
+
+
+.main{
+
+    margin-left:0;
+
+}
+
+
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+
+
+.header{
+
+    padding:20px;
+
+}
+
+
+
+.welcome{
+
+    padding:25px;
+
+}
+
+
+
+.welcome h2{
+
+    font-size:28px;
+
+}
+
+
+
+.profile{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+
+
+.menu-group{
+
+    width:100%;
+
+}
+
+
+
+}
+
+
+
+
+
+@media(max-width:500px){
+
+
+.header h1{
+
+    font-size:24px;
+
+}
+
+
+
+.card h1{
+
+    font-size:32px;
+
+}
+
+
+
+.section{
+
+    padding:20px;
+
+}
+
+
+
+table{
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+}
+
+
+
+}
+</style>
+<!-- ===========================
+     SIDEBAR
+=========================== -->
+
+
+<div class="sidebar">
+
+
+<h2>
+⛪ ACK Parish 
+</h2>
+
+
+
+<!-- DASHBOARD -->
+
+<a href="{{ url_for('dashboard') }}" class="active">
+
+🏠 Dashboard
+
+</a>
+
+
+
+
+<!-- MEMBERS MENU -->
+
+<div class="menu-group">
+
+<details open>
+
+<summary>
+👥 Members
+</summary>
+
+
+<div class="submenu">
+
+
+<a href="{{ url_for('users') }}">
+
+Registered Members
+
+</a>
+
+
+<a href="{{ url_for('admin_login') }}">
+
+Admin Login
+
+</a>
+
+
+</div>
+
+
+</details>
+
+</div>
+
+
+
+
+
+<!-- CHURCH MANAGEMENT -->
+
+<div class="menu-group">
+
+
+<details>
+
+
+<summary>
+
+⛪ Church Management
+
+</summary>
+
+
+
+<div class="submenu">
+
+
+<a href="{{ url_for('prayer_request') }}">
+
+🙏 Prayer Requests
+
+</a>
+
+<a href="{{ url_for('support') }}">
+🙏 Support / Giving
+</a>
+
+
+
+<a href="{{ url_for('events') }}">
+
+📅 Events
+
+</a>
+
+
+
+
+<a href="{{ url_for('sermons') }}">
+
+🎤 Sermons
+
+</a>
+
+
+
+
+<a href="{{ url_for('books') }}">
+
+📚 Books
+
+</a>
+
+
+
+
+<a href="{{ url_for('gallery') }}">
+
+🖼 Gallery
+
+</a>
+
+
+
+
+<a href="{{ url_for('activities') }}">
+
+🎯 Activities
+
+</a>
+
+
+
+
+<a href="{{ url_for('sports') }}">
+
+🏆 Sports
+
+</a>
+
+
+
+</div>
+
+
+</details>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- WEBSITE MANAGEMENT -->
+
+
+<div class="menu-group">
+
+
+<details>
+
+
+<summary>
+
+🌐 Website
+
+</summary>
+
+
+
+<div class="submenu">
+
+
+<a href="{{ url_for('about') }}">
+
+About Us
+
+</a>
+
+
+
+
+<a href="{{ url_for('leadership') }}">
+
+Leadership
+
+</a>
+
+
+
+
+<a href="{{ url_for('contact') }}">
+
+🎯 Contact Us
+
+</a>
+
+
+
+
+<a href="{{ url_for('explore') }}">
+
+Explore More
+
+</a>
+
+
+
+</div>
+
+
+</details>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- COMMUNICATION -->
+
+
+<div class="menu-group">
+
+
+<details>
+
+
+<summary>
+
+💬 Communication
+
+</summary>
+
+
+
+<div class="submenu">
+
+
+<a href="{{ url_for('notifications') }}">
+
+🔔 Notifications
+
+</a>
+
+
+
+
+<a href="{{ url_for('discussions') }}">
+
+Discussion Forum
+
+</a>
+
+
+
+</div>
+
+
+
+</details>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ADMINISTRATION -->
+
+
+<div class="menu-group">
+
+
+<details>
+
+
+<summary>
+
+⚙ Administration
+
+</summary>
+
+
+
+<div class="submenu">
+
+
+<a href="{{ url_for('reports') }}">
+
+📊 Reports
+
+</a>
+
+
+
+
+<a href="{{ url_for('settings') }}">
+
+⚙ Settings
+
+</a>
+
+
+
+
+<a href="{{ url_for('logout') }}">
+
+🚪 Logout
+
+</a>
+
+
+
+</div>
+
+
+
+</details>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<!-- ===========================
+     MAIN CONTENT
+=========================== -->
+
+
+<div class="main">
+
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+
+<h1>
+Welcome to ACK St. Paul's Parish Mafisini
+</h1>
+
+
+
+
+<div class="profile">
+
+
+<img src="https://picsum.photos/100" alt="Admin Profile">
+
+
+
+<div>
+
+
+<h3>
+
+{{ admin_name }}
+
+</h3>
+
+
+
+<p>
+
+{{ admin_email }}
+
+</p>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- WELCOME MESSAGE -->
+
+
+<div class="welcome">
+
+
+<h2>
+
+Welcome Back, {{ admin_name }} 👋
+
+</h2>
+
+
+
+<p>
+
+Manage church members, prayer requests,
+upcoming events, sermons and website activities
+from one central dashboard.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     STATISTICS CARDS
+=========================== -->
+
+
+<div class="cards">
+
+
+
+
+
+<!-- MEMBERS -->
+
+
+<div class="card">
+
+
+<div class="icon">
+
+👥
+
+</div>
+
+
+
+<h3>
+
+Registered Members
+
+</h3>
+
+
+
+<h1>
+
+{{ total_users }}
+
+</h1>
+
+
+
+<p>
+
+Total members in system
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- PRAYERS -->
+
+
+<div class="card">
+
+
+<div class="icon">
+
+🙏
+
+</div>
+
+
+
+<h3>
+
+Prayer Requests
+
+</h3>
+
+
+
+<h1>
+
+{{ total_prayers }}
+
+</h1>
+
+
+
+<p>
+
+Submitted prayer requests
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- EVENTS -->
+
+
+<div class="card">
+
+
+<div class="icon">
+
+📅
+
+</div>
+
+
+
+<h3>
+
+Upcoming Events
+
+</h3>
+
+
+
+<h1>
+
+{{ total_events }}
+
+</h1>
+
+
+
+<p>
+
+Church events available
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- SERMONS -->
+
+
+<div class="card">
+
+
+<div class="icon">
+
+🎤
+
+</div>
+
+
+
+<h3>
+
+Sermons
+
+</h3>
+
+
+
+<h1>
+
+{{ total_sermons }}
+
+</h1>
+
+
+
+<p>
+
+Available sermons
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+</div>
+<!-- ===========================
+     REGISTERED MEMBERS
+=========================== -->
+
+
+<div class="section">
+
+
+<h2>
+👥 Registered Members
+</h2>
+
+
+
+<table>
+
+
+<tr>
+
+<th>
+ID
+</th>
+
+
+<th>
+Name
+</th>
+
+
+<th>
+Email
+</th>
+
+
+<th>
+Role
+</th>
+
+
+</tr>
+
+
+
+
+
+{% for user in users %}
+
+
+
+<tr>
+
+
+<td>
+
+{{ user.id }}
+
+</td>
+
+
+
+<td>
+
+{{ user.name }}
+
+</td>
+
+
+
+
+<td>
+
+{{ user.email }}
+
+</td>
+
+
+
+
+<td>
+
+
+<span class="status active">
+
+{{ user.role }}
+
+</span>
+
+
+</td>
+
+
+
+</tr>
+
+
+
+
+{% else %}
+
+
+
+
+<tr>
+
+
+<td colspan="4" style="text-align:center;padding:20px;">
+
+
+No registered members found
+
+
+</td>
+
+
+</tr>
+
+
+
+
+{% endfor %}
+
+
+
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     ADMIN NOTIFICATIONS
+=========================== -->
+
+
+<div class="section">
+
+
+<h2>
+
+🔔 Administrator Notifications
+
+</h2>
+
+
+
+<ul class="notifications">
+
+
+
+<li>
+
+New members can register through the church website.
+
+</li>
+
+
+
+<li>
+
+Prayer requests require administrator attention.
+
+</li>
+
+
+
+<li>
+
+Keep church events updated regularly.
+
+</li>
+
+
+
+<li>
+
+Upload sermons after every service.
+
+</li>
+
+
+
+<li>
+
+Ensure regular database backups.
+
+</li>
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     ADMIN INFORMATION
+=========================== -->
+
+
+<div class="section admin-box">
+
+
+<h2>
+
+⛪ Church Management System
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+
+
+<footer>
+
+
+
+<h2>
+
+⛪ ACK St. Paul's Parish Mafisini
+
+</h2>
+
+
+
+
+<p>
+
+Church Management System Administrator Portal
+
+</p>
+
+
+
+
+<p>
+
+© 2026 All Rights Reserved
+
+</p>
+
+
+
+</footer>
+
+
+
+
+
+
+</div>
+
+<!-- END MAIN -->
+
+
+
+
+
+</body>
+
+
+</html>

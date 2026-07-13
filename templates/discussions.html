@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Church Discussions | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#eef3fa;
+color:#333;
+}
+
+/* HEADER */
+
+header{
+background:#0d47a1;
+color:white;
+padding:20px;
+text-align:center;
+box-shadow:0 3px 10px rgba(0,0,0,.2);
+}
+
+header h1{
+font-size:32px;
+margin-bottom:5px;
+}
+
+header p{
+color:#f1f1f1;
+font-size:15px;
+}
+
+/* CONTAINER */
+
+.container{
+
+width:95%;
+max-width:1400px;
+margin:30px auto;
+
+display:grid;
+grid-template-columns:3fr 1fr;
+gap:25px;
+
+}
+
+/* LEFT */
+
+.left{
+
+display:flex;
+flex-direction:column;
+gap:25px;
+
+}
+
+/* RIGHT */
+
+.right{
+
+display:flex;
+flex-direction:column;
+gap:20px;
+
+}
+
+/* CARD */
+
+.card{
+
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+/* SECTION TITLE */
+
+.section-title{
+
+font-size:24px;
+color:#0d47a1;
+margin-bottom:15px;
+font-weight:600;
+
+}
+
+/* FORM */
+
+form input,
+form select,
+form textarea{
+
+width:100%;
+padding:12px;
+margin-top:12px;
+border:1px solid #d8d8d8;
+border-radius:8px;
+font-size:15px;
+outline:none;
+
+}
+
+form textarea{
+
+height:170px;
+resize:vertical;
+
+}
+
+form input:focus,
+form select:focus,
+form textarea:focus{
+
+border:1px solid gold;
+
+}
+
+/* BUTTON */
+
+button{
+
+background:#0d47a1;
+color:white;
+padding:12px 30px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:15px;
+font-weight:600;
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#08306b;
+
+}
+
+.gold-btn{
+
+background:gold;
+color:#222;
+
+}
+
+.gold-btn:hover{
+
+background:#ffd54f;
+
+}
+
+/* SEARCH */
+
+.search-box{
+
+display:flex;
+gap:10px;
+
+}
+
+.search-box input{
+
+flex:1;
+padding:12px;
+border-radius:8px;
+border:1px solid #ccc;
+
+}
+
+/* DISCUSSION CARD */
+
+.discussion{
+
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.discussion-header{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:10px;
+
+}
+
+.author{
+
+font-weight:600;
+color:#0d47a1;
+
+}
+
+.category{
+
+background:#0d47a1;
+color:white;
+padding:6px 14px;
+border-radius:20px;
+font-size:13px;
+
+}
+
+.discussion h3{
+
+margin-top:10px;
+margin-bottom:10px;
+color:#222;
+
+}
+
+.discussion p{
+
+line-height:1.7;
+
+}
+
+.meta{
+
+margin-top:15px;
+display:flex;
+gap:20px;
+font-size:14px;
+color:#666;
+
+}
+
+/* NO DISCUSSIONS */
+
+.empty{
+
+background:white;
+padding:50px;
+text-align:center;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.empty h2{
+
+color:#0d47a1;
+margin-bottom:10px;
+
+}
+
+.empty p{
+
+color:#777;
+
+}
+
+/* SIDEBAR */
+
+.sidebar{
+
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.sidebar h2{
+
+color:#0d47a1;
+margin-bottom:15px;
+
+}
+
+.sidebar ul{
+
+list-style:none;
+
+}
+
+.sidebar li{
+
+padding:10px 0;
+border-bottom:1px solid #eee;
+
+}
+
+.sidebar li:last-child{
+
+border-bottom:none;
+
+}
+
+.sidebar a{
+
+text-decoration:none;
+color:#333;
+font-weight:500;
+
+}
+
+.sidebar a:hover{
+
+color:#0d47a1;
+
+}
+
+/* FOOTER */
+
+footer{
+
+margin-top:40px;
+background:#0d47a1;
+color:white;
+text-align:center;
+padding:20px;
+
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Church Discussion Forum</h1>
+
+<p>Share Ideas • Encourage One Another • Grow Together in Christ</p>
+
+</header>
+
+<div class="container">
+
+<div class="left">
+
+<!-- CREATE DISCUSSION -->
+
+<div class="card">
+
+<h2 class="section-title">Start a New Discussion</h2>
+
+<form action="{{ url_for('create_discussion') }}" method="POST">
+
+<input
+type="text"
+name="title"
+placeholder="Discussion Title"
+required>
+
+<select name="category" required>
+
+<option value="">Select Category</option>
+
+<option value="General">General</option>
+
+<option value="Bible Study">Bible Study</option>
+
+<option value="Prayer Requests">Prayer Requests</option>
+
+<option value="Youth Ministry">Youth Ministry</option>
+
+<option value="Choir">Choir</option>
+
+<option value="Marriage & Family">Marriage & Family</option>
+
+<option value="Development">Development</option>
+
+<option value="Evangelism">Evangelism</option>
+
+</select>
+
+<textarea
+name="content"
+placeholder="Write your discussion here..."
+required></textarea>
+
+<button
+type="submit"
+class="gold-btn">
+
+Post Discussion
+
+</button>
+
+</form>
+
+</div>
+
+<!-- SEARCH -->
+
+<div class="card">
+
+<div class="search-box">
+
+<input
+type="text"
+placeholder="Search discussions...">
+
+<button>
+
+Search
+
+</button>
+
+</div>
+
+</div>
+
+<!-- DISCUSSIONS START HERE -->
+
+{% if discussions %}
+
+{% for discussion in discussions %}
+
+<div class="discussion">
+
+    <div class="discussion-header">
+
+        <div>
+
+            <div class="author">
+
+                {{ discussion.author.username }}
+
+            </div>
+
+            <small style="color:gray;">
+
+                {{ discussion.created_at.strftime('%d %B %Y %I:%M %p') }}
+
+            </small>
+
+        </div>
+
+        <span class="category">
+
+            {{ discussion.category }}
+
+        </span>
+
+    </div>
+
+    <h3>
+
+        {{ discussion.title }}
+
+    </h3>
+
+    <p>
+
+        {{ discussion.content }}
+
+    </p>
+
+    <!-- ACTION BUTTONS -->
+
+    <div class="meta">
+
+        <span>
+
+            👍 {{ discussion.likes|length }} Likes
+
+        </span>
+
+        <span>
+
+            💬 {{ discussion.replies|length }} Replies
+
+        </span>
+
+    </div>
+
+    <br>
+
+    <!-- LIKE BUTTON -->
+
+    <form
+        action="{{ url_for('like_discussion', discussion_id=discussion.id) }}"
+        method="POST">
+
+        <button type="submit">
+
+            👍 Like
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <!-- REPLIES -->
+
+    <div style="margin-top:20px;">
+
+        <h4 style="color:#0d47a1; margin-bottom:15px;">
+
+            Replies
+
+        </h4>
+
+        {% if discussion.replies %}
+
+            {% for reply in discussion.replies %}
+
+            <div style="background:#f8f8f8;
+                        padding:15px;
+                        border-left:5px solid gold;
+                        border-radius:8px;
+                        margin-bottom:12px;">
+
+                <strong>
+
+                    {{ reply.author.username }}
+
+                </strong>
+
+                <br>
+
+                <small style="color:gray;">
+
+                    {{ reply.created_at.strftime('%d %B %Y %I:%M %p') }}
+
+                </small>
+
+                <br><br>
+
+                {{ reply.message }}
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+        <p style="color:gray;">
+
+            No replies yet.
+
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    <!-- REPLY FORM -->
+
+    <form
+        action="{{ url_for('reply', discussion_id=discussion.id) }}"
+        method="POST"
+        style="margin-top:20px;">
+
+        <textarea
+            name="reply"
+            placeholder="Write your reply..."
+            required></textarea>
+
+        <br><br>
+
+        <button type="submit">
+
+            Reply
+
+        </button>
+
+    </form>
+
+</div>
+
+<br>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+    <h2>
+
+        No Discussions Yet
+
+    </h2>
+
+    <p>
+
+        Be the first church member to start a discussion.
+
+    </p>
+
+</div>
+
+{% endif %}
+
+<!-- RIGHT SIDEBAR -->
+
+</div>
+
+<div class="right">
+
+    <!-- CATEGORIES -->
+
+    <div class="sidebar">
+
+        <h2>Discussion Categories</h2>
+
+        <ul>
+
+            <li><a href="{{ url_for('discussions') }}">General</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Bible Study</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Prayer Requests</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Youth Ministry</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Choir</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Marriage & Family</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Development</a></li>
+
+            <li><a href="{{ url_for('discussions') }}">Evangelism</a></li>
+
+        </ul>
+
+    </div>
+
+    <!-- RECENT DISCUSSIONS -->
+
+    <div class="sidebar">
+
+        <h2>Recent Discussions</h2>
+
+        {% if discussions %}
+
+            <ul>
+
+            {% for discussion in discussions[:5] %}
+
+                <li>
+
+                    <strong>{{ discussion.title }}</strong>
+
+                    <br>
+
+                    <small>
+
+                        {{ discussion.author.username }}
+
+                    </small>
+
+                </li>
+
+            {% endfor %}
+
+            </ul>
+
+        {% else %}
+
+            <p style="color:gray;">
+
+                No discussions available.
+
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <!-- FORUM RULES -->
+
+    <div class="sidebar">
+
+        <h2>Forum Rules</h2>
+
+        <ul>
+
+            <li>✔ Respect every church member.</li>
+
+            <li>✔ Use encouraging and respectful language.</li>
+
+            <li>✔ Keep discussions Christ-centered.</li>
+
+            <li>✔ Avoid offensive or abusive comments.</li>
+
+            <li>✔ Do not post false information.</li>
+
+            <li>✔ Pray for one another.</li>
+
+            <li>✔ Encourage unity within the church.</li>
+
+        </ul>
+
+    </div>
+
+    <!-- QUICK STATS -->
+
+    <div class="sidebar">
+
+        <h2>Forum Statistics</h2>
+
+        <p><strong>Total Discussions:</strong> {{ discussions|length }}</p>
+
+        <p><strong>Church Community Forum</strong></p>
+
+        <p style="color:gray;font-size:14px;">
+            Welcome to the church discussion forum. Share ideas, ask questions,
+            request prayers, and encourage one another in Christ.
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+<footer>
+
+    <h3>ACK St. Paul's Parish Mafisini</h3>
+
+    <p>
+        Church Discussion Forum
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+
+</html>
+

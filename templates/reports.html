@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports | ACK St. Paul's Parish Mafisini</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+    background:#fff8dc;
+    color:#333;
+
+}
+
+
+/* HEADER */
+
+header{
+
+    background:#b8860b;
+    color:white;
+    padding:25px;
+    text-align:center;
+
+}
+
+
+header h1{
+
+    font-size:32px;
+
+}
+
+
+header p{
+
+    margin-top:10px;
+
+}
+
+
+
+/* NAVIGATION */
+
+nav{
+
+    background:#8b6508;
+    padding:15px;
+    text-align:center;
+
+}
+
+
+nav a{
+
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    font-weight:bold;
+
+}
+
+
+nav a:hover{
+
+    color:#ffd700;
+
+}
+
+
+
+/* CONTAINER */
+
+.container{
+
+    width:90%;
+    margin:40px auto;
+
+}
+
+
+/* TITLE */
+
+.title{
+
+    text-align:center;
+    margin-bottom:30px;
+
+}
+
+
+.title h2{
+
+    color:#b8860b;
+    font-size:30px;
+
+}
+
+
+/* REPORT CARDS */
+
+.grid{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+
+}
+
+
+
+.card{
+
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+    text-align:center;
+    border-top:5px solid #ffd700;
+
+}
+
+
+.card h3{
+
+    color:#b8860b;
+    margin-bottom:15px;
+
+}
+
+
+.card p{
+
+    margin-bottom:20px;
+
+}
+
+
+/* BUTTON */
+
+.btn{
+
+    display:inline-block;
+    background:#b8860b;
+    color:white;
+    padding:12px 25px;
+    border-radius:25px;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+
+}
+
+
+.btn:hover{
+
+    background:#8b6508;
+
+}
+
+
+
+/* REPORT FORM */
+
+.report-box{
+
+    background:white;
+    margin-top:40px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+
+label{
+
+    display:block;
+    margin-top:15px;
+    font-weight:bold;
+
+}
+
+
+select,input{
+
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:8px;
+
+}
+
+
+/* FOOTER */
+
+
+footer{
+
+    margin-top:50px;
+    background:#b8860b;
+    color:white;
+    text-align:center;
+    padding:30px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>ACK St. Paul's Parish Mafisini</h1>
+
+<p>Church Management Reports System</p>
+
+</header>
+
+
+
+<nav>
+
+<a href="/index">Home</a>
+
+
+
+</nav>
+
+
+
+
+<div class="container">
+
+
+<div class="title">
+
+<h2>📊 Generate Reports</h2>
+
+<p>
+View and generate church activity reports easily.
+</p>
+
+</div>
+
+
+
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>👥 Members Report</h3>
+
+<p>
+Generate list of registered church members.
+</p>
+
+<button class="btn" onclick="generateReport('Members')">
+
+Generate
+
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>⛪ Attendance Report</h3>
+
+<p>
+View Sunday service attendance records.
+</p>
+
+<button class="btn" onclick="generateReport('Attendance')">
+
+Generate
+
+</button>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>🎤 Sermons Report</h3>
+
+<p>
+Generate sermons and preaching records.
+</p>
+
+<button class="btn" onclick="generateReport('Sermons')">
+
+Generate
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>📅 Events Report</h3>
+
+<p>
+Generate church events and activities report.
+</p>
+
+<button class="btn" onclick="generateReport('Events')">
+
+Generate
+
+</button>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>💰 Donations Report</h3>
+
+<p>
+Generate financial contribution reports.
+</p>
+
+<button class="btn" onclick="generateReport('Donations')">
+
+Generate
+
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>🙏 Prayer Requests</h3>
+
+<p>
+View submitted prayer requests.
+</p>
+
+<button class="btn" onclick="generateReport('Prayer Requests')">
+
+Generate
+
+</button>
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="report-box">
+
+
+<h2 style="color:#b8860b;">
+Custom Report Generator
+</h2>
+
+
+<label>
+Select Report Type
+</label>
+
+
+<select id="reportType">
+
+<option>Members</option>
+
+<option>Attendance</option>
+
+<option>Events</option>
+
+<option>Sermons</option>
+
+<option>Donations</option>
+
+<option>Prayer Requests</option>
+
+</select>
+
+
+
+
+<label>
+From Date
+</label>
+
+
+<input type="date" id="fromDate">
+
+
+
+<label>
+To Date
+</label>
+
+
+<input type="date" id="toDate">
+
+
+
+<br><br>
+
+
+<button class="btn" onclick="customReport()">
+
+Generate Custom Report
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<footer>
+
+
+<h2>
+ACK St. Paul's Parish Mafisini
+</h2>
+
+
+<p>
+Walking Together in Faith, Hope and Love
+</p>
+
+
+<p style="margin-top:15px;">
+
+© 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+
+</p>
+
+
+</footer>
+
+
+
+
+
+<script>
+
+
+function generateReport(type){
+
+alert(
+"Generating "+type+" Report..."
+);
+
+
+// Later connect this to PHP/Flask backend
+// for PDF or Excel generation
+
+}
+
+
+
+function customReport(){
+
+let type=document.getElementById("reportType").value;
+
+let from=document.getElementById("fromDate").value;
+
+let to=document.getElementById("toDate").value;
+
+
+alert(
+
+"Generating "+type+
+" Report from "+
+from+
+" to "+
+to
+
+);
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

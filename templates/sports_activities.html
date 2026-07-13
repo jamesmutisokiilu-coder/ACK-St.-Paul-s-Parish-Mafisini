@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sports Activities | ACK St. Paul's Parish Mafisini</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f8f9fc;
+    color:#333;
+}
+
+/* HEADER */
+
+header{
+    background:#0d47a1;
+    color:white;
+    padding:18px 60px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    border:3px solid gold;
+}
+
+.logo h2{
+    color:gold;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:gold;
+}
+
+/* HERO */
+
+.hero{
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("{{ url_for('static', filename='images/sports-banner.jpg') }}") center/cover;
+    color:white;
+    text-align:center;
+    padding:120px 20px;
+}
+
+.hero h1{
+    font-size:50px;
+    color:gold;
+}
+
+.hero p{
+    max-width:800px;
+    margin:20px auto;
+    line-height:1.8;
+    font-size:18px;
+}
+
+/* SECTION */
+
+.section{
+    width:90%;
+    max-width:1200px;
+    margin:60px auto;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.section-title h2{
+    color:#0d47a1;
+    font-size:38px;
+}
+
+.section-title p{
+    color:#666;
+    margin-top:15px;
+}
+
+/* SPORTS GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card-content h3{
+    color:#0d47a1;
+    margin-bottom:12px;
+}
+
+.card-content p{
+    color:#555;
+    line-height:1.7;
+}
+
+.button{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 25px;
+    background:#0d47a1;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    transition:.3s;
+}
+
+.button:hover{
+    background:gold;
+    color:black;
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.gallery img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.gallery img:hover{
+    transform:scale(1.05);
+}
+
+/* FOOTER */
+
+footer{
+    background:#0d47a1;
+    color:white;
+    text-align:center;
+    padding:30px;
+    margin-top:70px;
+}
+
+footer h3{
+    color:gold;
+    margin-bottom:10px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:34px;
+}
+
+header{
+    flex-direction:column;
+    gap:20px;
+}
+
+nav{
+    justify-content:center;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<img src="{{ url_for('static', filename='images/logo.png') }}">
+
+<div>
+
+<h2>ACK St. Paul's Parish Mafisini</h2>
+
+<p>Sports Ministry</p>
+
+</div>
+
+</div>
+
+<nav>
+
+<a href="{{ url_for('home') }}">Home</a>
+<a href="{{ url_for('activities') }}">Activities</a>
+<a href="{{ url_for('gallery') }}">Gallery</a>
+<a href="{{ url_for('contact') }}">Contact</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Church Sports Activities</h1>
+
+<p>
+
+Building fellowship, promoting healthy living, nurturing talent,
+and glorifying God through sports and recreation.
+
+</p>
+
+</section>
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Our Sports Programs</h2>
+
+<p>
+
+The church organizes different sporting activities that bring together
+children, youth, and adults for fellowship and healthy competition.
+
+
+
+</div>
+
+</div>
+
+</section>
+<!-- SPORTS GALLERY -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Sports Gallery</h2>
+
+<p>
+
+Capture memorable moments from our church sports activities.
+Replace these images with your own photos.
+
+</p>
+
+</div>
+
+<div class="gallery">
+
+<img src="/static/images/sport1.jpeg">
+
+<img src="/static/images/sport2.jpeg">
+
+<img src="/static/images/sport3.jpeg">
+
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- OTHER SPORTS -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Other Sporting Activities</h2>
+
+<p>
+
+We encourage members of all ages to participate in different sports and recreational activities.
+
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<img src="/static/images/bask.webp">
+
+<div class="card-content">
+
+<h3>Basketball</h3>
+
+<p>
+
+Basketball helps develop teamwork, leadership, confidence and physical fitness among our youth.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="/static/images/net.webp">
+
+<div class="card-content">
+
+<h3>Netball</h3>
+
+<p>
+
+The church organizes friendly netball matches that strengthen fellowship and unity.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<img src="/static/images/indoor.webp">
+
+<div class="card-content">
+
+<h3>Indoor Games</h3>
+
+<p>
+
+Chess, draughts and board games encourage strategic thinking and healthy interaction.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ACHIEVEMENTS -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Achievements</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>🏆 Community Tournament</h3>
+
+<p>
+
+Participated in local community tournaments and promoted Christian fellowship through sports.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>🥇 Youth Competitions</h3>
+
+<p>
+
+Youth teams continue to represent the church with discipline, respect and teamwork.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>🤝 Fellowship</h3>
+
+<p>
+
+Sports have helped bring together families, youth and church members from different groups.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- UPCOMING EVENTS -->
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Upcoming Sports Events</h2>
+
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>⚽ Football Tournament</h3>
+
+<p><strong>Date:</strong> 15 August 2026</p>
+
+<p><strong>Venue:</strong> Church Playground</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>🏐 Volleyball Challenge</h3>
+
+<p><strong>Date:</strong> 29 August 2026</p>
+
+<p><strong>Venue:</strong> Parish Grounds</p>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="card-content">
+
+<h3>🏃 Athletics Day</h3>
+
+<p><strong>Date:</strong> 12 September 2026</p>
+
+<p><strong>Venue:</strong> Community Field</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- BIBLE VERSE -->
+
+<section class="section">
+
+<div class="card">
+
+<div class="card-content" style="text-align:center;">
+
+<h2 style="color:#0d47a1;">
+
+📖 Bible Inspiration
+
+</h2>
+
+<p style="font-size:20px;line-height:2;margin-top:20px;">
+
+"Do you not know that in a race all the runners run, but only one gets the prize?
+Run in such a way as to get the prize."
+
+</p>
+
+<h3 style="margin-top:20px;color:gold;">
+
+1 Corinthians 9:24
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- JOIN SPORTS -->
+
+<section class="section">
+
+<div class="card">
+
+<div class="card-content" style="text-align:center;">
+
+<h2 style="color:#0d47a1;">
+
+Join Our Sports Ministry
+
+</h2>
+
+<p>
+
+Everyone is welcome to participate regardless of age or experience.
+
+Come and enjoy fellowship while keeping physically fit.
+
+</p>
+
+<a href="{{ url_for('contact') }}" class="button">
+
+Join Today
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<footer>
+
+<h3>
+
+ACK St. Paul's Parish Mafisini
+
+</h3>
+
+<p>
+
+Sports Ministry • Building Fellowship Through Sports
+
+</p>
+
+<p>
+
+Email: info@ackmafisini.org
+
+</p>
+
+<p>
+
+Phone: +254 XXX XXX XXX
+
+</p>
+
+<p>
+
+© 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+
+</p>
+
+</footer>
+
+</body>
+
+</html>

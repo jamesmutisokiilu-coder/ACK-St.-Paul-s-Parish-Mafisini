@@ -1,1 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+ACK St. Paul's Parish Mafisini
+</title>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+<style>
+
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+
+body{
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,.65),
+            rgba(0,0,0,.65)
+        ),
+
+        url("/static/images/church.jpeg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+
+
+    color:#fff;
+
+}
+
+
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+
+header{
+
+
+    width:100%;
+
+    padding:18px 8%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.45);
+
+    backdrop-filter:blur(10px);
+
+    position:fixed;
+
+    top:0;
+
+    z-index:1000;
+
+
+}
+
+
+
+
+
+/* ===========================
+   LEFT LOGO AREA
+=========================== */
+
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+
+.logo-circle{
+
+
+    width:55px;
+
+    height:55px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#222;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:bold;
+
+    font-size:22px;
+
+
+}
+
+
+
+.logo h2{
+
+    font-size:24px;
+
+}
+
+
+
+.logo small{
+
+    color:#fff;
+
+}
+
+
+
+
+
+
+
+/* ===========================
+   NAVIGATION
+=========================== */
+
+
+nav a{
+
+
+    color:#fff;
+
+    text-decoration:none;
+
+    margin-left:25px;
+
+    font-weight:500;
+
+    transition:.3s;
+
+
+}
+
+
+
+nav a:hover{
+
+
+    color:#d4af37;
+
+
+}
+
+
+
+
+
+
+
+/* ===========================
+   TOP RIGHT CHURCH LOGO
+=========================== */
+
+
+.header-logo{
+
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:
+
+    3px solid #FFD700;
+
+
+    box-shadow:
+
+    0 5px 15px rgba(0,0,0,.4);
+
+
+}
+
+
+
+
+
+
+
+/* ===========================
+   HERO SECTION
+=========================== */
+
+
+.hero{
+
+
+    min-height:100vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    text-align:center;
+
+
+    padding:
+
+    120px 20px 40px;
+
+
+}
+
+
+
+.hero-content{
+
+
+    max-width:850px;
+
+
+    background:
+
+    rgba(255,255,255,.08);
+
+
+    backdrop-filter:blur(12px);
+
+
+    border-radius:20px;
+
+
+    padding:50px;
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+}
+
+
+
+.hero h1{
+
+
+    font-size:55px;
+
+
+    margin-bottom:15px;
+
+
+    color:#FFD700;
+
+
+}
+
+
+
+.hero h3{
+
+
+    font-size:28px;
+
+
+    margin-bottom:20px;
+
+
+    font-weight:400;
+
+
+}
+
+
+
+.hero p{
+
+
+    font-size:18px;
+
+
+    line-height:1.8;
+
+
+    margin-bottom:35px;
+
+
+}
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.btn{
+
+
+    text-decoration:none;
+
+    padding:15px 35px;
+
+    border-radius:50px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+
+}
+
+
+
+.register{
+
+
+    background:#FFD700;
+
+    color:#222;
+
+
+}
+
+
+
+.register:hover{
+
+
+    background:#fff;
+
+    transform:translateY(-4px);
+
+
+}
+
+
+
+.login{
+
+
+    border:
+
+    2px solid #FFD700;
+
+
+    color:#FFD700;
+
+
+}
+
+
+
+.login:hover{
+
+
+    background:#FFD700;
+
+    color:#222;
+
+
+}
+
+
+
+
+
+
+/* ===========================
+   FEATURES
+=========================== */
+
+
+.features{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(260px,1fr));
+
+
+    gap:25px;
+
+
+    padding:70px 8%;
+
+
+    background:#f4f4f4;
+
+
+    color:#222;
+
+
+}
+
+
+
+.card{
+
+
+    background:#fff;
+
+
+    border-radius:15px;
+
+
+    padding:30px;
+
+
+    text-align:center;
+
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,.1);
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.card:hover{
+
+
+    transform:translateY(-8px);
+
+
+}
+
+
+
+.card h2{
+
+
+    color:#004080;
+
+
+    margin-bottom:15px;
+
+
+}
+
+
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+
+footer{
+
+
+    background:#00152d;
+
+
+    color:#fff;
+
+
+    text-align:center;
+
+
+    padding:25px;
+
+
+}
+
+
+
+
+
+/* ===========================
+   MOBILE RESPONSIVE
+=========================== */
+
+
+@media(max-width:768px){
+
+
+header{
+
+
+    flex-direction:column;
+
+
+    gap:15px;
+
+
+}
+
+
+
+nav{
+
+
+    display:flex;
+
+
+    flex-wrap:wrap;
+
+
+    justify-content:center;
+
+
+}
+
+
+.header-logo{
+    width:140px;
+    height:auto;
+    max-height:80px;
+    object-fit:contain;
+    background:transparent;
+    border:none;
+    box-shadow:none;
+    display:block;
+}
+
+
+.hero h1{
+
+
+    font-size:38px;
+
+
+}
+
+
+
+.hero h3{
+
+
+    font-size:22px;
+
+
+}
+
+
+
+.hero-content{
+
+
+    padding:35px 20px;
+
+
+}
+
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<!-- ===========================
+     HEADER
+=========================== -->
+
+
+<header>
+
+
+
+
+<div class="logo">
+
+
+<div class="logo-circle">
+
+✝
+
+</div>
+
+
+
+
+<div>
+
+
+<h2>
+
+ACK St. Paul's
+
+</h2>
+
+
+<small>
+
+Parish Mafisini
+
+</small>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<nav>
+
+
+<a href="/">
+
+Home
+
+</a>
+
+
+<a href="/about">
+
+About
+
+</a>
+
+
+
+<a href="/sermons">
+
+Sermons
+
+</a>
+
+
+
+<a href="/events">
+
+Events
+
+</a>
+
+
+
+<a href="/contact">
+
+Contact
+
+</a>
+
+
+
+</nav>
+
+
+
+
+
+
+<!-- TOP RIGHT LOGO -->
+
+
+<img 
+
+src="/static/images/ack.webp"
+
+alt="ACK St. Paul's Parish Logo"
+
+class="header-logo">
+
+
+
+</header>
+
+
+
+
+
+
+
+
+<!-- ===========================
+     HERO SECTION
+=========================== -->
+
+
+<section class="hero">
+
+
+
+<div class="hero-content">
+
+
+
+<h1>
+
+Welcome to ACK St. Paul's Parish Mafisini
+
+</h1>
+
+
+
+
+<h3>
+
+Growing Together in Faith, Hope and Love.
+
+</h3>
+
+
+
+
+
+<p>
+
+Welcome to the official digital platform of ACK St. Paul's Parish Mafisini.
+Our church is committed to spreading the Gospel of Jesus Christ, nurturing
+spiritual growth, serving our community, and welcoming everyone into God's
+family. Stay connected through sermons, church announcements, events,
+ministries, and online services.
+
+</p>
+
+
+
+
+
+
+<div class="buttons">
+
+
+<a href="/register" class="btn register">
+
+Register
+
+</a>
+
+
+
+
+<a href="/login" class="btn login">
+
+Login
+
+</a>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+<!-- ===========================
+     FEATURES SECTION
+=========================== -->
+
+
+<section class="features">
+
+
+
+<div class="card">
+
+
+<h2>
+
+🙏 Worship Services
+
+</h2>
+
+
+
+<p>
+
+Join us every Sunday and during weekly fellowship services as we worship
+God together.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+
+📖 Sermons
+
+</h2>
+
+
+
+<p>
+
+Read and watch inspiring sermons from our clergy anytime and anywhere.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+
+❤️ Church Community
+
+</h2>
+
+
+
+<p>
+
+Become part of our ministries, fellowship groups, and community outreach
+programs.
+
+</p>
+
+
+
+</div>
+
+
+
+
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+
+<footer>
+
+<div style="max-width:1200px;margin:auto;">
+
+<h2 style="color:#FFD700;margin-bottom:15px;">
+⛪ ACK St. Paul's Parish Mafisini
+</h2>
+
+<p style="margin-bottom:10px;">
+Serving God Through Faith, Hope and Love
+</p>
+
+<p style="margin-bottom:10px;">
+Mafisini, Kenya
+</p>
+
+<p style="margin-bottom:10px;">
+"Let your light shine before others, that they may see your good deeds and glorify your Father in heaven."
+</p>
+
+<p style="color:#FFD700;">
+— Matthew 5:16
+</p>
+
+<hr style="
+margin:25px auto;
+border:none;
+height:1px;
+background:rgba(255,255,255,.2);
+width:80%;
+">
+
+<p>
+&copy; 2026 ACK St. Paul's Parish Mafisini.
+All Rights Reserved.
+</p>
+
+</div>
+
+</footer>
+
+</body>
+
+</html>

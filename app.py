@@ -928,14 +928,22 @@ def events():
 
 
 
-@app.route("/baptism-registration")
+@app.route('/baptism-registration', methods=['POST'])
 def baptism_registration():
-    return render_template("baptism_registration.html")
+    flash(
+        "✅ Thank you for registering for Holy Baptism. The Parish Office will contact you soon with the next steps.",
+        "success"
+    )
+    return redirect(url_for('events'))
 
 
-@app.route("/wedding-registration")
+@app.route('/wedding-registration', methods=['POST'])
 def wedding_registration():
-    return render_template("wedding_registration.html")
+    flash(
+        "💍 Thank you for booking your Christian Wedding. Our Parish Office will contact you to arrange counselling and confirm your preferred wedding date.",
+        "success"
+    )
+    return redirect(url_for('events'))
 
 @app.route("/sermons")
 

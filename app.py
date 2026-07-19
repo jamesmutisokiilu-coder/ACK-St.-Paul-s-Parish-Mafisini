@@ -775,30 +775,459 @@ def dashboard():
 
 
 # ==========================================================
-# REPORTS PAGE
+
+# ==========================================================
+# REPORTS DASHBOARD
 # ==========================================================
 
 @app.route("/reports")
-@login_required
 def reports():
 
-    total_users = User.query.count()
+    members = Member.query.all()
 
-    total_prayers = PrayerRequest.query.count()
+    events = Event.query.all()
 
-    total_events = Event.query.count()
+    sermons = Sermon.query.all()
 
-    total_sermons = Sermon.query.count()
+    prayers = PrayerRequest.query.all()
 
-    total_discussions = Discussion.query.count()
+    baptisms = Baptism.query.all()
+
+    weddings = Wedding.query.all()
+
 
     return render_template(
         "reports.html",
-        total_users=total_users,
-        total_prayers=total_prayers,
-        total_events=total_events,
-        total_sermons=total_sermons,
-        total_discussions=total_discussions
+        members=members,
+        events=events,
+        sermons=sermons,
+        prayers=prayers,
+        baptisms=baptisms,
+        weddings=weddings
+    )
+
+
+
+# ==========================================================
+# PDF GENERATOR FUNCTION
+# ==========================================================
+
+def create_pdf(title, headers, rows):
+
+    buffer = io.BytesIO()
+
+
+    pdf = SimpleDocTemplate(
+        buffer,
+        pagesize=landscape(A4)
+    )
+
+
+    styles = getSampleStyleSheet()
+
+
+    content=[]
+
+
+    content.append(
+        Paragraph(
+            "ACK St. Paul's Parish Mafisini",
+            styles["Title"]
+        )
+    )
+
+
+    content.append(
+        Spacer(1,15)
+    )
+
+
+    content.append(
+        Paragraph(
+            title,
+            styles["Heading2"]
+        )
+    )
+
+
+    content.append(
+        Paragraph(
+            "Generated on: "
+            + datetime.now().strftime("%d-%m-%Y %H:%M"),
+            styles["Normal"]
+        )
+    )
+
+
+    content.append(
+        Spacer(1,20)
+    )
+
+
+    table_data=[headers]
+
+
+    for row in rows:
+        table_data.append(row)
+
+
+    table = Table(table_data)
+
+
+    table.setStyle(
+        TableStyle([
+
+            (
+            'BACKGROUND',
+            (0,0),
+            (-1,0),
+            '#1565c0'
+            ),
+
+
+            (
+            'TEXTCOLOR',
+            (0,0),
+            (-1,0),
+            '#ffffff'
+            ),
+
+
+            (
+            'GRID',
+            (0,0),
+            (-1,-1),
+            0.5,
+            '#000000'
+            ),
+
+
+            (
+            'VALIGN',
+            (0,0),
+            (-1,-1),
+            'TOP'
+            )
+
+        ])
+    )
+
+
+    content.append(table)
+
+
+    content.append(
+        Spacer(1,30)
+    )
+
+
+    content.append(
+        Paragraph(
+            "Official Church Management Report",
+            styles["Normal"]
+        )
+    )
+
+
+    pdf.build(content)
+
+
+    buffer.seek(0)
+
+
+    return buffer
+
+
+
+
+# ==========================================================
+# MEMBERS REPORT PDF
+# ==========================================================
+
+@app.route("/members-report-pdf")
+def members_report_pdf():
+
+
+    members = Member.query.all()
+
+
+    rows=[]
+
+
+    for m in members:
+
+        rows.append([
+
+            m.id,
+            m.name,
+            m.email,
+            m.phone
+
+        ])
+
+
+
+    pdf=create_pdf(
+
+        "Church Members Report",
+
+        [
+            "ID",
+            "Name",
+            "Email",
+            "Phone"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="members_report.pdf",
+
+        mimetype="application/pdf"
+
+    )
+
+
+
+
+
+# ==========================================================
+# EVENTS REPORT PDF
+# ==========================================================
+
+@app.route("/events-report-pdf")
+def events_report_pdf():
+
+
+    events = Event.query.all()
+
+
+    rows=[]
+
+
+    for e in events:
+
+        rows.append([
+
+            e.id,
+            e.title,
+            e.date,
+            e.description
+
+        ])
+
+
+
+    pdf=create_pdf(
+
+        "Church Events Report",
+
+        [
+            "ID",
+            "Title",
+            "Date",
+            "Description"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="events_report.pdf",
+
+        mimetype="application/pdf"
+
+    )
+
+
+
+
+
+# ==========================================================
+# SERMONS REPORT PDF
+# ==========================================================
+
+@app.route("/sermons-report-pdf")
+def sermons_report_pdf():
+
+
+    sermons = Sermon.query.all()
+
+
+    rows=[]
+
+
+    for s in sermons:
+
+        rows.append([
+
+            s.id,
+            s.title,
+            s.preacher,
+            str(s.date)
+
+        ])
+
+
+    pdf=create_pdf(
+
+        "Sermons Report",
+
+        [
+            "ID",
+            "Title",
+            "Preacher",
+            "Date"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="sermons_report.pdf",
+
+        mimetype="application/pdf"
+
+    )
+
+
+
+
+
+# ==========================================================
+# PRAYER REQUEST REPORT PDF
+# ==========================================================
+
+@app.route("/prayer-report-pdf")
+def prayer_report_pdf():
+
+
+    prayers = PrayerRequest.query.all()
+
+
+    rows=[]
+
+
+    for p in prayers:
+
+        rows.append([
+
+            p.id,
+            p.full_name,
+            p.category,
+            p.prayer
+
+        ])
+
+
+    pdf=create_pdf(
+
+        "Prayer Requests Report",
+
+        [
+            "ID",
+            "Name",
+            "Category",
+            "Prayer Request"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="prayer_requests.pdf",
+
+        mimetype="application/pdf"
+
+    )
+
+
+
+
+
+# ==========================================================
+# BAPTISM REPORT PDF
+# ==========================================================
+
+@app.route("/baptism-report-pdf")
+def baptism_report_pdf():
+
+
+    baptisms = Baptism.query.all()
+
+
+    rows=[]
+
+
+    for b in baptisms:
+
+        rows.append([
+
+            b.id,
+            b.full_name,
+            b.phone,
+            b.email,
+            b.dob
+
+        ])
+
+
+    pdf=create_pdf(
+
+        "Holy Baptism Registration Report",
+
+        [
+            "ID",
+            "Name",
+            "Phone",
+            "Email",
+            "DOB"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="baptism_report.pdf",
+
+        mimetype="application/pdf"
+
     )
 
 

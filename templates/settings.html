@@ -372,8 +372,7 @@ onchange="previewLogo(event)">
 <input
 type="text"
 name="church_name"
-value="ACK St. Paul's Parish Mafisini"
-required>
+value="{{setting.church_name}}">
 
 </div>
 
@@ -384,7 +383,7 @@ required>
 <input
 type="text"
 name="church_motto"
-value="Walking Together in Faith, Hope and Love">
+value="{{setting.church_motto or ''}}">
 
 </div>
 
@@ -395,6 +394,7 @@ value="Walking Together in Faith, Hope and Love">
 <input
 type="text"
 name="vicar"
+value="{{setting.vicar or ''}}"
 placeholder="Enter Parish Priest or Vicar">
 
 </div>
@@ -406,6 +406,7 @@ placeholder="Enter Parish Priest or Vicar">
 <input
 type="number"
 name="established"
+value="{{setting.established or ''}}"
 placeholder="e.g. 1998">
 
 </div>
@@ -415,7 +416,7 @@ placeholder="e.g. 1998">
 <label>Church Address</label>
 
 <textarea
-name="address">Mafisini, Kenya</textarea>
+<textarea name="address">{{setting.address or ''}}</textarea>
 
 </div>
 
@@ -423,12 +424,7 @@ name="address">Mafisini, Kenya</textarea>
 
 <label>Church Description</label>
 
-<textarea
-name="description">Welcome to ACK St. Paul's Parish Mafisini.
-
-We are committed to worship, discipleship, evangelism, community outreach and serving God faithfully.
-
-Everyone is welcome to worship with us.</textarea>
+<textarea name="description">{{setting.description or ''}}</textarea>
 
 </div>
 
@@ -453,7 +449,7 @@ Everyone is welcome to worship with us.</textarea>
 <input
 type="text"
 name="phone"
-value="+254 700 000 000">
+value="{{setting.phone or ''}}">
 
 </div>
 
@@ -475,7 +471,7 @@ placeholder="+254 711 111 111">
 <input
 type="email"
 name="email"
-value="info@ackstpaulsmafisini.org">
+value="{{setting.email or ''}}">
 
 </div>
 
@@ -486,7 +482,7 @@ value="info@ackstpaulsmafisini.org">
 <input
 type="url"
 name="website"
-placeholder="https://www.ackstpaulsmafisini.org">
+value="{{setting.website or ''}}"
 
 </div>
 
@@ -497,7 +493,7 @@ placeholder="https://www.ackstpaulsmafisini.org">
 <input
 type="text"
 name="office_hours"
-value="Monday - Friday | 8:00 AM - 5:00 PM">
+value="{{setting.office_hours or ''}}"
 
 </div>
 
@@ -855,8 +851,11 @@ class="save-btn">
 
 <button
 type="reset"
-class="reset-btn">
+class="reset-btn"
+onclick="return confirm('Clear all unsaved changes?')">
+
 ↺ Reset Form
+
 </button>
 
 <button

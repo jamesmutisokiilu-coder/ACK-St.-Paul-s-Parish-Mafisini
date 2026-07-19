@@ -1389,13 +1389,43 @@ def delete_discussion(id):
 # ADMIN LOGIN
 # ==========================================================
 
+# ==========================================================
+# ADMIN LOGIN REQUIRED DECORATOR
+# ==========================================================
+
+def admin_required(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+
+        if not session.get("admin"):
+
+            flash(
+                "Please login as administrator.",
+                "warning"
+            )
+
+            return redirect(url_for("admin_login"))
+
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+# ==========================================================
+# ADMIN LOGIN
+# ==========================================================
+
 @app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
+
+    # Already logged in
+    if session.get("admin"):
+        return redirect(url_for("admin_dashboard"))
 
     if request.method == "POST":
 
         email = request.form.get("email", "").strip().lower()
-        password = request.form.get("password", "")
+        password = request.form.get("password", "").strip()
 
         admin_email = os.environ.get(
             "ADMIN_EMAIL",
@@ -1413,17 +1443,17 @@ def admin_login():
 
             session["admin"] = True
             session["admin_name"] = "Church Administrator"
-            session["admin_email"] = email
+            session["admin_email"] = admin_email
 
             flash(
-                "Administrator login successful.",
+                "Welcome Administrator.",
                 "success"
             )
 
             return redirect(url_for("admin_dashboard"))
 
         flash(
-            "Invalid administrator credentials.",
+            "Invalid administrator email or password.",
             "danger"
         )
 
@@ -1435,17 +1465,8 @@ def admin_login():
 # ==========================================================
 
 @app.route("/admin-dashboard")
-@login_required
+@admin_required
 def admin_dashboard():
-
-    if not session.get("admin"):
-
-        flash(
-            "Administrator access required.",
-            "danger"
-        )
-
-        return redirect(url_for("dashboard"))
 
     total_users = User.query.count()
 

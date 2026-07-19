@@ -251,6 +251,61 @@ class DiscussionLike(db.Model):
     )
 
 
+class ChurchSettings(db.Model):
+
+    __tablename__ = "church_settings"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    church_name = db.Column(db.String(200))
+    church_motto = db.Column(db.String(255))
+    vicar = db.Column(db.String(150))
+    established = db.Column(db.String(20))
+
+    address = db.Column(db.Text)
+    description = db.Column(db.Text)
+
+    phone = db.Column(db.String(50))
+    alt_phone = db.Column(db.String(50))
+    email = db.Column(db.String(150))
+    website = db.Column(db.String(200))
+
+    office_hours = db.Column(db.String(200))
+    postal_address = db.Column(db.String(100))
+    county = db.Column(db.String(100))
+    location = db.Column(db.String(150))
+    google_maps = db.Column(db.Text)
+
+    theme = db.Column(db.String(50))
+    language = db.Column(db.String(50))
+
+    welcome_message = db.Column(db.Text)
+
+    show_sermons = db.Column(db.String(20))
+    show_events = db.Column(db.String(20))
+    prayer_requests = db.Column(db.String(20))
+    visitor_registration = db.Column(db.String(20))
+
+    email_notifications = db.Column(db.String(20))
+    prayer_notifications = db.Column(db.String(20))
+    event_notifications = db.Column(db.String(20))
+    newsletter_notifications = db.Column(db.String(20))
+    system_alerts = db.Column(db.String(20))
+    backup_reminder = db.Column(db.String(50))
+
+    session_timeout = db.Column(db.String(50))
+    two_factor = db.Column(db.String(20))
+    auto_backup = db.Column(db.String(20))
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+
 class ContactMessage(db.Model):
 
     __tablename__ = "contact_messages"
@@ -469,6 +524,136 @@ def register():
 # ==========================================================
 
 
+
+
+# ==========================================================
+# WEBSITE SETTINGS
+# ==========================================================
+
+@app.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+
+    settings = ChurchSettings.query.first()
+
+
+    if request.method == "POST":
+
+
+        if not settings:
+
+            settings = ChurchSettings()
+
+            db.session.add(settings)
+
+
+
+        settings.church_name = request.form.get("church_name")
+
+        settings.church_motto = request.form.get("church_motto")
+
+        settings.vicar = request.form.get("vicar")
+
+        settings.established = request.form.get("established")
+
+
+        settings.address = request.form.get("address")
+
+        settings.description = request.form.get("description")
+
+
+        settings.phone = request.form.get("phone")
+
+        settings.alt_phone = request.form.get("alt_phone")
+
+        settings.email = request.form.get("email")
+
+        settings.website = request.form.get("website")
+
+
+        settings.office_hours = request.form.get("office_hours")
+
+        settings.postal_address = request.form.get("postal_address")
+
+        settings.county = request.form.get("county")
+
+        settings.location = request.form.get("location")
+
+        settings.google_maps = request.form.get("google_maps")
+
+
+        settings.theme = request.form.get("theme")
+
+        settings.language = request.form.get("language")
+
+        settings.welcome_message = request.form.get("welcome_message")
+
+
+        settings.show_sermons = request.form.get("show_sermons")
+
+        settings.show_events = request.form.get("show_events")
+
+        settings.prayer_requests = request.form.get("prayer_requests")
+
+        settings.visitor_registration = request.form.get("visitor_registration")
+
+
+        settings.email_notifications = request.form.get("email_notifications")
+
+        settings.prayer_notifications = request.form.get("prayer_notifications")
+
+        settings.event_notifications = request.form.get("event_notifications")
+
+        settings.newsletter_notifications = request.form.get("newsletter_notifications")
+
+        settings.system_alerts = request.form.get("system_alerts")
+
+        settings.backup_reminder = request.form.get("backup_reminder")
+
+
+        settings.session_timeout = request.form.get("session_timeout")
+
+        settings.two_factor = request.form.get("two_factor")
+
+        settings.auto_backup = request.form.get("auto_backup")
+
+
+
+        try:
+
+            db.session.commit()
+
+
+            flash(
+                "Website settings updated successfully.",
+                "success"
+            )
+
+
+        except Exception as e:
+
+            db.session.rollback()
+
+            print(e)
+
+
+            flash(
+                "Unable to save settings.",
+                "danger"
+            )
+
+
+
+        return redirect(
+            url_for("settings")
+        )
+
+
+
+    return render_template(
+        "settings.html",
+        settings=settings
+    )
 
 
 # ==========================================================

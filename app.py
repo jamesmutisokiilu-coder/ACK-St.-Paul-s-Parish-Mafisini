@@ -249,9 +249,6 @@ class Discussion(db.Model):
 
 
 
-# =========================
-# REPLY MODEL
-# =========================
 
 
 class Reply(db.Model):
@@ -299,14 +296,6 @@ class Reply(db.Model):
 
 
 
-
-
-
-# =========================
-# DISCUSSION LIKE MODEL
-# =========================
-
-
 class DiscussionLike(db.Model):
 
     __tablename__ = "discussion_like"
@@ -342,13 +331,6 @@ class DiscussionLike(db.Model):
 
 
 
-
-
-# =========================
-# CONTACT MODEL
-# =========================
-
-
 class ContactMessage(db.Model):
 
     id = db.Column(
@@ -375,14 +357,6 @@ class ContactMessage(db.Model):
 
 
 
-
-
-
-# =========================
-# GALLERY MODEL
-# =========================
-
-
 class Gallery(db.Model):
 
     id = db.Column(
@@ -402,14 +376,6 @@ class Gallery(db.Model):
 
 
 
-
-
-
-
-
-# =========================
-# PRAYER REQUEST MODEL
-# =========================
 
 
 class PrayerRequest(db.Model):
@@ -959,6 +925,17 @@ def prayer_request():
 @app.route('/events')
 def events():
     return render_template("events.html")
+
+
+
+@app.route("/baptism-registration")
+def baptism_registration():
+    return render_template("baptism_registration.html")
+
+
+@app.route("/wedding-registration")
+def wedding_registration():
+    return render_template("wedding_registration.html")
 
 @app.route("/sermons")
 

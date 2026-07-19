@@ -88,38 +88,17 @@ class User(db.Model):
         default=datetime.utcnow
     )
 
-
 class Event(db.Model):
 
     __tablename__ = "events"
 
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+    id = db.Column(db.Integer, primary_key=True)
 
-    title = db.Column(
-        db.String(150),
-        nullable=False
-    )
+    title = db.Column(db.String(150), nullable=False)
 
-    date = db.Column(
-        db.String(50),
-        nullable=False
-    )
+    date = db.Column(db.String(50))
 
-    description = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-    created_at = db.Column(
-        db.DateTime,
-        default=datetime.utcnow
-    )
-
-    def __repr__(self):
-        return f"<Event {self.title}>"
+    description = db.Column(db.Text)
 
 
 class Sermon(db.Model):

@@ -1,6 +1,9 @@
 import os
+import io
+
 from datetime import datetime
 from functools import wraps
+
 
 from flask import (
     Flask,
@@ -10,11 +13,40 @@ from flask import (
     url_for,
     session,
     flash,
-    jsonify
+    jsonify,
+    send_file
 )
 
+
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+
+
+from werkzeug.security import (
+    generate_password_hash,
+    check_password_hash
+)
+
+
+# ==========================================================
+# PDF REPORT GENERATION IMPORTS
+# ==========================================================
+
+from reportlab.platypus import (
+    SimpleDocTemplate,
+    Paragraph,
+    Spacer,
+    Table,
+    TableStyle
+)
+
+from reportlab.lib.pagesizes import (
+    A4,
+    landscape
+)
+
+from reportlab.lib.styles import (
+    getSampleStyleSheet
+)
 
 
 # --------------------------------------------------
@@ -784,29 +816,27 @@ def dashboard():
 # CHURCH REPORTS SYSTEM
 # ==========================================================
 
+# ==========================================================
+# REPORTS PAGE
+# ==========================================================
+
 @app.route("/reports")
 def reports():
 
-    # Registered church users / members
     members = User.query.order_by(User.id.desc()).all()
 
-    # Church events
     events = Event.query.order_by(Event.id.desc()).all()
 
-    # Sermons
     sermons = Sermon.query.order_by(Sermon.id.desc()).all()
 
-    # Prayer requests
     prayer_requests = PrayerRequest.query.order_by(
         PrayerRequest.id.desc()
     ).all()
 
-    # Baptism registrations
     baptisms = Baptism.query.order_by(
         Baptism.id.desc()
     ).all()
 
-    # Wedding bookings
     weddings = Wedding.query.order_by(
         Wedding.id.desc()
     ).all()
@@ -816,20 +846,17 @@ def reports():
         "reports.html",
 
         members=members,
-
         events=events,
-
         sermons=sermons,
-
         prayer_requests=prayer_requests,
-
         baptisms=baptisms,
-
         weddings=weddings
     )
 
+
+
 # ==========================================================
-# PDF GENERATOR FUNCTION
+# PDF CREATION FUNCTION
 # ==========================================================
 
 def create_pdf(title, headers, rows):
@@ -858,7 +885,7 @@ def create_pdf(title, headers, rows):
 
 
     content.append(
-        Spacer(1,15)
+        Spacer(1,20)
     )
 
 
@@ -872,7 +899,7 @@ def create_pdf(title, headers, rows):
 
     content.append(
         Paragraph(
-            "Generated on: "
+            "Generated: "
             + datetime.now().strftime("%d-%m-%Y %H:%M"),
             styles["Normal"]
         )
@@ -891,42 +918,43 @@ def create_pdf(title, headers, rows):
         table_data.append(row)
 
 
-    table = Table(table_data)
+
+    table = Table(
+        table_data,
+        repeatRows=1
+    )
 
 
     table.setStyle(
         TableStyle([
 
             (
-            'BACKGROUND',
-            (0,0),
-            (-1,0),
-            '#1565c0'
+                'BACKGROUND',
+                (0,0),
+                (-1,0),
+                '#1565c0'
             ),
 
-
             (
-            'TEXTCOLOR',
-            (0,0),
-            (-1,0),
-            '#ffffff'
+                'TEXTCOLOR',
+                (0,0),
+                (-1,0),
+                '#ffffff'
             ),
 
-
             (
-            'GRID',
-            (0,0),
-            (-1,-1),
-            0.5,
-            '#000000'
+                'GRID',
+                (0,0),
+                (-1,-1),
+                0.5,
+                '#000000'
             ),
 
-
             (
-            'VALIGN',
-            (0,0),
-            (-1,-1),
-            'TOP'
+                'VALIGN',
+                (0,0),
+                (-1,-1),
+                'TOP'
             )
 
         ])
@@ -954,21 +982,20 @@ def create_pdf(title, headers, rows):
 
     buffer.seek(0)
 
-
     return buffer
 
 
 
 
+
 # ==========================================================
-# MEMBERS REPORT PDF
+# MEMBERS PDF REPORT
 # ==========================================================
 
 @app.route("/members-report-pdf")
 def members_report_pdf():
 
-
-    members = Member.query.all()
+    members = User.query.all()
 
 
     rows=[]
@@ -979,12 +1006,14 @@ def members_report_pdf():
         rows.append([
 
             m.id,
+
             m.name,
+
             m.email,
-            m.phone
+
+            getattr(m,"phone","")
 
         ])
-
 
 
     pdf=create_pdf(
@@ -1020,12 +1049,11 @@ def members_report_pdf():
 
 
 # ==========================================================
-# EVENTS REPORT PDF
+# EVENTS PDF REPORT
 # ==========================================================
 
 @app.route("/events-report-pdf")
 def events_report_pdf():
-
 
     events = Event.query.all()
 
@@ -1038,9 +1066,12 @@ def events_report_pdf():
         rows.append([
 
             e.id,
+
             e.title,
+
             e.date,
-            e.description
+
+            e.description or ""
 
         ])
 
@@ -1079,14 +1110,13 @@ def events_report_pdf():
 
 
 # ==========================================================
-# SERMONS REPORT PDF
+# SERMONS PDF REPORT
 # ==========================================================
 
 @app.route("/sermons-report-pdf")
 def sermons_report_pdf():
 
-
-    sermons = Sermon.query.all()
+    sermons=Sermon.query.all()
 
 
     rows=[]
@@ -1097,11 +1127,15 @@ def sermons_report_pdf():
         rows.append([
 
             s.id,
+
             s.title,
-            s.preacher,
-            str(s.date)
+
+            getattr(s,"preacher",""),
+
+            str(getattr(s,"date",""))
 
         ])
+
 
 
     pdf=create_pdf(
@@ -1137,14 +1171,13 @@ def sermons_report_pdf():
 
 
 # ==========================================================
-# PRAYER REQUEST REPORT PDF
+# PRAYER REQUEST PDF REPORT
 # ==========================================================
 
 @app.route("/prayer-report-pdf")
 def prayer_report_pdf():
 
-
-    prayers = PrayerRequest.query.all()
+    prayers=PrayerRequest.query.all()
 
 
     rows=[]
@@ -1155,11 +1188,15 @@ def prayer_report_pdf():
         rows.append([
 
             p.id,
+
             p.full_name,
+
             p.category,
+
             p.prayer
 
         ])
+
 
 
     pdf=create_pdf(
@@ -1170,7 +1207,7 @@ def prayer_report_pdf():
             "ID",
             "Name",
             "Category",
-            "Prayer Request"
+            "Prayer"
         ],
 
         rows
@@ -1195,14 +1232,13 @@ def prayer_report_pdf():
 
 
 # ==========================================================
-# BAPTISM REPORT PDF
+# BAPTISM PDF REPORT
 # ==========================================================
 
 @app.route("/baptism-report-pdf")
 def baptism_report_pdf():
 
-
-    baptisms = Baptism.query.all()
+    baptisms=Baptism.query.all()
 
 
     rows=[]
@@ -1213,12 +1249,17 @@ def baptism_report_pdf():
         rows.append([
 
             b.id,
+
             b.full_name,
+
             b.phone,
-            b.email,
-            b.dob
+
+            b.email or "",
+
+            str(b.dob)
 
         ])
+
 
 
     pdf=create_pdf(
@@ -1245,6 +1286,70 @@ def baptism_report_pdf():
         as_attachment=True,
 
         download_name="baptism_report.pdf",
+
+        mimetype="application/pdf"
+
+    )
+
+
+
+
+
+# ==========================================================
+# WEDDING PDF REPORT
+# ==========================================================
+
+@app.route("/wedding-report-pdf")
+def wedding_report_pdf():
+
+    weddings=Wedding.query.all()
+
+
+    rows=[]
+
+
+    for w in weddings:
+
+        rows.append([
+
+            w.id,
+
+            w.bride_name,
+
+            w.groom_name,
+
+            w.phone,
+
+            str(w.wedding_date)
+
+        ])
+
+
+
+    pdf=create_pdf(
+
+        "Christian Wedding Bookings Report",
+
+        [
+            "ID",
+            "Bride",
+            "Groom",
+            "Phone",
+            "Date"
+        ],
+
+        rows
+
+    )
+
+
+    return send_file(
+
+        pdf,
+
+        as_attachment=True,
+
+        download_name="wedding_report.pdf",
 
         mimetype="application/pdf"
 

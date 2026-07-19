@@ -577,6 +577,26 @@ def dashboard():
     )
 
 
+
+
+
+# ==========================================================
+# NOTIFICATIONS PAGE
+# ==========================================================
+
+@app.route("/notifications")
+@login_required
+def notifications():
+
+    notifications = Notification.query.order_by(
+        Notification.created_at.desc()
+    ).all()
+
+    return render_template(
+        "notifications.html",
+        notifications=notifications
+    )
+
 # ==========================================================
 # PROFILE
 # ==========================================================

@@ -367,6 +367,29 @@ class PrayerRequest(db.Model):
     )
 
 
+class Wedding(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    bride_name = db.Column(db.String(150), nullable=False)
+    groom_name = db.Column(db.String(150), nullable=False)
+    phone = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(120))
+    wedding_date = db.Column(db.String(30))
+    guests = db.Column(db.Integer)
+    message = db.Column(db.Text)
+    status = db.Column(db.String(30), default="Booked")
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class Baptism(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String(150), nullable=False)
+    phone = db.Column(db.String(30), nullable=False)
+    email = db.Column(db.String(120))
+    dob = db.Column(db.String(30))
+    message = db.Column(db.Text)
+    status = db.Column(db.String(30), default="Pending")
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
 class Notification(db.Model):
 
     __tablename__ = "notifications"
@@ -968,6 +991,20 @@ def activities():
     )
 
 
+@app.route("/ministries")
+def ministries():
+
+    baptisms = Baptism.query.order_by(Baptism.created_at.desc()).all()
+
+    weddings = Wedding.query.order_by(Wedding.created_at.desc()).all()
+
+    return render_template(
+        "ministries.html",
+        baptisms=baptisms,
+        weddings=weddings
+    )
+
+
 # ==========================================================
 # HOLY BAPTISM REGISTRATION
 # ==========================================================
@@ -975,27 +1012,75 @@ def activities():
 @app.route("/baptism-registration", methods=["POST"])
 def baptism_registration():
 
-    flash(
-        "✅ Thank you for registering for Holy Baptism. Our Parish Office will contact you soon with the baptism class schedule.",
-        "success"
+    baptism = Baptism(
+        full_name=request.form["full_name"],
+        phone=request.form["phone"],
+        email=request.form.get("email"),
+        dob=request.form["dob"],
+        message=request.form.get("message")
     )
 
-    return redirect(url_for("events"))
+    db.session.add(baptism)
+    db.session.commit()
+
+    flash("Baptism registration submitted successfully.", "success")
+
+    return redirect(url_for("ministries"))
 
 
 # ==========================================================
 # CHRISTIAN WEDDING BOOKING
-# ==========================================================
-
 @app.route("/wedding-registration", methods=["POST"])
 def wedding_registration():
 
-    flash(
-        "💍 Thank you for booking your Christian Wedding. Our Parish Office will contact you shortly to arrange counselling and confirm your wedding date.",
-        "success"
+    wedding = Wedding(
+        bride_name=request.form["bride_name"],
+        groom_name=request.form["groom_name"],
+        phone=request.form["phone"],
+        email=request.form.get("email"),
+        wedding_date=request.form["wedding_date"],
+        guests=request.form.get("guests") or None,
+        message=request.form.get("message")
     )
 
-    return redirect(url_for("events"))
+    db.session.add(wedding)
+    db.session.commit()
+
+    flash("Wedding booking submitted successfully.", "success")
+
+    return redirect(url_for("ministries"))
+
+
+@app.route("/view-baptism/<int:baptism_id>")
+def view_baptism(baptism_id):
+    baptism = Baptism.query.get_or_404(baptism_id)
+    return render_template("view_baptism.html", baptism=baptism)
+
+
+@app.route("/delete-baptism/<int:baptism_id>")
+def delete_baptism(baptism_id):
+
+    baptism = Baptism.query.get_or_404(baptism_id)
+
+    db.session.delete(baptism)
+    db.session.commit()
+
+    flash("Baptism registration deleted.", "success")
+
+    return redirect(url_for("ministries"))
+
+
+@app.route("/delete-wedding/<int:wedding_id>")
+def delete_wedding(wedding_id):
+
+    wedding = Wedding.query.get_or_404(wedding_id)
+
+    db.session.delete(wedding)
+    db.session.commit()
+
+    flash("Wedding booking deleted.", "success")
+
+    return redirect(url_for("ministries"))
 
 
 # ==========================================================

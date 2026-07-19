@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Reports Dashboard | ACK St. Paul's Parish Mafisini</title>
+<title>
+Support Us | ACK St. Paul's Parish Mafisini
+</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 
 <style>
 
@@ -24,1451 +23,498 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
     font-family:'Poppins',sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
-}
 
 body{
 
-    background:#f4f7fb;
+    background:#F8F6F0;
     color:#333;
-    overflow-x:hidden;
 
 }
 
-/* =======================================
-SCROLLBAR
-======================================= */
 
-::-webkit-scrollbar{
-    width:10px;
-}
 
-::-webkit-scrollbar-thumb{
-    background:#1565c0;
-    border-radius:30px;
-}
-
-::-webkit-scrollbar-track{
-    background:#efefef;
-}
-
-/* =======================================
-HEADER
-======================================= */
+/* HEADER */
 
 header{
 
-    background:
-    linear-gradient(rgba(13,71,161,.92),rgba(25,118,210,.90)),
-    url("https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1600&q=80");
-
-    background-size:cover;
-    background-position:center;
-
+    background:linear-gradient(135deg,#0B3D91,#082C68);
     color:white;
-
-    padding:80px 20px;
-
     text-align:center;
+    padding:50px 20px;
 
 }
+
 
 header h1{
 
-    font-size:48px;
-    font-weight:700;
+    font-size:38px;
     margin-bottom:15px;
 
 }
+
 
 header p{
 
-    font-size:18px;
-    opacity:.95;
-
+    font-size:17px;
 }
 
-/* =======================================
-NAVIGATION
-======================================= */
 
-nav{
 
-    background:white;
 
-    display:flex;
 
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:20px;
-
-    padding:18px;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-
-    position:sticky;
-
-    top:0;
-
-    z-index:999;
-
-}
-
-nav a{
-
-    color:#1565c0;
-
-    text-decoration:none;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-nav a:hover{
-
-    color:#0d47a1;
-
-}
-
-/* =======================================
-CONTAINER
-======================================= */
+/* MAIN */
 
 .container{
 
-    width:92%;
-    max-width:1400px;
-
-    margin:70px auto;
-
-}
-
-/* =======================================
-PAGE TITLE
-======================================= */
-
-.title{
-
-    text-align:center;
-
-    margin-bottom:50px;
-
-}
-
-.title h2{
-
-    color:#0d47a1;
-
-    font-size:42px;
-
-    margin-bottom:15px;
-
-}
-
-.title p{
-
-    color:#666;
-
-    max-width:850px;
-
-    margin:auto;
-
-    line-height:1.8;
-
-}
-
-/* =======================================
-STATISTICS
-======================================= */
-
-.stats{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-
-    gap:25px;
-
-    margin-bottom:60px;
-
-}
-
-.stat-card{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:30px;
-
-    text-align:center;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-    transition:.3s;
-
-}
-
-.stat-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.stat-card i{
-
-    font-size:42px;
-
-    color:#1565c0;
-
-    margin-bottom:18px;
-
-}
-
-.stat-card h3{
-
-    font-size:34px;
-
-    color:#0d47a1;
-
-}
-
-.stat-card p{
-
-    margin-top:8px;
-
-    color:#666;
-
-}
-
-/* =======================================
-REPORT GRID
-======================================= */
-
-.grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
-
-    gap:30px;
+    width:90%;
+    max-width:1100px;
+    margin:40px auto;
 
 }
 
 
-/* =======================================
-REPORT CARDS
-======================================= */
+
+/* CARD */
 
 .card{
 
     background:white;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-    transition:.35s;
-
-    position:relative;
-
-}
-
-.card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:0 20px 40px rgba(0,0,0,.15);
-
-}
-
-.card-top{
-
-    background:linear-gradient(135deg,#1565c0,#0d47a1);
-
-    color:white;
-
-    text-align:center;
-
     padding:30px;
-
-}
-
-.card-top i{
-
-    font-size:55px;
-
-    margin-bottom:15px;
-
-}
-
-.card-top h3{
-
-    font-size:25px;
-
-    font-weight:600;
-
-}
-
-.card-body{
-
-    padding:25px;
-
-}
-
-.card-body p{
-
-    color:#666;
-
-    line-height:1.8;
-
-    margin-bottom:25px;
-
-}
-
-/* =======================================
-BUTTONS
-======================================= */
-
-.btn{
-
-    display:inline-block;
-
-    width:100%;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#1565c0;
-
-    color:white;
-
-    font-weight:600;
-
-    text-decoration:none;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.btn:hover{
-
-    background:#0d47a1;
-
-}
-
-.btn-success{
-
-    background:#28a745;
-
-}
-
-.btn-success:hover{
-
-    background:#1f7a35;
-
-}
-
-.btn-danger{
-
-    background:#dc3545;
-
-}
-
-.btn-danger:hover{
-
-    background:#b52a37;
-
-}
-
-/* =======================================
-CUSTOM REPORT BOX
-======================================= */
-
-.report-box{
-
-    margin-top:70px;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:40px;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-}
-
-.report-box h2{
-
-    color:#1565c0;
-
     margin-bottom:30px;
-
-    text-align:center;
-
-}
-
-/* =======================================
-FORMS
-======================================= */
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-    gap:25px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+    border-left:6px solid #C9A227;
 
 }
 
-.form-group{
 
+
+.card h2{
+
+    color:#0B3D91;
     margin-bottom:20px;
 
 }
 
-.form-group label{
 
-    display:block;
 
-    font-weight:600;
+.card p{
 
-    margin-bottom:8px;
+    line-height:1.8;
 
 }
 
-.form-group input,
 
-.form-group select{
 
-    width:100%;
 
-    padding:13px;
 
-    border:1px solid #ccc;
+/* GIVING TYPES */
 
-    border-radius:8px;
+.giving{
 
-    outline:none;
-
-    transition:.3s;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
 
 }
 
-.form-group input:focus,
 
-.form-group select:focus{
 
-    border-color:#1565c0;
+.giving-box{
 
-    box-shadow:0 0 8px rgba(21,101,192,.2);
-
-}
-
-/* =======================================
-FOOTER
-======================================= */
-
-footer{
-
-    margin-top:80px;
-
-    background:#0d47a1;
-
-    color:white;
-
+    background:#fff;
+    padding:25px;
+    border-radius:15px;
     text-align:center;
-
-    padding:45px 20px;
+    border-top:5px solid #C9A227;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
 
 }
 
-footer h2{
 
+
+.giving-box h3{
+
+    color:#0B3D91;
     margin-bottom:15px;
 
 }
 
-footer p{
 
-    opacity:.9;
+
+.icon{
+
+    font-size:45px;
+    margin-bottom:15px;
 
 }
 
-/* =======================================
-RESPONSIVE
-======================================= */
 
-@media(max-width:768px){
+
+
+
+/* PAYMENT DETAILS */
+
+.payment{
+
+    background:#0B3D91;
+    color:white;
+    padding:35px;
+    border-radius:20px;
+
+}
+
+
+
+.payment h2{
+
+    color:#C9A227;
+    margin-bottom:20px;
+
+}
+
+
+
+.payment p{
+
+    font-size:18px;
+    margin:12px 0;
+
+}
+
+
+
+.number{
+
+    background:white;
+    color:#0B3D91;
+    padding:12px;
+    border-radius:10px;
+    font-weight:700;
+    display:inline-block;
+}
+
+
+
+
+
+/* BUTTON */
+
+button{
+
+    background:#C9A227;
+    color:white;
+    border:none;
+    padding:14px 30px;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:#0B3D91;
+
+}
+
+
+
+
+
+footer{
+
+    background:#082C68;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+
+}
+
+
+
+
+@media(max-width:600px){
 
 header h1{
 
-    font-size:34px;
+    font-size:28px;
 
 }
 
-.title h2{
 
-    font-size:30px;
+.container{
 
-}
-
-.report-box{
-
-    padding:25px;
-
-}
-
-nav{
-
-    gap:12px;
-
-}
-
-nav a{
-
-    font-size:14px;
+    width:95%;
 
 }
 
 }
+
 
 </style>
 
 </head>
 
-<style>
 
-/* =======================================
-REPORT CARDS
-======================================= */
 
-.card{
+<body>
 
-    background:white;
 
-    border-radius:18px;
 
-    overflow:hidden;
+<header>
 
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
+<h1>
+🙏 Support ACK St. Paul's Parish Mafisini
+</h1>
 
-    transition:.35s;
 
-    position:relative;
+<p>
+Your giving helps us spread the Gospel, support ministry work,
+and serve our community.
+</p>
 
-}
 
-.card:hover{
+</header>
 
-    transform:translateY(-10px);
 
-    box-shadow:0 20px 40px rgba(0,0,0,.15);
 
-}
 
-.card-top{
 
-    background:linear-gradient(135deg,#1565c0,#0d47a1);
 
-    color:white;
+<div class="container">
 
-    text-align:center;
 
-    padding:30px;
 
-}
 
-.card-top i{
-
-    font-size:55px;
-
-    margin-bottom:15px;
-
-}
-
-.card-top h3{
-
-    font-size:25px;
-
-    font-weight:600;
-
-}
-
-.card-body{
-
-    padding:25px;
-
-}
-
-.card-body p{
-
-    color:#666;
-
-    line-height:1.8;
-
-    margin-bottom:25px;
-
-}
-
-/* =======================================
-BUTTONS
-======================================= */
-
-.btn{
-
-    display:inline-block;
-
-    width:100%;
-
-    padding:14px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:#1565c0;
-
-    color:white;
-
-    font-weight:600;
-
-    text-decoration:none;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-.btn:hover{
-
-    background:#0d47a1;
-
-}
-
-.btn-success{
-
-    background:#28a745;
-
-}
-
-.btn-success:hover{
-
-    background:#1f7a35;
-
-}
-
-.btn-danger{
-
-    background:#dc3545;
-
-}
-
-.btn-danger:hover{
-
-    background:#b52a37;
-
-}
-
-/* =======================================
-CUSTOM REPORT BOX
-======================================= */
-
-.report-box{
-
-    margin-top:70px;
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:40px;
-
-    box-shadow:0 12px 30px rgba(0,0,0,.08);
-
-}
-
-.report-box h2{
-
-    color:#1565c0;
-
-    margin-bottom:30px;
-
-    text-align:center;
-
-}
-
-/* =======================================
-FORMS
-======================================= */
-
-.form-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-
-    gap:25px;
-
-}
-
-.form-group{
-
-    margin-bottom:20px;
-
-}
-
-.form-group label{
-
-    display:block;
-
-    font-weight:600;
-
-    margin-bottom:8px;
-
-}
-
-.form-group input,
-
-.form-group select{
-
-    width:100%;
-
-    padding:13px;
-
-    border:1px solid #ccc;
-
-    border-radius:8px;
-
-    outline:none;
-
-    transition:.3s;
-
-}
-
-.form-group input:focus,
-
-.form-group select:focus{
-
-    border-color:#1565c0;
-
-    box-shadow:0 0 8px rgba(21,101,192,.2);
-
-}
-
-/* =======================================
-FOOTER
-======================================= */
-
-footer{
-
-    margin-top:80px;
-
-    background:#0d47a1;
-
-    color:white;
-
-    text-align:center;
-
-    padding:45px 20px;
-
-}
-
-footer h2{
-
-    margin-bottom:15px;
-
-}
-
-footer p{
-
-    opacity:.9;
-
-}
-
-/* =======================================
-RESPONSIVE
-======================================= */
-
-@media(max-width:768px){
-
-header h1{
-
-    font-size:34px;
-
-}
-
-.title h2{
-
-    font-size:30px;
-
-}
-
-.report-box{
-
-    padding:25px;
-
-}
-
-nav{
-
-    gap:12px;
-
-}
-
-nav a{
-
-    font-size:14px;
-
-}
-
-}
-
-</style>
-
-</head>
-<!-- ================= MEMBERS REPORT ================= -->
 
 <div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-users"></i>
-        <h3>Members Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Generate a complete PDF containing all registered church
-            members with their personal information.
-        </p>
-
-        <a href="{{ url_for('members_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= EVENTS REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-calendar-days"></i>
-        <h3>Events Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Download all church events, meetings, conferences,
-            crusades and ministry activities.
-        </p>
-
-        <a href="{{ url_for('events_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= SERMONS REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-microphone"></i>
-        <h3>Sermons Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Download all sermons preached in the church together
-            with preacher names and sermon dates.
-        </p>
-
-        <a href="{{ url_for('sermons_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= PRAYER REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-hands-praying"></i>
-        <h3>Prayer Requests</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Generate a report containing all submitted prayer
-            requests together with request categories.
-        </p>
-
-        <a href="{{ url_for('prayer_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= BAPTISM REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-droplet"></i>
-        <h3>Baptism Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Generate all Holy Baptism registrations submitted
-            through the church website.
-        </p>
-
-        <a href="{{ url_for('baptism_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= WEDDING REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-ring"></i>
-        <h3>Wedding Bookings</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Download all Christian wedding bookings and scheduled
-            wedding ceremonies.
-        </p>
-
-        <a href="{{ url_for('wedding_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= DONATIONS REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-hand-holding-dollar"></i>
-        <h3>Donations Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Download church offerings, tithes and donations
-            submitted by members.
-        </p>
-
-        <a href="{{ url_for('donations_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-<!-- ================= ATTENDANCE REPORT ================= -->
-
-<div class="card">
-
-    <div class="card-top">
-        <i class="fa-solid fa-user-check"></i>
-        <h3>Attendance Report</h3>
-    </div>
-
-    <div class="card-body">
-
-        <p>
-            Generate attendance reports for Sunday services,
-            conferences and church meetings.
-        </p>
-
-        <a href="{{ url_for('attendance_report_pdf') }}" class="btn">
-            <i class="fa-solid fa-file-pdf"></i>
-            Generate PDF
-        </a>
-
-    </div>
-
-</div>
-
-</div>
-<!-- END GRID -->
-<!-- ==========================================
-CUSTOM REPORT GENERATOR
-========================================== -->
-
-<div class="report-box">
-
-    <h2>
-        <i class="fa-solid fa-file-circle-plus"></i>
-        Custom Report Generator
-    </h2>
-
-
-    <form action="{{ url_for('generate_custom_report') }}" method="POST">
-
-
-        <div class="form-grid">
-
-
-            <!-- REPORT TYPE -->
-
-            <div class="form-group">
-
-                <label>
-                    <i class="fa-solid fa-list"></i>
-                    Select Report Type
-                </label>
-
-
-                <select name="report_type" required>
-
-                    <option value="">
-                        -- Select Report --
-                    </option>
-
-
-                    <option value="members">
-                        Members Report
-                    </option>
-
-
-                    <option value="events">
-                        Events Report
-                    </option>
-
-
-                    <option value="sermons">
-                        Sermons Report
-                    </option>
-
-
-                    <option value="prayers">
-                        Prayer Requests Report
-                    </option>
-
-
-                    <option value="baptisms">
-                        Baptism Report
-                    </option>
-
-
-                    <option value="weddings">
-                        Wedding Bookings Report
-                    </option>
-
-
-                    <option value="donations">
-                        Donations Report
-                    </option>
-
-
-                    <option value="attendance">
-                        Attendance Report
-                    </option>
-
-
-                </select>
-
-            </div>
-
-
-
-            <!-- FROM DATE -->
-
-            <div class="form-group">
-
-                <label>
-
-                    <i class="fa-solid fa-calendar"></i>
-
-                    From Date
-
-                </label>
-
-
-                <input 
-                type="date"
-                name="from_date"
-                >
-
-
-            </div>
-
-
-
-
-            <!-- TO DATE -->
-
-            <div class="form-group">
-
-                <label>
-
-                    <i class="fa-solid fa-calendar-check"></i>
-
-                    To Date
-
-                </label>
-
-
-                <input 
-                type="date"
-                name="to_date"
-                >
-
-            </div>
-
-
-
-        </div>
-
-
-
-        <button 
-        type="submit"
-        class="btn"
-        style="margin-top:25px;">
-
-            <i class="fa-solid fa-file-pdf"></i>
-
-            Generate Custom PDF Report
-
-        </button>
-
-
-
-    </form>
-
-
-</div>
-<!-- ==========================================
-REPORT INFORMATION
-========================================== -->
-
-
-<div class="report-box"
-style="margin-top:40px;text-align:center;">
 
 
 <h2>
-
-<i class="fa-solid fa-circle-info"></i>
-
-About Generated Reports
-
+💒 Why We Give
 </h2>
 
 
-<p style="color:#666;line-height:2;">
+<p>
 
-
-All generated reports are produced in PDF format and contain
-official ACK St. Paul's Parish Mafisini information.
-
-Each report includes:
+Giving is an act of worship and thanksgiving to God.
+Through your support, the church is able to run ministries,
+support vulnerable members, maintain church facilities,
+and continue spreading God's Word.
 
 </p>
 
 
-<div class="grid"
-style="margin-top:30px;">
+</div>
+
+
+
+
+
+
+
+
+<div class="giving">
+
+
+
+<div class="giving-box">
+
+<div class="icon">
+🙏
+</div>
+
+<h3>
+Offering
+</h3>
+
+<p>
+Regular church offerings given during worship services
+to support the daily activities and ministry of the church.
+</p>
+
+</div>
+
+
+
+
+
+<div class="giving-box">
+
+<div class="icon">
+🌾
+</div>
+
+
+<h3>
+Fungu la Kumi (Tithe)
+</h3>
+
+
+<p>
+A tenth of your income given faithfully to God as an act
+of obedience, gratitude, and commitment.
+</p>
+
+
+</div>
+
+
+
+
+
+
+<div class="giving-box">
+
+<div class="icon">
+❤️
+</div>
+
+
+<h3>
+Other Contributions
+</h3>
+
+
+<p>
+Support for church projects, development programs,
+missions, youth ministry, and community outreach.
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="payment">
+
+
+<h2>
+💳 Church Giving Payment Details
+</h2>
+
+
+
+<p>
+Bank Account Number:
+</p>
+
+<span class="number">
+7878851#
+</span>
+
+
+
+<br><br>
+
+
+<p>
+M-Pesa Paybill / Business Number:
+</p>
+
+
+<span class="number">
+
+522325    
+
+</span>
+
+
+
+<br><br>
+
+
+<p>
+Account Name:
+</p>
+
+
+<span class="number">
+ACK St. Paul's Parish Mafisini
+</span>
+
+
+
+</div>
+
+
+
+
+
+
+
 
 
 <div class="card">
 
-<div class="card-body">
 
-<i class="fa-solid fa-file-pdf"
-style="font-size:40px;color:#dc3545;"></i>
+<h2>
+📌 Important Notice
+</h2>
 
-<h3 style="margin-top:15px;">
-PDF Format
-</h3>
 
 <p>
-Professional printable documents.
+
+After making your contribution, kindly keep your transaction
+message or receipt for confirmation purposes.
+All donations are handled with transparency and used to
+support the mission and activities of the church.
+
 </p>
 
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<div class="card-body">
-
-<i class="fa-solid fa-calendar-days"
-style="font-size:40px;color:#1565c0;"></i>
-
-
-<h3 style="margin-top:15px;">
-Date Information
-</h3>
-
-<p>
-Reports show generation dates and records.
-</p>
-
-</div>
 
 </div>
 
 
 
 
-<div class="card">
-
-<div class="card-body">
-
-<i class="fa-solid fa-shield-halved"
-style="font-size:40px;color:#28a745;"></i>
-
-
-<h3 style="margin-top:15px;">
-Secure Records
-</h3>
-
-<p>
-Only authorized church administrators can access reports.
-</p>
-
-</div>
-
-</div>
 
 
 </div>
 
 
-</div>
-<!-- ==========================================
-FOOTER
-========================================== -->
+
+
+
+
+
 
 <footer>
 
 
-<h2>
-
-<i class="fa-solid fa-church"></i>
-
-ACK St. Paul's Parish Mafisini
-
-</h2>
+<h3>
+⛪ ACK St. Paul's Parish Mafisini
+</h3>
 
 
-<p style="margin-top:15px;">
-
-Walking Together in Faith, Hope and Love
-
-</p>
-
-
-<p style="margin-top:15px;">
-
-📍 Mafisini, Kenya
-
+<p>
+Serving God Through Faith, Love and Service
 </p>
 
 
 <p>
-
-📞 +254 700 000 000
-
-</p>
-
-
-<p>
-
-✉ info@ackstpaulsmafisini.org
-
-</p>
-
-
-<hr 
-style="
-width:80%;
-margin:25px auto;
-border:1px solid rgba(255,255,255,.3);
-">
-
-
-<p>
-
-© 2026 ACK St. Paul's Parish Mafisini.
-All Rights Reserved.
-
-</p>
-
-
-<p style="margin-top:10px;font-size:14px;">
-
-Website Designed & Managed By
-
-<br>
-
-<strong>
-James Kiilu Mutiso
-</strong>
-
-<br>
-
-ICT Services & Church Management System
-
+© 2026 All Rights Reserved
 </p>
 
 
 </footer>
 
-
-
-
-
-<!-- ==========================================
-LOADING MESSAGE
-========================================== -->
-
-
-<div id="loadingBox"
-style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,.65);
-z-index:9999;
-align-items:center;
-justify-content:center;
-color:white;
-font-size:25px;
-font-weight:600;
-">
-
-
-<i class="fa-solid fa-spinner fa-spin"></i>
-
-&nbsp;
-
-Generating PDF Report...
-
-</div>
-
-
-
-
-
-
-<!-- ==========================================
-JAVASCRIPT
-========================================== -->
-
-
-<script>
-
-
-/*
-Show loading animation when
-PDF generation starts
-*/
-
-
-document.querySelectorAll("form")
-.forEach(function(form){
-
-
-form.addEventListener("submit",function(){
-
-
-document.getElementById("loadingBox")
-.style.display="flex";
-
-
-});
-
-
-});
-
-
-
-
-
-/*
-Confirm before leaving
-*/
-
-
-function confirmDelete(){
-
-
-return confirm(
-"Are you sure you want to delete this record?"
-);
-
-
-}
-
-
-
-</script>
 
 
 

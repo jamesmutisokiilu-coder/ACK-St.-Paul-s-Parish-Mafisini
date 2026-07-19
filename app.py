@@ -958,8 +958,7 @@ def prayer_request():
 
 @app.route('/events')
 def events():
-    events = Event.query.all()
-    return render_template("events.html", events=events)
+    return render_template("events.html")
 
 @app.route("/sermons")
 

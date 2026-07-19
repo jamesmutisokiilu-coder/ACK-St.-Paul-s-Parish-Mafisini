@@ -963,7 +963,7 @@ def prayer_request():
 @app.route("/events")
 def events():
 
-    events = Event.query.order_by(Event.event_date.asc()).all()
+    events = Event.query.order_by(Event.id.desc()).all()
 
     baptisms = Baptism.query.order_by(Baptism.created_at.desc()).all()
 

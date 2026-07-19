@@ -718,6 +718,25 @@ def events():
     return render_template("events.html")
 
 
+
+# ==========================================================
+# CHURCH ACTIVITIES
+# ==========================================================
+
+@app.route("/activities")
+@login_required
+def activities():
+
+    activities = Activity.query.order_by(
+        Activity.id.desc()
+    ).all()
+
+    return render_template(
+        "activities.html",
+        activities=activities
+    )
+
+
 # ==========================================================
 # HOLY BAPTISM REGISTRATION
 # ==========================================================

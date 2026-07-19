@@ -12,159 +12,197 @@
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
-background:#f5f7fb;
-color:#333;
-line-height:1.7;
+    background:#f5f7fb;
+    color:#333;
+    line-height:1.7;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
 .hero{
-background:linear-gradient(rgba(13,71,161,.85),rgba(13,71,161,.85)),
-url("https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1600&q=80");
-background-size:cover;
-background-position:center;
-padding:120px 20px;
-text-align:center;
-color:#fff;
+    background:
+    linear-gradient(rgba(13,71,161,.85),rgba(13,71,161,.85)),
+    url("https://images.unsplash.com/photo-1438232992991-995b7058bbb3?auto=format&fit=crop&w=1600&q=80");
+
+    background-size:cover;
+    background-position:center;
+    padding:120px 20px;
+    text-align:center;
+    color:white;
 }
 
 .hero h1{
-font-size:50px;
-margin-bottom:20px;
+    font-size:52px;
+    margin-bottom:20px;
 }
 
 .hero p{
-max-width:850px;
-margin:auto;
-font-size:18px;
+    max-width:850px;
+    margin:auto;
+    font-size:18px;
 }
 
 .hero a{
-display:inline-block;
-margin-top:30px;
-padding:14px 35px;
-background:white;
-color:#0d47a1;
-text-decoration:none;
-border-radius:30px;
-font-weight:600;
-transition:.3s;
+    display:inline-block;
+    margin-top:35px;
+    background:white;
+    color:#0d47a1;
+    text-decoration:none;
+    padding:15px 35px;
+    border-radius:40px;
+    font-weight:600;
+    transition:.3s;
 }
 
 .hero a:hover{
-background:#1976d2;
-color:white;
+    background:#1976d2;
+    color:white;
 }
 
-/* SECTION */
+/* ================= FLASH MESSAGE ================= */
+
+.flash-message{
+    width:90%;
+    max-width:1100px;
+    margin:30px auto;
+    padding:18px;
+    border-radius:10px;
+    text-align:center;
+    font-size:17px;
+    font-weight:600;
+}
+
+.flash-message.success{
+    background:#d4edda;
+    color:#155724;
+    border-left:6px solid #28a745;
+}
+
+.flash-message.error{
+    background:#f8d7da;
+    color:#721c24;
+    border-left:6px solid #dc3545;
+}
+
+/* ================= SECTION ================= */
 
 .section{
-width:90%;
-max-width:1200px;
-margin:70px auto;
+    width:90%;
+    max-width:1200px;
+    margin:70px auto;
 }
 
 .section h2{
-text-align:center;
-color:#0d47a1;
-margin-bottom:15px;
-font-size:36px;
+    text-align:center;
+    color:#0d47a1;
+    margin-bottom:15px;
+    font-size:36px;
 }
 
 .section p.title{
-text-align:center;
-max-width:800px;
-margin:auto auto 40px;
-color:#666;
+    text-align:center;
+    max-width:850px;
+    margin:auto auto 45px;
+    color:#666;
 }
 
-/* GRID */
+/* ================= GRID ================= */
 
 .grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
 }
 
+/* ================= CARD ================= */
+
 .card{
-background:white;
-border-radius:15px;
-overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-transition:.3s;
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+    transition:.35s;
 }
 
 .card:hover{
-transform:translateY(-8px);
+    transform:translateY(-8px);
 }
 
 .card img{
-width:100%;
-height:220px;
-object-fit:cover;
+    width:100%;
+    height:220px;
+    object-fit:cover;
 }
 
 .card-content{
-padding:25px;
+    padding:25px;
 }
 
 .card-content h3{
-color:#0d47a1;
-margin-bottom:15px;
+    color:#0d47a1;
+    margin-bottom:15px;
 }
 
 .card-content p{
-color:#666;
-margin-bottom:20px;
+    color:#666;
+    margin-bottom:20px;
 }
 
+/* ================= BUTTON ================= */
+
 .btn{
-display:inline-block;
-background:#1976d2;
-color:white;
-padding:12px 28px;
-border-radius:8px;
-text-decoration:none;
-font-weight:600;
+    display:inline-block;
+    background:#1976d2;
+    color:white;
+    border:none;
+    text-decoration:none;
+    padding:13px 30px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
 }
 
 .btn:hover{
-background:#0d47a1;
+    background:#0d47a1;
 }
 
+/* ================= INFORMATION BOX ================= */
+
 .info-box{
-background:white;
-padding:35px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-margin-top:30px;
+    background:white;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+    margin-top:35px;
 }
 
 .info-box ul{
-margin-left:20px;
-line-height:2;
+    margin-left:25px;
+    line-height:2;
 }
 
-footer{
-background:#0d47a1;
-color:white;
-text-align:center;
-padding:40px 20px;
-margin-top:60px;
-}
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
 
 .hero h1{
-font-size:36px;
+    font-size:36px;
+}
+
+.section h2{
+    font-size:30px;
 }
 
 }
@@ -182,254 +220,367 @@ font-size:36px;
 <h1>Church Ministries</h1>
 
 <p>
-
 Serving God through Missions, Holy Baptism and Christian Marriage.
-We welcome you to worship, grow in faith and become part of our church family.
-
+We welcome you to worship, grow in faith and become part of our church family as we grow together in Christ.
 </p>
 
-<a href="#missions">
-Explore Ministries
-</a>
+<a href="#missions">Explore Ministries</a>
 
 </section>
 
-<!-- MISSIONS -->
+<!-- SUCCESS / ERROR MESSAGE -->
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+
+{% for category, message in messages %}
+
+<div class="flash-message {{ category }}">
+{{ message }}
+</div>
+
+{% endfor %}
+
+{% endif %}
+{% endwith %}
+<!-- ================= MISSIONS & OUTREACH ================= -->
 
 <section class="section" id="missions">
 
 <h2>🌍 Missions & Outreach</h2>
 
 <p class="title">
-
 We spread the Gospel through evangelism, community outreach,
-mission work and compassionate service.
-
+mission work and compassionate service to our community.
 </p>
 
 <div class="grid">
 
-<div class="card">
+    <!-- Community Outreach -->
+    <div class="card">
 
-<img src="https://images.unsplash.com/photo-1469571486292-b53601020f35?auto=format&fit=crop&w=900&q=80">
+        <img src="https://images.unsplash.com/photo-1469571486292-b53601020f35?auto=format&fit=crop&w=900&q=80" alt="Community Outreach">
 
-<div class="card-content">
+        <div class="card-content">
+            <h3>Community Outreach</h3>
 
-<h3>Community Outreach</h3>
+            <p>
+                Supporting families through charity, education,
+                hospital visits, prayer ministry and community service
+                programs that demonstrate Christ's love in practical ways.
+            </p>
 
-<p>
-Supporting families through charity,
-education, hospital visits and community service.
-</p>
+            <a href="{{ url_for('contact') }}" class="btn">
+                Learn More
+            </a>
+        </div>
+    </div>
 
-<a href="{{ url_for('contact') }}" class="btn">
-Learn More
-</a>
+    <!-- Evangelism -->
+    <div class="card">
 
-</div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Evangelism">
 
-</div>
+        <div class="card-content">
+            <h3>Evangelism</h3>
 
-<div class="card">
+            <p>
+                Sharing the Good News through church missions,
+                school ministries, home fellowships and community
+                outreach activities that lead people to Christ.
+            </p>
 
-<img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80">
+            <a href="{{ url_for('contact') }}" class="btn">
+                Join Us
+            </a>
+        </div>
+    </div>
 
-<div class="card-content">
+    <!-- Mission Trips -->
+    <div class="card">
 
-<h3>Evangelism</h3>
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80" alt="Mission Trips">
 
-<p>
-Sharing the Good News through church missions,
-school ministries and community outreach.
-</p>
+        <div class="card-content">
+            <h3>Mission Trips</h3>
 
-<a href="{{ url_for('contact') }}" class="btn">
-Join Us
-</a>
+            <p>
+                Join mission teams serving communities through
+                practical ministry, evangelism, prayer and humanitarian
+                support across different regions.
+            </p>
 
-</div>
-
-</div>
-
-<div class="card">
-
-<img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80">
-
-<div class="card-content">
-
-<h3>Mission Trips</h3>
-
-<p>
-Join mission teams serving communities through
-practical ministry and evangelism.
-</p>
-
-<a href="{{ url_for('events') }}" class="btn">
-Upcoming Missions
-</a>
-
-</div>
-
-</div>
+            <a href="{{ url_for('events') }}" class="btn">
+                Upcoming Missions
+            </a>
+        </div>
+    </div>
 
 </div>
 
 </section>
-
-<!-- HOLY BAPTISM -->
+<!-- ================= HOLY BAPTISM ================= -->
 
 <section class="section">
 
-<h2>💧 Holy Baptism</h2>
+<h2>💧 Holy Baptism Registration</h2>
 
 <p class="title">
-
-Holy Baptism is a public declaration of faith in Jesus Christ
-and marks the beginning of a new Christian life.
-
+Holy Baptism is a public declaration of faith in Jesus Christ and marks the beginning of a new Christian life. Complete the form below and our Parish Office will contact you.
 </p>
 
 <div class="info-box">
 
-<h3 style="color:#0d47a1;margin-bottom:15px;">
-Requirements
+<h3 style="color:#0d47a1;margin-bottom:20px;">
+Baptism Registration Form
 </h3>
 
-<ul>
+<form action="{{ url_for('baptism_registration') }}" method="POST">
 
-<li>Accept Jesus Christ as Lord and Savior.</li>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
 
-<li>Attend Baptism Preparation Classes.</li>
+<div>
+<label><strong>Full Name</strong></label>
+<input type="text" name="full_name" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-<li>Meet with the Parish Priest.</li>
+<div>
+<label><strong>Phone Number</strong></label>
+<input type="tel" name="phone" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-<li>Complete the Baptism Registration.</li>
+<div>
+<label><strong>Email Address</strong></label>
+<input type="email" name="email"
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-</ul>
+<div>
+<label><strong>Date of Birth</strong></label>
+<input type="date" name="dob" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-<br>
+</div>
 
-<a href="{{ url_for('baptism_registration') }}" class="btn">
+<div style="margin-top:20px;">
 
+<label><strong>Additional Information</strong></label>
+
+<textarea
+name="message"
+rows="5"
+placeholder="Any additional information..."
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+</div>
+
+<button type="submit" class="btn" style="margin-top:25px;">
 Register for Baptism
+</button>
 
-</a>
+</form>
 
 </div>
 
 </section>
 
-<!-- CHRISTIAN WEDDINGS -->
+<!-- ================= CHRISTIAN WEDDINGS ================= -->
 
 <section class="section">
 
-<h2>💍 Christian Weddings</h2>
+<h2>💍 Christian Wedding Booking</h2>
 
 <p class="title">
-
-Celebrate your marriage before God through a Christ-centered
-Anglican wedding ceremony.
-
+Celebrate your marriage before God through a Christ-centered Anglican wedding ceremony.
 </p>
 
 <div class="info-box">
 
-<h3 style="color:#0d47a1;margin-bottom:15px;">
-Requirements
+<h3 style="color:#0d47a1;margin-bottom:20px;">
+Wedding Booking Form
 </h3>
 
-<ul>
+<form action="{{ url_for('wedding_registration') }}" method="POST">
 
-<li>Complete the Wedding Application.</li>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">
 
-<li>Attend Premarital Counseling.</li>
+<div>
+<label><strong>Bride's Full Name</strong></label>
+<input type="text" name="bride_name" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-<li>Meet with the Parish Priest.</li>
+<div>
+<label><strong>Groom's Full Name</strong></label>
+<input type="text" name="groom_name" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-<li>Agree on the wedding date.</li>
+<div>
+<label><strong>Phone Number</strong></label>
+<input type="tel" name="phone" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
 
-</ul>
+<div>
+<label><strong>Email Address</strong></label>
+<input type="email" name="email"
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
+
+<div>
+<label><strong>Preferred Wedding Date</strong></label>
+<input type="date" name="wedding_date" required
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;">
+</div>
+
+</div>
+
+<div style="margin-top:20px;">
+
+<label><strong>Additional Information</strong></label>
+
+<textarea
+name="message"
+rows="5"
+placeholder="Any special requests..."
+style="width:100%;padding:12px;margin-top:8px;border:1px solid #ccc;border-radius:8px;"></textarea>
+
+</div>
+
+<button type="submit" class="btn" style="margin-top:25px;">
+Book Wedding
+</button>
+
+</form>
+
+</div>
+
+</section>
+<!-- ================= CONTACT & OFFICE HOURS ================= -->
+
+<section class="section">
+
+<div class="info-box" style="text-align:center;">
+
+<h2 style="color:#0d47a1;margin-bottom:20px;">
+📍 Church Office Information
+</h2>
+
+<p style="font-size:17px;">
+
+Our Parish Office is always ready to assist you with enquiries about
+Holy Baptism, Christian Weddings, Church Membership, Ministries,
+Counselling and other spiritual services.
+
+</p>
 
 <br>
 
-<a href="{{ url_for('wedding_registration') }}" class="btn">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;">
 
-Book Wedding
+<div>
 
-</a>
-
-</div>
-
-</section>
-
-<!-- CONTACT & FOOTER CONTINUE IN PART 2 -->
-<!-- CONTACT -->
-
-
-</div>
-
-</div>
-
-</div>
-
-<div class="info-box" style="margin-top:40px;text-align:center;">
-
-<h3 style="color:#0d47a1;margin-bottom:15px;">
-🕒 Church Office Hours
-</h3>
+<h3 style="color:#1976d2;">🕒 Office Hours</h3>
 
 <p>
-
-<strong>Monday – Friday</strong><br>
-
+Monday – Friday<br>
 8:00 AM – 5:00 PM
-
 </p>
 
-<p style="margin-top:20px;color:#666;">
+</div>
 
-We welcome you to worship with us, grow in faith,
-and participate in our church ministries.
-May God richly bless you.
+<div>
+
+<h3 style="color:#1976d2;">📞 Call Us</h3>
+
+<p>
++254 700 000 000
+</p>
+
+</div>
+
+<div>
+
+<h3 style="color:#1976d2;">✉ Email</h3>
+
+<p>
+info@ackstpaulsmafisini.org
+</p>
+
+</div>
+
+<div>
+
+<h3 style="color:#1976d2;">📍 Location</h3>
+
+<p>
+ACK St. Paul's Parish Mafisini<br>
+Mafisini, Kenya
+</p>
+
+</div>
+
+</div>
+
+<div style="margin-top:40px;">
+
+<h3 style="color:#0d47a1;">
+🙏 Our Prayer
+</h3>
+
+<p style="max-width:850px;margin:20px auto;color:#555;">
+
+"May the Lord bless you and keep you. May He guide your family,
+strengthen your faith, and grant you His peace as you walk with
+Christ through every stage of life."
 
 </p>
 
 </div>
 
+</div>
+
 </section>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
 <h2>ACK St. Paul's Parish Mafisini</h2>
 
-<p style="margin-top:12px;font-size:17px;">
-
+<p style="margin-top:15px;font-size:18px;">
 Walking Together in Faith, Hope and Love
-
 </p>
 
-<p style="margin-top:15px;">
-
+<p style="margin-top:20px;">
 📍 Mafisini, Kenya
-
 </p>
 
 <p>
-
 📞 +254 700 000 000
-
 </p>
 
 <p>
-
 ✉ info@ackstpaulsmafisini.org
-
 </p>
 
-<hr style="width:80%;margin:25px auto;border:1px solid rgba(255,255,255,.25);">
+<hr style="width:80%;margin:30px auto;border:1px solid rgba(255,255,255,.25);">
 
 <p>
+&copy; 2026 ACK St. Paul's Parish Mafisini. All Rights Reserved.
+</p>
 
-© 2026 ACK St. Paul's Parish Mafisini.
+<p style="margin-top:10px;font-size:14px;color:#ddd;">
+Website Designed & Maintained by
+<strong>James Kiilu Mutiso</strong><br>
+Website Manager & IT Services
+</p>
+
+</footer>
+
+</body>
+</html>

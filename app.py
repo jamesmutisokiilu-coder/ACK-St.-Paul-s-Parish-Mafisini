@@ -462,14 +462,6 @@ class PrayerRequest(db.Model):
 
 
 
-
-# Continue in PART 2...
-
-# ============================================================
-# NOTIFICATION MODEL
-# ============================================================
-
-
 class Notification(db.Model):
 
     id = db.Column(
@@ -511,12 +503,6 @@ class Notification(db.Model):
 
 
 
-
-# ============================================================
-# ACTIVITY MODEL
-# ============================================================
-
-
 class Activity(db.Model):
 
     id = db.Column(
@@ -538,12 +524,6 @@ class Activity(db.Model):
 
 
 
-
-# ============================================================
-# DATABASE CREATION
-# ============================================================
-
-
 with app.app_context():
 
     db.create_all()
@@ -552,10 +532,6 @@ with app.app_context():
 
 
 
-
-# ============================================================
-# LOGIN REQUIRED DECORATOR
-# ============================================================
 
 
 def login_required(function):
@@ -593,12 +569,6 @@ def login_required(function):
 
 
 
-
-# ============================================================
-# HOME PAGE
-# ============================================================
-
-
 @app.route("/")
 def home():
 
@@ -607,13 +577,6 @@ def home():
     )
 
 
-
-
-
-
-# ============================================================
-# REGISTER
-# ============================================================
 
 
 @app.route(
@@ -701,13 +664,6 @@ def register():
 
 
 
-
-
-
-
-# ============================================================
-# LOGIN
-# ============================================================
 
 
 @app.route(
@@ -1000,73 +956,10 @@ def prayer_request():
 
 
 
-
-@app.route("/events")
-
-@login_required
-
+@app.route('/events')
 def events():
-
-    events = Event.query.order_by(
-        Event.id.desc()
-    ).all()
-
-
-
-    return render_template(
-        "events.html",
-        events=events
-    )
-
-
-
-
-@app.route(
-    "/add-event",
-    methods=["POST"]
-)
-
-@login_required
-
-def add_event():
-
-
-    event = Event(
-
-
-        title=request.form["title"],
-
-
-        date=request.form["date"],
-
-
-        description=request.form["description"]
-
-
-    )
-
-
-
-    db.session.add(event)
-
-    db.session.commit()
-
-
-
-    flash(
-        "Event added successfully",
-        "success"
-    )
-
-
-
-    return redirect(
-        url_for("events")
-    )
-
-
-
-
+    events = Event.query.all()
+    return render_template("events.html", events=events)
 
 @app.route("/sermons")
 

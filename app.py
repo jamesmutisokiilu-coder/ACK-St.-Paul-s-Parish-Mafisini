@@ -967,39 +967,22 @@ def prayer_request():
 # EVENTS / MINISTRIES PAGE
 # ==========================================================
 
+# ==========================================================
+# EVENTS PAGE
+# ==========================================================
+
 @app.route("/events")
 def events():
-    return render_template("events.html")
 
-
-
-# ==========================================================
-# CHURCH ACTIVITIES
-# ==========================================================
-
-@app.route("/activities")
-@login_required
-def activities():
-
-    activities = Activity.query.order_by(
-        Activity.id.desc()
-    ).all()
-
-    return render_template(
-        "activities.html",
-        activities=activities
-    )
-
-
-@app.route("/ministries")
-def ministries():
+    events = Event.query.order_by(Event.event_date.asc()).all()
 
     baptisms = Baptism.query.order_by(Baptism.created_at.desc()).all()
 
     weddings = Wedding.query.order_by(Wedding.created_at.desc()).all()
 
     return render_template(
-        "ministries.html",
+        "events.html",
+        events=events,
         baptisms=baptisms,
         weddings=weddings
     )
@@ -1025,11 +1008,13 @@ def baptism_registration():
 
     flash("Baptism registration submitted successfully.", "success")
 
-    return redirect(url_for("ministries"))
+    return redirect(url_for("events"))
 
 
 # ==========================================================
 # CHRISTIAN WEDDING BOOKING
+# ==========================================================
+
 @app.route("/wedding-registration", methods=["POST"])
 def wedding_registration():
 
@@ -1048,14 +1033,27 @@ def wedding_registration():
 
     flash("Wedding booking submitted successfully.", "success")
 
-    return redirect(url_for("ministries"))
+    return redirect(url_for("events"))
 
+
+# ==========================================================
+# VIEW BAPTISM
+# ==========================================================
 
 @app.route("/view-baptism/<int:baptism_id>")
 def view_baptism(baptism_id):
-    baptism = Baptism.query.get_or_404(baptism_id)
-    return render_template("view_baptism.html", baptism=baptism)
 
+    baptism = Baptism.query.get_or_404(baptism_id)
+
+    return render_template(
+        "view_baptism.html",
+        baptism=baptism
+    )
+
+
+# ==========================================================
+# DELETE BAPTISM
+# ==========================================================
 
 @app.route("/delete-baptism/<int:baptism_id>")
 def delete_baptism(baptism_id):
@@ -1065,10 +1063,29 @@ def delete_baptism(baptism_id):
     db.session.delete(baptism)
     db.session.commit()
 
-    flash("Baptism registration deleted.", "success")
+    flash("Baptism registration deleted successfully.", "success")
 
-    return redirect(url_for("ministries"))
+    return redirect(url_for("events"))
 
+
+# ==========================================================
+# VIEW WEDDING
+# ==========================================================
+
+@app.route("/view-wedding/<int:wedding_id>")
+def view_wedding(wedding_id):
+
+    wedding = Wedding.query.get_or_404(wedding_id)
+
+    return render_template(
+        "view_wedding.html",
+        wedding=wedding
+    )
+
+
+# ==========================================================
+# DELETE WEDDING
+# ==========================================================
 
 @app.route("/delete-wedding/<int:wedding_id>")
 def delete_wedding(wedding_id):
@@ -1078,9 +1095,28 @@ def delete_wedding(wedding_id):
     db.session.delete(wedding)
     db.session.commit()
 
-    flash("Wedding booking deleted.", "success")
+    flash("Wedding booking deleted successfully.", "success")
 
-    return redirect(url_for("ministries"))
+    return redirect(url_for("events"))
+
+# ==========================================================
+# CHURCH ACTIVITIES
+# ==========================================================
+
+@app.route("/activities")
+@login_required
+def activities():
+
+    activities = Activity.query.order_by(
+        Activity.id.desc()
+    ).all()
+
+    return render_template(
+        "activities.html",
+        activities=activities
+    )
+
+
 
 
 # ==========================================================

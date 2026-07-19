@@ -577,6 +577,32 @@ def dashboard():
     )
 
 
+# ==========================================================
+# REPORTS PAGE
+# ==========================================================
+
+@app.route("/reports")
+@login_required
+def reports():
+
+    total_users = User.query.count()
+
+    total_prayers = PrayerRequest.query.count()
+
+    total_events = Event.query.count()
+
+    total_sermons = Sermon.query.count()
+
+    total_discussions = Discussion.query.count()
+
+    return render_template(
+        "reports.html",
+        total_users=total_users,
+        total_prayers=total_prayers,
+        total_events=total_events,
+        total_sermons=total_sermons,
+        total_discussions=total_discussions
+    )
 
 
 

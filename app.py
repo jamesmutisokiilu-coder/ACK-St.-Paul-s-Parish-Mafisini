@@ -1,9 +1,6 @@
 import os
-
 from datetime import datetime
-
 from functools import wraps
-
 
 from flask import (
     Flask,
@@ -16,87 +13,59 @@ from flask import (
     jsonify
 )
 
-
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-from werkzeug.security import (
-    generate_password_hash,
-    check_password_hash
-)
-
-
-
+# --------------------------------------------------
+# APP CONFIGURATION
+# --------------------------------------------------
 
 app = Flask(__name__)
-
-
-
-# Secret key from Render environment
 
 app.secret_key = os.environ.get(
     "SECRET_KEY",
     "church_secret_key_2026"
 )
 
-
-
-database_url = os.environ.get(
-    "DATABASE_URL"
-)
-
-
+database_url = os.environ.get("DATABASE_URL")
 
 if database_url:
 
-
-    # Render PostgreSQL compatibility fix
-
     if database_url.startswith("postgres://"):
-
         database_url = database_url.replace(
             "postgres://",
             "postgresql://",
             1
         )
 
-
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-
-
 
 else:
 
-
-    # Local development database
-
-    app.config["SQLALCHEMY_DATABASE_URI"] = (
-        "sqlite:///church.db"
-    )
-
-
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///church.db"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
-
 
 db = SQLAlchemy(app)
 
 
+# --------------------------------------------------
+# DATABASE MODELS
+# --------------------------------------------------
 
 class User(db.Model):
+    __tablename__ = "church_users"
 
     id = db.Column(
         db.Integer,
         primary_key=True
     )
 
-
     name = db.Column(
         db.String(100),
         nullable=False
     )
-
 
     email = db.Column(
         db.String(120),
@@ -104,113 +73,15 @@ class User(db.Model):
         nullable=False
     )
 
-
     password = db.Column(
-        db.String(200),
+        db.String(255),
         nullable=False
     )
-
 
     role = db.Column(
         db.String(50),
         default="Member"
     )
-
-
-
-
-
-
-class Event(db.Model):
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-
-    title = db.Column(
-        db.String(150),
-        nullable=False
-    )
-
-
-    date = db.Column(
-        db.String(50)
-    )
-
-
-    description = db.Column(
-        db.Text
-    )
-
-
-
-
-
-class Sermon(db.Model):
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-
-    title = db.Column(
-        db.String(150),
-        nullable=False
-    )
-
-
-    pastor = db.Column(
-        db.String(100)
-    )
-
-
-    date = db.Column(
-        db.String(50)
-    )
-
-
-
-
-
-
-class Discussion(db.Model):
-
-    __tablename__ = "discussion"
-
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
-
-
-    title = db.Column(
-        db.String(200),
-        nullable=False
-    )
-
-
-    content = db.Column(
-        db.Text,
-        nullable=False
-    )
-
-
-    category = db.Column(
-        db.String(100),
-        default="General"
-    )
-
-
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("user.id"),
-        nullable=False
-    )
-
 
     created_at = db.Column(
         db.DateTime,
@@ -218,12 +89,91 @@ class Discussion(db.Model):
     )
 
 
+class Event(db.Model):
+
+    __tablename__ = "events"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    title = db.Column(
+        db.String(150),
+        nullable=False
+    )
+
+    date = db.Column(
+        db.String(50)
+    )
+
+    description = db.Column(
+        db.Text
+    )
+
+
+class Sermon(db.Model):
+
+    __tablename__ = "sermons"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    title = db.Column(
+        db.String(150),
+        nullable=False
+    )
+
+    pastor = db.Column(
+        db.String(100)
+    )
+
+    date = db.Column(
+        db.String(50)
+    )
+
+
+class Discussion(db.Model):
+
+    __tablename__ = "discussion"
+
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
+
+    title = db.Column(
+        db.String(200),
+        nullable=False
+    )
+
+    content = db.Column(
+        db.Text,
+        nullable=False
+    )
+
+    category = db.Column(
+        db.String(100),
+        default="General"
+    )
+
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey("church_users.id"),
+        nullable=False
+    )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
     author = db.relationship(
         "User",
         backref="discussions"
     )
-
-
 
     replies = db.relationship(
         "Reply",
@@ -231,8 +181,6 @@ class Discussion(db.Model):
         lazy=True,
         cascade="all, delete-orphan"
     )
-
-
 
     likes = db.relationship(
         "DiscussionLike",
@@ -242,25 +190,14 @@ class Discussion(db.Model):
     )
 
 
-
-
-
-
-
-
-
-
-
 class Reply(db.Model):
 
     __tablename__ = "reply"
-
 
     id = db.Column(
         db.Integer,
         primary_key=True
     )
-
 
     discussion_id = db.Column(
         db.Integer,
@@ -268,44 +205,33 @@ class Reply(db.Model):
         nullable=False
     )
 
-
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey("user.id"),
+        db.ForeignKey("church_users.id"),
         nullable=False
     )
-
 
     message = db.Column(
         db.Text,
         nullable=False
     )
 
-
     created_at = db.Column(
         db.DateTime,
         default=datetime.utcnow
     )
 
-
-    author = db.relationship(
-        "User"
-    )
-
-
-
+    author = db.relationship("User")
 
 
 class DiscussionLike(db.Model):
 
     __tablename__ = "discussion_like"
 
-
     id = db.Column(
         db.Integer,
         primary_key=True
     )
-
 
     discussion_id = db.Column(
         db.Integer,
@@ -313,13 +239,11 @@ class DiscussionLike(db.Model):
         nullable=False
     )
 
-
     user_id = db.Column(
         db.Integer,
-        db.ForeignKey("user.id"),
+        db.ForeignKey("church_users.id"),
         nullable=False
     )
-
 
     created_at = db.Column(
         db.DateTime,
@@ -327,97 +251,60 @@ class DiscussionLike(db.Model):
     )
 
 
-
-
-
-
 class ContactMessage(db.Model):
+
+    __tablename__ = "contact_messages"
 
     id = db.Column(
         db.Integer,
         primary_key=True
     )
 
-
-    name = db.Column(
-        db.String(100)
-    )
-
-
-    email = db.Column(
-        db.String(120)
-    )
-
-
-    message = db.Column(
-        db.Text
-    )
-
-
-
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(120))
+    message = db.Column(db.Text)
 
 
 class Gallery(db.Model):
 
+    __tablename__ = "gallery"
+
     id = db.Column(
         db.Integer,
         primary_key=True
     )
 
-
-    title = db.Column(
-        db.String(150)
-    )
-
-
-    image = db.Column(
-        db.String(300)
-    )
-
-
-
+    title = db.Column(db.String(150))
+    image = db.Column(db.String(300))
 
 
 class PrayerRequest(db.Model):
 
+    __tablename__ = "prayer_requests"
+
     id = db.Column(
         db.Integer,
         primary_key=True
     )
-
 
     full_name = db.Column(
         db.String(150),
         nullable=False
     )
 
-
-    email = db.Column(
-        db.String(150)
-    )
-
-
-    phone = db.Column(
-        db.String(30)
-    )
-
-
-    category = db.Column(
-        db.String(100)
-    )
-
+    email = db.Column(db.String(150))
+    phone = db.Column(db.String(30))
+    category = db.Column(db.String(100))
 
     prayer = db.Column(
         db.Text,
         nullable=False
     )
 
-
     confidential = db.Column(
         db.Boolean,
         default=False
     )
-
 
     date = db.Column(
         db.DateTime,
@@ -425,40 +312,34 @@ class PrayerRequest(db.Model):
     )
 
 
-
-
-
 class Notification(db.Model):
+
+    __tablename__ = "notifications"
 
     id = db.Column(
         db.Integer,
         primary_key=True
     )
 
-
     title = db.Column(
         db.String(200),
         nullable=False
     )
-
 
     message = db.Column(
         db.Text,
         nullable=False
     )
 
-
     category = db.Column(
         db.String(100),
         default="General"
     )
 
-
     is_read = db.Column(
         db.Boolean,
         default=False
     )
-
 
     created_at = db.Column(
         db.DateTime,
@@ -466,337 +347,225 @@ class Notification(db.Model):
     )
 
 
-
-
-
 class Activity(db.Model):
+
+    __tablename__ = "activities"
 
     id = db.Column(
         db.Integer,
         primary_key=True
     )
 
-
     title = db.Column(
         db.String(150)
     )
-
 
     description = db.Column(
         db.Text
     )
 
 
-
-
+# --------------------------------------------------
+# CREATE TABLES
+# --------------------------------------------------
 
 with app.app_context():
-
     db.create_all()
 
 
+# --------------------------------------------------
+# LOGIN DECORATOR
+# --------------------------------------------------
 
+def login_required(func):
 
-
-
-
-def login_required(function):
-
-
-    @wraps(function)
-
+    @wraps(func)
     def wrapper(*args, **kwargs):
-
 
         if "user_id" not in session:
 
-
             flash(
-                "Please login first",
+                "Please login first.",
                 "warning"
             )
-
 
             return redirect(
                 url_for("login")
             )
 
-
-
-        return function(
-            *args,
-            **kwargs
-        )
-
+        return func(*args, **kwargs)
 
     return wrapper
 
 
-
-
+# ==========================================================
+# HOME PAGE
+# ==========================================================
 
 @app.route("/")
 def home():
-
-    return render_template(
-        "index.html"
-    )
+    return render_template("index.html")
 
 
+# ==========================================================
+# REGISTER
+# ==========================================================
 
-
-@app.route(
-    "/register",
-    methods=["GET","POST"]
-)
-
+@app.route("/register", methods=["GET", "POST"])
 def register():
-
 
     if request.method == "POST":
 
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
 
-        name = request.form["name"]
+        if not name or not email or not password:
+            flash("Please fill in all required fields.", "danger")
+            return redirect(url_for("register"))
 
-
-        email = request.form["email"]
-
-
-        password = request.form["password"]
-
-
-
-
-        existing_user = User.query.filter_by(
-            email=email
-        ).first()
-
-
+        existing_user = User.query.filter_by(email=email).first()
 
         if existing_user:
+            flash("An account with this email already exists.", "warning")
+            return redirect(url_for("register"))
 
+        hashed_password = generate_password_hash(password)
+
+        new_user = User(
+            name=name,
+            email=email,
+            password=hashed_password,
+            role="Member"
+        )
+
+        try:
+            db.session.add(new_user)
+            db.session.commit()
 
             flash(
-                "Email already registered",
+                "Registration successful! Please login.",
+                "success"
+            )
+
+            return redirect(url_for("login"))
+
+        except Exception as e:
+            db.session.rollback()
+            print(e)
+
+            flash(
+                "Registration failed. Please try again.",
                 "danger"
             )
 
+            return redirect(url_for("register"))
 
-            return redirect(
-                url_for("register")
-            )
-
+    return render_template("register.html")
 
 
+# ==========================================================
+# LOGIN
+# ==========================================================
 
-
-        user = User(
-
-            name=name,
-
-            email=email,
-
-            password=generate_password_hash(
-                password
-            )
-
-        )
-
-
-
-        db.session.add(user)
-
-        db.session.commit()
-
-
-
-        flash(
-            "Registration successful. Login now.",
-            "success"
-        )
-
-
-
-        return redirect(
-            url_for("login")
-        )
-
-
-
-    return render_template(
-        "register.html"
-    )
-
-
-
-
-
-
-@app.route(
-    "/login",
-    methods=["GET","POST"]
-)
-
+@app.route("/login", methods=["GET", "POST"])
 def login():
-
 
     if request.method == "POST":
 
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
 
+        user = User.query.filter_by(email=email).first()
 
-        email = request.form["email"]
+        if user and check_password_hash(user.password, password):
 
-
-        password = request.form["password"]
-
-
-
-
-
-        user = User.query.filter_by(
-            email=email
-        ).first()
-
-
-
-
-
-        if user and check_password_hash(
-            user.password,
-            password
-        ):
-
-
+            session.clear()
 
             session["user_id"] = user.id
-
-
             session["user_name"] = user.name
+            session["user_role"] = user.role
 
-
-
-            return redirect(
-                url_for("dashboard")
+            flash(
+                f"Welcome {user.name}!",
+                "success"
             )
 
-
-
-
+            return redirect(url_for("dashboard"))
 
         flash(
-            "Invalid login details",
+            "Invalid email or password.",
             "danger"
         )
 
+    return render_template("login.html")
 
 
-
-    return render_template(
-        "login.html"
-    )
-
-
-
-
-
+# ==========================================================
+# LOGOUT
+# ==========================================================
 
 @app.route("/logout")
-
 def logout():
-
 
     session.clear()
 
-
-
     flash(
-        "Logged out successfully",
+        "You have logged out successfully.",
         "success"
     )
 
+    return redirect(url_for("login"))
 
 
-    return redirect(
-        url_for("login")
-    )
-
-
-
-
-
-
+# ==========================================================
+# DASHBOARD
+# ==========================================================
 
 @app.route("/dashboard")
-
 @login_required
-
 def dashboard():
 
-
+    current_user = User.query.get(session["user_id"])
 
     users = User.query.all()
-
-
 
     prayers = PrayerRequest.query.order_by(
         PrayerRequest.id.desc()
     ).limit(5).all()
 
-
-
-
     events = Event.query.order_by(
         Event.id.desc()
     ).limit(5).all()
-
-
-
 
     sermons = Sermon.query.order_by(
         Sermon.id.desc()
     ).limit(5).all()
 
-
-
-
-
-    user = User.query.get(
-        session["user_id"]
-    )
-
-
-
+    notifications = Notification.query.order_by(
+        Notification.created_at.desc()
+    ).limit(5).all()
 
     return render_template(
-
         "dashboard.html",
-
+        user=current_user,
         users=users,
-
         prayers=prayers,
-
         events=events,
-
         sermons=sermons,
-
-        user=user
-
+        notifications=notifications
     )
 
 
+# ==========================================================
+# PROFILE
+# ==========================================================
 
 @app.route("/profile")
-
 @login_required
-
 def profile():
 
-
-    user = User.query.get(
-        session["user_id"]
-    )
-
-
+    user = User.query.get_or_404(session["user_id"])
 
     return render_template(
         "profile.html",
@@ -804,159 +573,171 @@ def profile():
     )
 
 
+# ==========================================================
+# UPDATE PROFILE
+# ==========================================================
 
-@app.route(
-    "/update-profile",
-    methods=["POST"]
-)
-
+@app.route("/update-profile", methods=["POST"])
 @login_required
-
 def update_profile():
 
+    user = User.query.get_or_404(session["user_id"])
 
+    name = request.form.get("name", "").strip()
+    email = request.form.get("email", "").strip().lower()
 
-    user = User.query.get(
-        session["user_id"]
-    )
+    if not name or not email:
 
-
-
-    user.name = request.form["name"]
-
-
-    user.email = request.form["email"]
-
-
-
-    db.session.commit()
-
-
-
-    session["user_name"] = user.name
-
-
-
-
-    flash(
-        "Profile updated successfully",
-        "success"
-    )
-
-
-
-    return redirect(
-        url_for("profile")
-    )
-
-
-
-
-
-@app.route("/about")
-
-@login_required
-
-def about():
-
-    return render_template(
-        "about.html"
-    )
-
-
-
-
-@app.route(
-    "/prayer-request",
-    methods=["GET","POST"]
-)
-
-def prayer_request():
-
-
-    if request.method == "POST":
-
-
-
-        prayer = PrayerRequest(
-
-            full_name=request.form["full_name"],
-
-            email=request.form.get("email"),
-
-            phone=request.form.get("phone"),
-
-            category=request.form.get("category"),
-
-            prayer=request.form["prayer"],
-
-            confidential=
-            "confidential" in request.form
-
+        flash(
+            "Name and email are required.",
+            "danger"
         )
 
+        return redirect(url_for("profile"))
 
+    existing = User.query.filter(
+        User.email == email,
+        User.id != user.id
+    ).first()
 
-        db.session.add(prayer)
+    if existing:
+
+        flash(
+            "Email already belongs to another account.",
+            "warning"
+        )
+
+        return redirect(url_for("profile"))
+
+    user.name = name
+    user.email = email
+
+    try:
 
         db.session.commit()
 
-
+        session["user_name"] = user.name
 
         flash(
-            "Prayer request submitted successfully.",
+            "Profile updated successfully.",
             "success"
         )
 
+    except Exception as e:
 
+        db.session.rollback()
 
-        return redirect(
-            url_for("prayer_request")
+        print(e)
+
+        flash(
+            "Failed to update profile.",
+            "danger"
         )
 
+    return redirect(url_for("profile"))
 
 
-    return render_template(
-        "prayer_request.html"
-    )
+# ==========================================================
+# ABOUT PAGE
+# ==========================================================
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 
+# ==========================================================
+# PRAYER REQUEST
+# ==========================================================
 
-@app.route('/events')
+@app.route("/prayer-request", methods=["GET", "POST"])
+def prayer_request():
+
+    if request.method == "POST":
+
+        prayer = PrayerRequest(
+            full_name=request.form.get("full_name"),
+            email=request.form.get("email"),
+            phone=request.form.get("phone"),
+            category=request.form.get("category"),
+            prayer=request.form.get("prayer"),
+            confidential="confidential" in request.form
+        )
+
+        try:
+
+            db.session.add(prayer)
+            db.session.commit()
+
+            flash(
+                "Your prayer request has been received. Our prayer team will stand with you in prayer.",
+                "success"
+            )
+
+        except Exception as e:
+
+            db.session.rollback()
+            print(e)
+
+            flash(
+                "Unable to submit prayer request.",
+                "danger"
+            )
+
+        return redirect(url_for("prayer_request"))
+
+    return render_template("prayer_request.html")
+
+
+# ==========================================================
+# EVENTS / MINISTRIES PAGE
+# ==========================================================
+
+@app.route("/events")
 def events():
     return render_template("events.html")
 
 
+# ==========================================================
+# HOLY BAPTISM REGISTRATION
+# ==========================================================
 
-@app.route('/baptism-registration', methods=['POST'])
+@app.route("/baptism-registration", methods=["POST"])
 def baptism_registration():
+
     flash(
-        "✅ Thank you for registering for Holy Baptism. The Parish Office will contact you soon with the next steps.",
+        "✅ Thank you for registering for Holy Baptism. Our Parish Office will contact you soon with the baptism class schedule.",
         "success"
     )
-    return redirect(url_for('events'))
+
+    return redirect(url_for("events"))
 
 
-@app.route('/wedding-registration', methods=['POST'])
+# ==========================================================
+# CHRISTIAN WEDDING BOOKING
+# ==========================================================
+
+@app.route("/wedding-registration", methods=["POST"])
 def wedding_registration():
+
     flash(
-        "💍 Thank you for booking your Christian Wedding. Our Parish Office will contact you to arrange counselling and confirm your preferred wedding date.",
+        "💍 Thank you for booking your Christian Wedding. Our Parish Office will contact you shortly to arrange counselling and confirm your wedding date.",
         "success"
     )
-    return redirect(url_for('events'))
+
+    return redirect(url_for("events"))
+
+
+# ==========================================================
+# SERMONS
+# ==========================================================
 
 @app.route("/sermons")
-
-@login_required
-
 def sermons():
-
 
     sermons = Sermon.query.order_by(
         Sermon.id.desc()
     ).all()
-
-
 
     return render_template(
         "sermons.html",
@@ -964,63 +745,53 @@ def sermons():
     )
 
 
+# ==========================================================
+# ADD SERMON
+# ==========================================================
 
-
-@app.route(
-    "/add-sermon",
-    methods=["POST"]
-)
-
+@app.route("/add-sermon", methods=["POST"])
 @login_required
-
 def add_sermon():
 
-
     sermon = Sermon(
-
-
-        title=request.form["title"],
-
-
-        pastor=request.form["pastor"],
-
-
-        date=request.form["date"]
-
+        title=request.form.get("title"),
+        pastor=request.form.get("pastor"),
+        date=request.form.get("date")
     )
 
+    try:
+
+        db.session.add(sermon)
+        db.session.commit()
+
+        flash(
+            "Sermon added successfully.",
+            "success"
+        )
+
+    except Exception as e:
+
+        db.session.rollback()
+        print(e)
+
+        flash(
+            "Unable to add sermon.",
+            "danger"
+        )
+
+    return redirect(url_for("sermons"))
 
 
-    db.session.add(sermon)
-
-    db.session.commit()
-
-
-
-    flash(
-        "Sermon added successfully",
-        "success"
-    )
-
-
-
-    return redirect(
-        url_for("sermons")
-    )
-
-
-
+# ==========================================================
+# GALLERY
+# ==========================================================
 
 @app.route("/gallery")
-
-@login_required
-
 def gallery():
 
-
-    images = Gallery.query.all()
-
-
+    images = Gallery.query.order_by(
+        Gallery.id.desc()
+    ).all()
 
     return render_template(
         "gallery.html",
@@ -1028,1473 +799,671 @@ def gallery():
     )
 
 
+# ==========================================================
+# ADD GALLERY IMAGE
+# ==========================================================
 
-
-
-
-
-
-@app.route(
-    "/add-gallery",
-    methods=["POST"]
-)
-
+@app.route("/add-gallery", methods=["POST"])
 @login_required
-
 def add_gallery():
 
-
     gallery = Gallery(
-
-        title=request.form["title"],
-
-        image=request.form["image"]
-
+        title=request.form.get("title"),
+        image=request.form.get("image")
     )
 
+    try:
 
-
-    db.session.add(gallery)
-
-    db.session.commit()
-
-
-
-    flash(
-        "Image added successfully",
-        "success"
-    )
-
-
-
-    return redirect(
-        url_for("gallery")
-    )
-
-
-
-
-
-@app.route("/sports")
-
-@login_required
-
-def sports():
-
-
-    return render_template(
-        "sports_activities.html"
-    )
-
-
-
-@app.route("/books")
-
-@login_required
-
-def books():
-
-
-    return render_template(
-        "books.html"
-    )
-
-
-
-
-
-@app.route("/explore")
-
-@login_required
-
-def explore():
-
-
-    return render_template(
-        "explore.html"
-    )
-
-
-
-@app.route("/leadership")
-
-@login_required
-
-def leadership():
-
-
-    return render_template(
-        "leadership.html"
-    )
-
-
-
-
-
-
-@app.route("/live")
-
-@login_required
-
-def live():
-
-
-    return render_template(
-        "live.html"
-    )
-
-
-
-@app.route("/support")
-
-def support():
-
-
-    return render_template(
-        "support.html"
-    )
-
-
-
-
-
-@app.route(
-    "/contact",
-    methods=["GET","POST"]
-)
-
-@login_required
-
-def contact():
-
-
-
-    if request.method == "POST":
-
-
-        message = ContactMessage(
-
-
-            name=request.form["name"],
-
-
-            email=request.form["email"],
-
-
-            message=request.form["message"]
-
-        )
-
-
-
-        db.session.add(message)
-
+        db.session.add(gallery)
         db.session.commit()
 
-
-
         flash(
-            "Message sent successfully",
+            "Image uploaded successfully.",
             "success"
         )
 
+    except Exception as e:
 
+        db.session.rollback()
+        print(e)
 
-        return redirect(
-            url_for("contact")
+        flash(
+            "Unable to upload image.",
+            "danger"
         )
 
+    return redirect(url_for("gallery"))
+
+# ==========================================================
+# SPORTS ACTIVITIES
+# ==========================================================
+
+@app.route("/sports")
+def sports():
+    return render_template("sports_activities.html")
 
 
+# ==========================================================
+# BOOKS
+# ==========================================================
+
+@app.route("/books")
+def books():
+    return render_template("books.html")
 
 
-    messages = ContactMessage.query.all()
+# ==========================================================
+# EXPLORE
+# ==========================================================
+
+@app.route("/explore")
+def explore():
+    return render_template("explore.html")
 
 
+# ==========================================================
+# CHURCH LEADERSHIP
+# ==========================================================
 
-    return render_template(
-
-        "contact.html",
-
-        messages=messages
-
-    )
-
+@app.route("/leadership")
+def leadership():
+    return render_template("leadership.html")
 
 
-@app.route("/discussions")
+# ==========================================================
+# LIVE STREAMING
+# ==========================================================
 
-@login_required
+@app.route("/live")
+def live():
+    return render_template("live.html")
 
-def discussions():
+
+# ==========================================================
+# SUPPORT PAGE
+# ==========================================================
+
+@app.route("/support")
+def support():
+    return render_template("support.html")
 
 
-    discussions = Discussion.query.order_by(
+# ==========================================================
+# CONTACT US
+# ==========================================================
 
-        Discussion.created_at.desc()
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
 
+    if request.method == "POST":
+
+        message = ContactMessage(
+            name=request.form.get("name"),
+            email=request.form.get("email"),
+            message=request.form.get("message")
+        )
+
+        try:
+
+            db.session.add(message)
+            db.session.commit()
+
+            flash(
+                "Thank you for contacting ACK St. Paul's Parish Mafisini. We have received your message.",
+                "success"
+            )
+
+        except Exception as e:
+
+            db.session.rollback()
+            print(e)
+
+            flash(
+                "Unable to send your message.",
+                "danger"
+            )
+
+        return redirect(url_for("contact"))
+
+    messages = ContactMessage.query.order_by(
+        ContactMessage.id.desc()
     ).all()
 
+    return render_template(
+        "contact.html",
+        messages=messages
+    )
 
+
+# ==========================================================
+# DISCUSSION FORUM
+# ==========================================================
+
+@app.route("/discussions")
+@login_required
+def discussions():
+
+    discussions = Discussion.query.order_by(
+        Discussion.created_at.desc()
+    ).all()
 
     return render_template(
-
         "discussions.html",
-
         discussions=discussions
-
     )
 
 
+# ==========================================================
+# CREATE DISCUSSION
+# ==========================================================
 
-
-@app.route(
-    "/create-discussion",
-    methods=["POST"]
-)
-
+@app.route("/create-discussion", methods=["POST"])
 @login_required
-
 def create_discussion():
 
-
-    title = request.form.get(
-        "title"
-    )
-
-
-    category = request.form.get(
-        "category",
-        "General"
-    )
-
-
-    content = request.form.get(
-        "content"
-    )
-
-
+    title = request.form.get("title")
+    category = request.form.get("category")
+    content = request.form.get("content")
 
     if not title or not content:
 
+        flash(
+            "Please complete all required fields.",
+            "warning"
+        )
+
+        return redirect(url_for("discussions"))
+
+    discussion = Discussion(
+        title=title,
+        category=category,
+        content=content,
+        user_id=session["user_id"]
+    )
+
+    try:
+
+        db.session.add(discussion)
+        db.session.commit()
 
         flash(
-            "Please fill all required fields",
+            "Discussion posted successfully.",
+            "success"
+        )
+
+    except Exception as e:
+
+        db.session.rollback()
+        print(e)
+
+        flash(
+            "Unable to post discussion.",
             "danger"
         )
 
+    return redirect(url_for("discussions"))
 
-        return redirect(
-            url_for("discussions")
-        )
+# ==========================================================
+# REPLY TO DISCUSSION
+# ==========================================================
 
-
-
-
-
-    discussion = Discussion(
-
-
-        title=title,
-
-
-        category=category,
-
-
-        content=content,
-
-
-        user_id=session["user_id"],
-
-
-        created_at=datetime.utcnow()
-
-    )
-
-
-
-    db.session.add(
-        discussion
-    )
-
-
-    db.session.commit()
-
-
-
-    flash(
-
-        "Discussion posted successfully",
-
-        "success"
-
-    )
-
-
-
-    return redirect(
-
-        url_for("discussions")
-
-    )
-
-
-
-
-
-
-@app.route(
-
-    "/reply/<int:discussion_id>",
-
-    methods=["POST"]
-
-)
-
+@app.route("/reply/<int:discussion_id>", methods=["POST"])
 @login_required
-
 def reply(discussion_id):
 
+    discussion = Discussion.query.get_or_404(discussion_id)
 
-    discussion = Discussion.query.get_or_404(
-
-        discussion_id
-
-    )
-
-
-
-    message = request.form.get(
-
-        "reply"
-
-    )
-
-
+    message = request.form.get("reply")
 
     if not message:
 
-
         flash(
-
-            "Reply cannot be empty",
-
-            "danger"
-
+            "Reply cannot be empty.",
+            "warning"
         )
 
-
-        return redirect(
-
-            url_for("discussions")
-
-        )
-
-
-
-
+        return redirect(url_for("discussions"))
 
     new_reply = Reply(
-
-
         discussion_id=discussion.id,
-
-
         user_id=session["user_id"],
-
-
-        message=message,
-
-
-        created_at=datetime.utcnow()
-
+        message=message
     )
 
+    try:
 
+        db.session.add(new_reply)
+        db.session.commit()
 
-    db.session.add(
+        flash(
+            "Reply posted successfully.",
+            "success"
+        )
 
-        new_reply
+    except Exception as e:
 
-    )
+        db.session.rollback()
+        print(e)
 
+        flash(
+            "Unable to post reply.",
+            "danger"
+        )
 
-    db.session.commit()
+    return redirect(url_for("discussions"))
 
+# ==========================================================
+# LIKE DISCUSSION
+# ==========================================================
 
-
-    flash(
-
-        "Reply posted successfully",
-
-        "success"
-
-    )
-
-
-
-    return redirect(
-
-        url_for("discussions")
-
-    )
-
-
-
-
-@app.route(
-
-    "/like-discussion/<int:discussion_id>",
-
-    methods=["POST"]
-
-)
-
+@app.route("/like-discussion/<int:discussion_id>", methods=["POST"])
 @login_required
-
 def like_discussion(discussion_id):
 
-
-    discussion = Discussion.query.get_or_404(
-
-        discussion_id
-
-    )
-
-
-
     existing = DiscussionLike.query.filter_by(
-
-        discussion_id=discussion.id,
-
+        discussion_id=discussion_id,
         user_id=session["user_id"]
-
     ).first()
-
-
-
-
 
     if existing:
 
-
         db.session.delete(existing)
-
-
-        flash(
-
-            "Like removed",
-
-            "info"
-
-        )
-
+        flash("Like removed.", "info")
 
     else:
 
-
         like = DiscussionLike(
-
-            discussion_id=discussion.id,
-
+            discussion_id=discussion_id,
             user_id=session["user_id"]
-
         )
 
-
-        db.session.add(
-
-            like
-
-        )
-
-
-        flash(
-
-            "Discussion liked",
-
-            "success"
-
-        )
-
-
-
+        db.session.add(like)
+        flash("Discussion liked.", "success")
 
     db.session.commit()
 
+    return redirect(url_for("discussions"))
 
 
-    return redirect(
+# ==========================================================
+# DELETE DISCUSSION
+# ==========================================================
 
-        url_for("discussions")
-
-    )
-
-
-
-
-@app.route(
-
-    "/delete-discussion/<int:id>"
-
-)
-
+@app.route("/delete-discussion/<int:id>")
 @login_required
-
 def delete_discussion(id):
 
-
-    discussion = Discussion.query.get_or_404(
-
-        id
-
-    )
-
-
+    discussion = Discussion.query.get_or_404(id)
 
     if discussion.user_id != session["user_id"] and not session.get("admin"):
 
-
         flash(
-
-            "You cannot delete this discussion",
-
+            "You are not allowed to delete this discussion.",
             "danger"
-
         )
 
+        return redirect(url_for("discussions"))
 
-        return redirect(
-
-            url_for("discussions")
-
-        )
-
-
-
-
-
-    db.session.delete(
-
-        discussion
-
-    )
-
-
+    db.session.delete(discussion)
     db.session.commit()
 
-
-
     flash(
-
-        "Discussion deleted",
-
+        "Discussion deleted successfully.",
         "success"
-
     )
 
+    return redirect(url_for("discussions"))
 
 
-    return redirect(
+# ==========================================================
+# ADMIN LOGIN
+# ==========================================================
 
-        url_for("discussions")
-
-    )
-
-
-
-@app.route(
-
-    "/delete-reply/<int:id>"
-
-)
-
-@login_required
-
-def delete_reply(id):
-
-
-    reply = Reply.query.get_or_404(
-
-        id
-
-    )
-
-
-
-    if reply.user_id != session["user_id"] and not session.get("admin"):
-
-
-        flash(
-
-            "You cannot delete this reply",
-
-            "danger"
-
-        )
-
-
-        return redirect(
-
-            url_for("discussions")
-
-        )
-
-
-
-
-
-    db.session.delete(
-
-        reply
-
-    )
-
-
-    db.session.commit()
-
-
-
-    flash(
-
-        "Reply deleted",
-
-        "success"
-
-    )
-
-
-
-    return redirect(
-
-        url_for("discussions")
-
-    )
-
-
-
-
-@app.route("/notifications")
-
-@login_required
-
-def notifications():
-
-
-    notifications = Notification.query.order_by(
-
-        Notification.created_at.desc()
-
-    ).all()
-
-
-
-    unread = Notification.query.filter_by(
-
-        is_read=False
-
-    ).count()
-
-
-
-
-    return render_template(
-
-        "notifications.html",
-
-        notifications=notifications,
-
-        unread=unread
-
-    )
-
-
-
-@app.route(
-
-    "/add-notification",
-
-    methods=["GET","POST"]
-
-)
-
-@login_required
-
-def add_notification():
-
-
-    if not session.get("admin"):
-
-
-        flash(
-
-            "Administrator access required",
-
-            "danger"
-
-        )
-
-
-        return redirect(
-
-            url_for("dashboard")
-
-        )
-
-
-
-
-    if request.method=="POST":
-
-
-
-        notification = Notification(
-
-
-            title=request.form["title"],
-
-
-            message=request.form["message"],
-
-
-            category=request.form["category"]
-
-        )
-
-
-
-        db.session.add(
-
-            notification
-
-        )
-
-
-        db.session.commit()
-
-
-
-        flash(
-
-            "Notification added",
-
-            "success"
-
-        )
-
-
-
-        return redirect(
-
-            url_for("notifications")
-
-        )
-
-
-
-
-    return render_template(
-
-        "add_notification.html"
-
-    )
-
-
-@app.route(
-    "/admin-login",
-    methods=["GET","POST"]
-)
-
+@app.route("/admin-login", methods=["GET", "POST"])
 def admin_login():
-
 
     if request.method == "POST":
 
-
-        email = request.form["email"]
-
-
-        password = request.form["password"]
-
-
-
-
-        # Render environment variables
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "")
 
         admin_email = os.environ.get(
             "ADMIN_EMAIL",
-            "admin@ackmafisini.com"
-        )
-
+            "admin@ackmafisini.org"
+        ).lower()
 
         admin_password = os.environ.get(
             "ADMIN_PASSWORD",
             "admin123"
         )
 
-
-
-
-
         if email == admin_email and password == admin_password:
 
-
+            session.clear()
 
             session["admin"] = True
-
-
             session["admin_name"] = "Church Administrator"
-
-
             session["admin_email"] = email
 
-
-
-
             flash(
-
-                "Admin login successful",
-
+                "Administrator login successful.",
                 "success"
-
             )
 
+            return redirect(url_for("admin_dashboard"))
+
+        flash(
+            "Invalid administrator credentials.",
+            "danger"
+        )
+
+    return render_template("admin-login.html")
 
 
-            return redirect(
-
-                url_for("admin_dashboard")
-
-            )
-
-
-
-
-
-        else:
-
-
-            flash(
-
-                "Invalid admin credentials",
-
-                "danger"
-
-            )
-
-
-
-
-    return render_template(
-
-        "admin-login.html"
-
-    )
-
-
-
+# ==========================================================
+# ADMIN DASHBOARD
+# ==========================================================
 
 @app.route("/admin-dashboard")
-
 @login_required
-
 def admin_dashboard():
 
-
     if not session.get("admin"):
 
-
         flash(
-
-            "Administrator access required",
-
+            "Administrator access required.",
             "danger"
-
         )
 
-
-        return redirect(
-
-            url_for("dashboard")
-
-        )
-
-
-
-
-
-    users = User.query.all()
-
-
-
-    prayers = PrayerRequest.query.order_by(
-
-        PrayerRequest.id.desc()
-
-    ).limit(5).all()
-
-
-
-
-    events = Event.query.order_by(
-
-        Event.id.desc()
-
-    ).limit(5).all()
-
-
-
-
-    sermons = Sermon.query.order_by(
-
-        Sermon.id.desc()
-
-    ).limit(5).all()
-
-
-
-
-    notifications = Notification.query.order_by(
-
-        Notification.created_at.desc()
-
-    ).limit(5).all()
-
-
-
-
+        return redirect(url_for("dashboard"))
 
     total_users = User.query.count()
 
-
     total_prayers = PrayerRequest.query.count()
-
 
     total_events = Event.query.count()
 
-
     total_sermons = Sermon.query.count()
-
-
-    total_notifications = Notification.query.count()
-
-
-
-
-    return render_template(
-
-
-        "admin-dashboard.html",
-
-
-
-        users=users,
-
-        prayers=prayers,
-
-        events=events,
-
-        sermons=sermons,
-
-        notifications=notifications,
-
-
-
-        total_users=total_users,
-
-
-        total_prayers=total_prayers,
-
-
-        total_events=total_events,
-
-
-        total_sermons=total_sermons,
-
-
-        total_notifications=total_notifications,
-
-
-
-        admin_name=session.get(
-
-            "admin_name"
-
-        ),
-
-
-
-        admin_email=session.get(
-
-            "admin_email"
-
-        )
-
-
-    )
-
-
-
-@app.route("/admin-logout")
-
-def admin_logout():
-
-
-    session.pop(
-
-        "admin",
-
-        None
-
-    )
-
-
-    session.pop(
-
-        "admin_name",
-
-        None
-
-    )
-
-
-    session.pop(
-
-        "admin_email",
-
-        None
-
-    )
-
-
-
-    flash(
-
-        "Admin logged out successfully",
-
-        "success"
-
-    )
-
-
-    return redirect(
-
-        url_for("admin_login")
-
-    )
-    
-
-
-
-@app.route("/users")
-
-@login_required
-
-def users():
-
-
-    if not session.get("admin"):
-
-
-        flash(
-
-            "Administrator access required",
-
-            "danger"
-
-        )
-
-
-        return redirect(
-
-            url_for("dashboard")
-
-        )
-
-
-
-    users = User.query.all()
-
-
-
-    return render_template(
-
-        "users.html",
-
-        users=users
-
-    )
-
-
-
-
-@app.route(
-
-    "/delete-user/<int:id>"
-
-)
-
-@login_required
-
-def delete_user(id):
-
-
-    if not session.get("admin"):
-
-
-        flash(
-
-            "Administrator access required",
-
-            "danger"
-
-        )
-
-
-        return redirect(
-
-            url_for("dashboard")
-
-        )
-
-
-
-
-
-    user = User.query.get_or_404(
-
-        id
-
-    )
-
-
-
-    db.session.delete(
-
-        user
-
-    )
-
-
-    db.session.commit()
-
-
-
-    flash(
-
-        "User deleted successfully",
-
-        "success"
-
-    )
-
-
-
-    return redirect(
-
-        url_for("users")
-
-    )
-
-
-
-
-@app.route("/activities")
-
-@login_required
-
-def activities():
-
-
-    activities = Activity.query.all()
-
-
-
-    return render_template(
-
-        "activities.html",
-
-        activities=activities
-
-    )
-
-
-
-
-@app.route(
-
-    "/add-activity",
-
-    methods=["POST"]
-
-)
-
-@login_required
-
-def add_activity():
-
-
-    activity = Activity(
-
-
-        title=request.form["title"],
-
-
-        description=request.form["description"]
-
-    )
-
-
-
-    db.session.add(
-
-        activity
-
-    )
-
-
-    db.session.commit()
-
-
-
-    flash(
-
-        "Activity added successfully",
-
-        "success"
-
-    )
-
-
-
-    return redirect(
-
-        url_for("activities")
-
-    )
-
-
-
-@app.route("/reports")
-
-@login_required
-
-def reports():
-
-
-    if not session.get("admin"):
-
-
-        flash(
-
-            "Administrator access required",
-
-            "danger"
-
-        )
-
-
-        return redirect(
-
-            url_for("dashboard")
-
-        )
-
-
-
-
-
-    total_users = User.query.count()
-
-
-    total_prayers = PrayerRequest.query.count()
-
-
-    total_events = Event.query.count()
-
-
-    total_sermons = Sermon.query.count()
-
 
     total_gallery = Gallery.query.count()
 
+    total_discussions = Discussion.query.count()
 
+    total_notifications = Notification.query.count()
 
-    users = User.query.all()
+    total_activities = Activity.query.count()
 
+    recent_users = User.query.order_by(
+        User.id.desc()
+    ).limit(5).all()
 
-    prayers = PrayerRequest.query.all()
+    recent_prayers = PrayerRequest.query.order_by(
+        PrayerRequest.id.desc()
+    ).limit(5).all()
 
+    recent_events = Event.query.order_by(
+        Event.id.desc()
+    ).limit(5).all()
 
-    events = Event.query.all()
+    recent_sermons = Sermon.query.order_by(
+        Sermon.id.desc()
+    ).limit(5).all()
 
-
-    sermons = Sermon.query.all()
-
-
-
-
+    recent_notifications = Notification.query.order_by(
+        Notification.created_at.desc()
+    ).limit(5).all()
 
     return render_template(
 
-        "reports.html",
+        "admin-dashboard.html",
 
+        admin_name=session.get("admin_name"),
+
+        admin_email=session.get("admin_email"),
 
         total_users=total_users,
 
-
         total_prayers=total_prayers,
-
 
         total_events=total_events,
 
-
         total_sermons=total_sermons,
-
 
         total_gallery=total_gallery,
 
+        total_discussions=total_discussions,
 
+        total_notifications=total_notifications,
 
-        users=users,
+        total_activities=total_activities,
 
+        users=recent_users,
 
-        prayers=prayers,
+        prayers=recent_prayers,
 
+        events=recent_events,
 
-        events=events,
+        sermons=recent_sermons,
 
-
-        sermons=sermons
-
-    )
-
-
-
-
-@app.route("/settings")
-
-@login_required
-
-def settings():
-
-
-    return render_template(
-
-        "settings.html"
+        notifications=recent_notifications
 
     )
 
 
-@app.route(
+# ==========================================================
+# ADMIN PROFILE
+# ==========================================================
 
-    "/delete-notification/<int:id>"
-
-)
-
+@app.route("/admin-profile")
 @login_required
-
-def delete_notification(id):
-
+def admin_profile():
 
     if not session.get("admin"):
 
-
         flash(
-
-            "Administrator access required",
-
+            "Administrator access required.",
             "danger"
-
         )
 
+        return redirect(url_for("dashboard"))
 
-        return redirect(
+    return render_template(
 
-            url_for("notifications")
+        "admin-profile.html",
 
-        )
+        admin_name=session.get("admin_name"),
 
-
-
-    notification = Notification.query.get_or_404(
-
-        id
+        admin_email=session.get("admin_email")
 
     )
 
 
-    db.session.delete(
+# ==========================================================
+# ADMIN LOGOUT
+# ==========================================================
 
-        notification
+@app.route("/admin-logout")
+@login_required
+def admin_logout():
 
+    session.clear()
+
+    flash(
+        "Administrator logged out successfully.",
+        "success"
     )
 
+    return redirect(url_for("admin_login"))
+
+
+@app.route("/notification-count")
+@login_required
+def notification_count():
+
+    count = Notification.query.filter_by(
+        is_read=False
+    ).count()
+
+    return jsonify({
+        "count": count
+    })
+
+
+@app.route("/latest-notifications")
+@login_required
+def latest_notifications():
+
+    notifications = Notification.query.order_by(
+        Notification.created_at.desc()
+    ).limit(5).all()
+
+    data = []
+
+    for notification in notifications:
+
+        data.append({
+
+            "id": notification.id,
+
+            "title": notification.title,
+
+            "message": notification.message,
+
+            "category": notification.category,
+
+            "created_at": notification.created_at.strftime(
+                "%d %b %Y %I:%M %p"
+            )
+
+        })
+
+    return jsonify(data)
+
+
+@app.route("/mark-notification-read/<int:id>")
+@login_required
+def mark_notification_read(id):
+
+    notification = Notification.query.get_or_404(id)
+
+    notification.is_read = True
 
     db.session.commit()
 
-
-
     flash(
-
-        "Notification deleted",
-
+        "Notification marked as read.",
         "success"
-
     )
-
 
     return redirect(
-
         url_for("notifications")
-
     )
 
 
+@app.route("/popup-notifications")
+@login_required
+def popup_notifications():
+
+    notifications = Notification.query.filter_by(
+        is_read=False
+    ).order_by(
+        Notification.created_at.desc()
+    ).limit(3).all()
+
+    results = []
+
+    for notification in notifications:
+
+        results.append({
+
+            "id": notification.id,
+
+            "title": notification.title,
+
+            "message": notification.message,
+
+            "category": notification.category
+
+        })
+
+    return jsonify(results)
+
+
+@app.route("/send-alert", methods=["POST"])
+@login_required
+def send_alert():
+
+    if not session.get("admin"):
+
+        return jsonify({
+            "success": False,
+            "message": "Unauthorized"
+        }), 403
+
+    title = request.form.get("title")
+    message = request.form.get("message")
+    category = request.form.get("category", "General")
+
+    notification = Notification(
+        title=title,
+        message=message,
+        category=category
+    )
+
+    db.session.add(notification)
+    db.session.commit()
+
+    return jsonify({
+        "success": True,
+        "message": "Notification sent successfully."
+    })
 
 
 @app.errorhandler(404)
 def page_not_found(error):
-    return "404 - Page Not Found", 404
-    
-    
+
+    return (
+        "404 - Page Not Found",
+        404
+    )
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+
+    db.session.rollback()
+
+    return (
+        "500 - Internal Server Error",
+        500
+    )
+
 
 @app.route("/health")
-
 def health():
 
     return jsonify({
 
         "status": "running",
 
-        "message":
-        "ACK St. Paul's Parish Mafisini system is online"
+        "application": "ACK St. Paul's Parish Mafisini",
+
+        "database": "connected"
 
     })
 
 
-
 if __name__ == "__main__":
 
-
     port = int(
-
         os.environ.get(
-
             "PORT",
-
             5000
-
         )
-
     )
 
-
     app.run(
-
         host="0.0.0.0",
-
-        port=port
-
-    )    
-        
+        port=port,
+        debug=False
+    )

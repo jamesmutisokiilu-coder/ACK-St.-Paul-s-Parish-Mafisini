@@ -3,215 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Church Leadership | ACK St. Paul's Parish Mafisini</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
 }
 
 body{
-    background:#f5f7fb;
-    color:#333;
+background:#f4f7fc;
+color:#333;
 }
 
-/* Header */
+/*=========================
+HEADER
+==========================*/
+
 header{
-    background:linear-gradient(135deg,#0d47a1,#1976d2);
-    color:#fff;
-    text-align:center;
-    padding:70px 20px;
+background:linear-gradient(135deg,#0d47a1,#1976d2);
+color:#fff;
+text-align:center;
+padding:80px 20px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
 }
 
 header h1{
-    font-size:42px;
-    margin-bottom:10px;
+font-size:45px;
+margin-bottom:15px;
+font-weight:700;
 }
 
 header p{
-    max-width:700px;
-    margin:auto;
-    font-size:17px;
-    opacity:.95;
+max-width:850px;
+margin:auto;
+font-size:18px;
+line-height:1.8;
+opacity:.95;
 }
 
-/* Section */
+/*=========================
+SECTION
+==========================*/
+
 .section{
-    width:90%;
-    max-width:1300px;
-    margin:60px auto;
+width:92%;
+max-width:1400px;
+margin:70px auto;
 }
 
 .section-title{
-    text-align:center;
-    margin-bottom:45px;
+text-align:center;
+margin-bottom:50px;
 }
 
 .section-title h2{
-    color:#0d47a1;
-    font-size:34px;
-    margin-bottom:10px;
+font-size:36px;
+color:#0d47a1;
+margin-bottom:10px;
 }
 
 .section-title p{
-    color:#666;
+color:#666;
+font-size:17px;
 }
 
-/* Grid */
+/*=========================
+GRID
+==========================*/
+
 .leaders{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
 }
 
-/* Card */
+/*=========================
+CARD
+==========================*/
+
 .card{
-    background:#fff;
-    border-radius:18px;
-    overflow:hidden;
-    box-shadow:0 12px 25px rgba(0,0,0,.08);
-    transition:.3s;
+background:#fff;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 12px 30px rgba(0,0,0,.08);
+transition:.35s;
 }
 
 .card:hover{
-    transform:translateY(-8px);
+transform:translateY(-10px);
+box-shadow:0 20px 40px rgba(0,0,0,.15);
 }
 
 .card img{
-    width:100%;
-    height:320px;
-    object-fit:cover;
+width:100%;
+height:340px;
+object-fit:cover;
+object-position:center top;
+transition:.4s;
+border-bottom:5px solid #1976d2;
+}
+
+.card:hover img{
+transform:scale(1.05);
 }
 
 .info{
-    padding:25px;
+padding:25px;
+text-align:center;
 }
 
 .info h3{
-    color:#0d47a1;
-    margin-bottom:8px;
+color:#0d47a1;
+font-size:24px;
+margin-bottom:10px;
 }
 
 .position{
-    color:#1976d2;
-    font-weight:600;
-    margin-bottom:15px;
+display:inline-block;
+background:#1976d2;
+color:#fff;
+padding:8px 18px;
+border-radius:40px;
+font-size:14px;
+font-weight:600;
+margin-bottom:20px;
 }
 
 .info p{
-    color:#666;
-    line-height:1.7;
-    margin-bottom:20px;
+color:#666;
+line-height:1.8;
+margin-bottom:20px;
+font-size:15px;
 }
 
-/* Contact */
+/*=========================
+CONTACT
+==========================*/
+
 .contact{
-    border-top:1px solid #eee;
-    padding-top:15px;
+border-top:1px solid #eee;
+padding-top:15px;
 }
 
 .contact a{
-    display:block;
-    text-decoration:none;
-    color:#333;
-    margin:10px 0;
-    transition:.3s;
+display:block;
+text-decoration:none;
+color:#444;
+margin:12px 0;
+transition:.3s;
+font-size:15px;
+}
+
+.contact a i{
+width:25px;
+color:#1976d2;
 }
 
 .contact a:hover{
-    color:#1976d2;
-    padding-left:8px;
+color:#1976d2;
+padding-left:8px;
 }
 
-/* Leadership Quote */
+/*=========================
+QUOTE
+==========================*/
+
 .quote{
-    margin-top:70px;
-    background:#1976d2;
-    color:#fff;
-    padding:60px 30px;
-    text-align:center;
-    border-radius:18px;
+margin-top:80px;
+background:linear-gradient(135deg,#1976d2,#0d47a1);
+color:white;
+padding:70px 30px;
+border-radius:20px;
+text-align:center;
 }
 
 .quote h2{
-    margin-bottom:20px;
+font-size:34px;
+margin-bottom:20px;
 }
 
 .quote p{
-    max-width:800px;
-    margin:auto;
-    line-height:1.9;
+max-width:900px;
+margin:auto;
+line-height:2;
+font-size:17px;
 }
 
-/* Footer */
+/*=========================
+FOOTER
+==========================*/
+
 footer{
-    margin-top:70px;
-    background:#0d47a1;
-    color:#fff;
-    text-align:center;
-    padding:25px;
+margin-top:70px;
+background:#0d47a1;
+color:#fff;
+padding:30px;
+text-align:center;
+font-size:15px;
 }
+
+/*=========================
+RESPONSIVE
+==========================*/
 
 @media(max-width:768px){
 
+header{
+padding:60px 20px;
+}
+
 header h1{
-    font-size:32px;
+font-size:34px;
+}
+
+header p{
+font-size:16px;
 }
 
 .card img{
-    height:280px;
+height:300px;
 }
 
 .section-title h2{
-    font-size:28px;
+font-size:30px;
+}
+
+.quote h2{
+font-size:28px;
 }
 
 }
+
 </style>
+
 </head>
+
 <body>
 
 <header>
-    <h1>Church Leadership</h1>
-    <p>
-        Meet the dedicated servants of God who provide spiritual guidance,
-        leadership, and support to the congregation of ACK St. Paul's Parish Mafisini.
-    </p>
+
+<h1>Church Leadership</h1>
+
+<p>
+
+Meet the dedicated servants of God who faithfully lead, teach, mentor and
+serve the congregation of ACK St. Paul's Parish Mafisini through spiritual
+leadership, administration and ministry.
+
+</p>
+
 </header>
+
+<section class="section">
+
+<div class="section-title">
+
+<h2>Our Church Leaders</h2>
+
+<p>
+Dedicated servants committed to advancing God's Kingdom through faithful leadership.
+</p>
+
+</div>
 
 <div class="leaders">
 
-<!-- Parish Vicar -->
+<!-- =======================
+PARISH VICAR
+======================= -->
 
 <div class="card">
 
-<img src="/static/images/rev.jpeg">
+<img src="/static/images/rev.jpeg" alt="Rev. Jackson Ruwa">
 
 <div class="info">
 
 <h3>Rev. Jackson Ruwa</h3>
 
-<div class="position">Parish Vicar</div>
+<div class="position">
+Parish Vicar
+</div>
 
 <p>
-Provides spiritual leadership to the parish through preaching,
-pastoral care, administration of the sacraments, discipleship,
-and oversight of all church ministries.
+
+Provides spiritual leadership through preaching,
+teaching God's Word, pastoral care, discipleship,
+Holy Communion, counselling and overseeing every
+church ministry.
+
 </p>
 
 <div class="contact">
 
-<a href="tel:+254700000001">
-📞 0702098431
+<a href="tel:+254702098431">
+
+<i class="fas fa-phone"></i>
+
+0702098431
+
+
 </a>
 
 <a href="mailto:vicar@ackstpaulsmafisini.org">
-✉ vicar@ackstpaulsmafisini.org
+
+<i class="fas fa-envelope"></i>
+
+vicar@ackstpaulsmafisini.org
+
 </a>
 
 </div>
@@ -220,32 +335,50 @@ and oversight of all church ministries.
 
 </div>
 
-<!-- Vicar's Warden -->
+<!-- =======================
+VICAR WARDEN
+======================= -->
 
 <div class="card">
 
-<img src="{{ url_for('static', filename='images/vicar_warden.jpg') }}" alt="Vicar's Warden">
+<img src="/static/images/vicar_warden.jpg"
+alt="Vicar Warden">
 
 <div class="info">
 
-<h3>[Vicar's Warden Name]</h3>
+<h3>Vicar's Warden</h3>
 
-<div class="position">Vicar's Warden</div>
+<div class="position">
+
+Vicar's Warden
+
+</div>
 
 <p>
-Works closely with the Parish Vicar in church leadership,
-administration, worship coordination and parish development
-to ensure the smooth running of church activities.
+
+Supports the Parish Vicar in administration,
+church planning, worship coordination,
+development projects and leadership
+of parish ministries.
+
 </p>
 
 <div class="contact">
 
 <a href="tel:+254700000002">
-📞 +254 700 000 002
+
+<i class="fas fa-phone"></i>
+
++254 700 000 002
+
 </a>
 
 <a href="mailto:vicarwarden@ackstpaulsmafisini.org">
-✉ vicarwarden@ackstpaulsmafisini.org
+
+<i class="fas fa-envelope"></i>
+
+vicarwarden@ackstpaulsmafisini.org
+
 </a>
 
 </div>
@@ -253,33 +386,49 @@ to ensure the smooth running of church activities.
 </div>
 
 </div>
-
-<!-- People's Warden -->
+<!-- =======================
+PEOPLE'S WARDEN
+======================= -->
 
 <div class="card">
 
-<img src="/static/images/pple.jpeg">
+<img src="/static/images/pple.jpeg" alt="People's Warden">
 
 <div class="info">
 
 <h3>Benson Mutiso</h3>
 
-<div class="position">People's Warden</div>
+<div class="position">
+
+People's Warden
+
+</div>
 
 <p>
-Represents the congregation by supporting church administration,
-promoting unity among members and assisting in parish activities
-and church development.
+
+Represents the congregation by promoting unity,
+supporting church administration, coordinating
+parish activities and encouraging spiritual growth
+among members.
+
 </p>
 
 <div class="contact">
 
-<a href="tel:+254700000003">
-📞 0713376415
+<a href="tel:+254713376415">
+
+<i class="fas fa-phone"></i>
+
+0713376415
+
 </a>
 
 <a href="mailto:peoplewarden@ackstpaulsmafisini.org">
-✉ peoplewarden@ackstpaulsmafisini.org
+
+<i class="fas fa-envelope"></i>
+
+peoplewarden@ackstpaulsmafisini.org
+
 </a>
 
 </div>
@@ -288,32 +437,49 @@ and church development.
 
 </div>
 
-<!-- Church Treasurer -->
+<!-- =======================
+TREASURER
+======================= -->
 
 <div class="card">
 
-<img src="{{ url_for('static', filename='images/treasurer.jpg') }}" alt="Church Treasurer">
+<img src="/static/images/treasurer.jpg" alt="Church Treasurer">
 
 <div class="info">
 
-<h3>[Treasurer Name]</h3>
+<h3>Church Treasurer</h3>
 
-<div class="position">Church Treasurer</div>
+<div class="position">
+
+Treasurer
+
+</div>
 
 <p>
-Manages the financial affairs of the parish, prepares budgets,
-maintains financial records and promotes accountability in the
-use of church resources.
+
+Responsible for budgeting, accountability,
+financial reporting, record keeping and
+ensuring proper stewardship of church
+resources.
+
 </p>
 
 <div class="contact">
 
 <a href="tel:+254700000004">
-📞 +254 700 000 004
+
+<i class="fas fa-phone"></i>
+
++254 700 000 004
+
 </a>
 
 <a href="mailto:treasurer@ackstpaulsmafisini.org">
-✉ treasurer@ackstpaulsmafisini.org
+
+<i class="fas fa-envelope"></i>
+
+treasurer@ackstpaulsmafisini.org
+
 </a>
 
 </div>
@@ -322,32 +488,55 @@ use of church resources.
 
 </div>
 
-<!-- Church Secretary -->
+<!-- =======================
+SECRETARY
+======================= -->
 
 <div class="card">
 
-<img src="/static/images/le.jpeg">
+<img src="/static/images/le.jpeg" alt="Church Secretary">
 
 <div class="info">
 
-<h3></h3>
+<h3>Rev. Jackson Ruwa and Rev. James</h3>
 
-<div class="position"></div>
+<div class="position">
+
+REV
+
+</div>
 
 <p>
-To faithfully serve God's people by providing spiritual guidance, spreading
-the Gospel of Jesus Christ, and leading the church towards growth, unity,
-and meaningful service to the community.
+
+As spiritual shepherds of ACK St. Paul's Parish Mafisini, our clergy are committed
+to faithfully proclaiming the Gospel of Jesus Christ, teaching God's Word, and
+providing Christ-centered leadership to the congregation. They serve with humility,
+integrity, and compassion through preaching, pastoral care, counselling, discipleship,
+administration of the Holy Sacraments, and community outreach. Their mission is to
+nurture spiritual growth, strengthen families, empower believers to live out their
+faith, and lead the church in fulfilling God's calling through worship, service,
+love, and unity.
+
+
 </p>
 
 <div class="contact">
 
-<a href="tel:+254700000005">
-📞 +254 700 000 005
+<a href="tel:+254702098431">
+
+<i class="fas fa-phone"></i>
+
+0702098431
+
 </a>
 
-<a href="mailto:secretary@ackstpaulsmafisini.org">
-✉ secretary@ackstpaulsmafisini.org
+<a href="mailto:vicar@ackstpaulsmafisini.org">
+
+<i class="fas fa-envelope"></i>
+
+
+vicar@ackstpaulsmafisini.org
+
 </a>
 
 </div>
@@ -356,29 +545,204 @@ and meaningful service to the community.
 
 </div>
 
+<!-- =======================
+YOUTH CHAIRPERSON
+======================= -->
+
+<div class="card">
+
+<img src="/static/images/youth_chairperson.jpg" alt="Youth Chairperson">
+
+<div class="info">
+
+<h3>Patrick</h3>
+
+<div class="position">
+
+Youth Chairperson
+
+</div>
+
+<p>
+
+Leads and coordinates the church youth ministry by inspiring young people to
+grow in their faith, participate actively in worship, discipleship, evangelism,
+leadership development, and community outreach. The Youth Chairperson works
+closely with church leadership to organize youth fellowships, conferences,
+retreats, mentorship programs, talent development, and activities that
+strengthen spiritual, social, and personal growth while empowering young
+people to become faithful disciples of Christ and future leaders of the Church.
+
+</p>
+
+<div class="contact">
+
+<a href="tel:+254700000007">
+
+<i class="fas fa-phone"></i>
+
++254 700 000 007
+
+</a>
+
+<a href="mailto:youth@ackstpaulsmafisini.org">
+
+<i class="fas fa-envelope"></i>
+
+youth@ackstpaulsmafisini.org
+
+</a>
+
 </div>
 
 </div>
+
+</div>
+
+<!-- =======================
+KEYBOARDIST
+======================= -->
+
+<div class="card">
+
+<img src="/static/images/keyboardist.jpg" alt="Church Keyboardist">
+
+<div class="info">
+
+<h3>Church Keyboardist</h3>
+
+<div class="position">
+
+Keyboardist
+
+</div>
+
+<p>
+
+Leads worship through keyboard ministry,
+supports praise and worship services,
+special events, rehearsals and helps
+create a spirit-filled worship experience.
+
+</p>
+
+<div class="contact">
+
+<a href="tel:+254 745 298817">
+
+<i class="fas fa-phone"></i>
+
++254 745 298817
+
+</a>
+
+<a href="mailto:keyboardist@ackstpaulsmafisini.org">
+
+<i class="fas fa-envelope"></i>
+
+keyboardist@ackstpaulsmafisini.org
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- =======================
+WEBSITE MANAGER
+======================= -->
+
+<div class="card">
+
+<img src="/static/images/pic3.jpeg"
+alt="James Kiilu Mutiso">
+
+<div class="info">
+
+<h3>James Kiilu Mutiso</h3>
+
+<div class="position">
+
+Website Manager & ICT Services
+
+</div>
+
+<p>
+
+Responsible for designing, developing,
+maintaining and securing the church website,
+live streaming church services, multimedia,
+technical support, digital communication,
+network administration and all ICT services
+within the church.
+
+</p>
+
+<div class="contact">
+
+<a href="tel:+254 710 329 922">
+
+<i class="fas fa-phone"></i>
+
+0710329922
+
+</a>
+
+<a href="mailto:jamesmutisokiilu@gmail.com">
+
+<i class="fas fa-envelope"></i>
+
+jamesmutisokiilu@gmail.com
+
+</a>
+
+<a href="https://github.com" target="_blank">
+
+<i class="fab fa-github"></i>
+
+GitHub
+
+</a>
+
+</div>
+
+</div>
+
 </div>
 
 </div>
 
 <div class="quote">
+
 <h2>Our Calling</h2>
+
 <p>
-"Our leadership is committed to serving Christ by nurturing faith,
-building strong families, reaching the community with God's love,
-and creating an environment where every believer can grow spiritually
-and use their gifts in ministry."
+
+"Our leadership is committed to serving Christ
+with humility, integrity and love. Together we
+seek to nurture faith, strengthen families,
+empower youth, reach the community with the
+Gospel and provide an environment where every
+believer can discover and use their gifts in
+the service of God."
+
 </p>
+
 </div>
 
 </section>
 
 <footer>
+
 <p>
-© 2026 ACK St. Paul's Parish Mafisini | All Rights Reserved.
+
+© 2026 ACK St. Paul's Parish Mafisini |
+All Rights Reserved.
+
 </p>
+
 </footer>
 
 </body>

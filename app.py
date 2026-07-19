@@ -267,20 +267,14 @@ class DiscussionLike(db.Model):
     )
 
 
-class ChurchSettings(db.Model):
+class Settings(db.Model):
 
-    __tablename__ = "church_settings"
-
-    id = db.Column(
-        db.Integer,
-        primary_key=True
-    )
+    id = db.Column(db.Integer, primary_key=True)
 
     church_name = db.Column(db.String(200))
-    church_motto = db.Column(db.String(255))
-    vicar = db.Column(db.String(150))
-    established = db.Column(db.String(20))
-
+    church_motto = db.Column(db.String(300))
+    vicar = db.Column(db.String(200))
+    established = db.Column(db.String(50))
     address = db.Column(db.Text)
     description = db.Column(db.Text)
 
@@ -288,16 +282,14 @@ class ChurchSettings(db.Model):
     alt_phone = db.Column(db.String(50))
     email = db.Column(db.String(150))
     website = db.Column(db.String(200))
-
     office_hours = db.Column(db.String(200))
-    postal_address = db.Column(db.String(100))
+    postal_address = db.Column(db.String(200))
     county = db.Column(db.String(100))
-    location = db.Column(db.String(150))
+    location = db.Column(db.String(200))
     google_maps = db.Column(db.Text)
 
     theme = db.Column(db.String(50))
     language = db.Column(db.String(50))
-
     welcome_message = db.Column(db.Text)
 
     show_sermons = db.Column(db.String(20))
@@ -316,9 +308,11 @@ class ChurchSettings(db.Model):
     two_factor = db.Column(db.String(20))
     auto_backup = db.Column(db.String(20))
 
-    created_at = db.Column(
+    logo = db.Column(db.String(200))
+    updated_at = db.Column(
         db.DateTime,
-        default=datetime.utcnow
+        default=datetime.utcnow,
+        onupdate=datetime.utcnow
     )
 
 
@@ -569,118 +563,105 @@ def register():
 # WEBSITE SETTINGS
 # ==========================================================
 
-@app.route("/settings", methods=["GET", "POST"])
-@login_required
+@app.route("/settings", methods=["GET","POST"])
 def settings():
 
-    settings = ChurchSettings.query.first()
+    setting = Settings.query.first()
 
 
-    if request.method == "POST":
+    if setting is None:
 
+        setting = Settings(
+            church_name="ACK St. Paul's Parish Mafisini",
+            church_motto="Walking Together in Faith, Hope and Love",
+            theme="blue",
+            language="English"
+        )
 
-        if not settings:
-
-            settings = ChurchSettings()
-
-            db.session.add(settings)
-
-
-
-        settings.church_name = request.form.get("church_name")
-
-        settings.church_motto = request.form.get("church_motto")
-
-        settings.vicar = request.form.get("vicar")
-
-        settings.established = request.form.get("established")
-
-
-        settings.address = request.form.get("address")
-
-        settings.description = request.form.get("description")
-
-
-        settings.phone = request.form.get("phone")
-
-        settings.alt_phone = request.form.get("alt_phone")
-
-        settings.email = request.form.get("email")
-
-        settings.website = request.form.get("website")
-
-
-        settings.office_hours = request.form.get("office_hours")
-
-        settings.postal_address = request.form.get("postal_address")
-
-        settings.county = request.form.get("county")
-
-        settings.location = request.form.get("location")
-
-        settings.google_maps = request.form.get("google_maps")
-
-
-        settings.theme = request.form.get("theme")
-
-        settings.language = request.form.get("language")
-
-        settings.welcome_message = request.form.get("welcome_message")
-
-
-        settings.show_sermons = request.form.get("show_sermons")
-
-        settings.show_events = request.form.get("show_events")
-
-        settings.prayer_requests = request.form.get("prayer_requests")
-
-        settings.visitor_registration = request.form.get("visitor_registration")
-
-
-        settings.email_notifications = request.form.get("email_notifications")
-
-        settings.prayer_notifications = request.form.get("prayer_notifications")
-
-        settings.event_notifications = request.form.get("event_notifications")
-
-        settings.newsletter_notifications = request.form.get("newsletter_notifications")
-
-        settings.system_alerts = request.form.get("system_alerts")
-
-        settings.backup_reminder = request.form.get("backup_reminder")
-
-
-        settings.session_timeout = request.form.get("session_timeout")
-
-        settings.two_factor = request.form.get("two_factor")
-
-        settings.auto_backup = request.form.get("auto_backup")
+        db.session.add(setting)
+        db.session.commit()
 
 
 
-        try:
-
-            db.session.commit()
+    if request.method=="POST":
 
 
-            flash(
-                "Website settings updated successfully.",
-                "success"
-            )
+        setting.church_name=request.form.get("church_name")
+
+        setting.church_motto=request.form.get("church_motto")
+
+        setting.vicar=request.form.get("vicar")
+
+        setting.established=request.form.get("established")
+
+        setting.address=request.form.get("address")
+
+        setting.description=request.form.get("description")
 
 
-        except Exception as e:
+        setting.phone=request.form.get("phone")
 
-            db.session.rollback()
+        setting.alt_phone=request.form.get("alt_phone")
 
-            print(e)
+        setting.email=request.form.get("email")
+
+        setting.website=request.form.get("website")
+
+        setting.office_hours=request.form.get("office_hours")
+
+        setting.postal_address=request.form.get("postal_address")
+
+        setting.county=request.form.get("county")
+
+        setting.location=request.form.get("location")
+
+        setting.google_maps=request.form.get("google_maps")
 
 
-            flash(
-                "Unable to save settings.",
-                "danger"
-            )
+        setting.theme=request.form.get("theme")
 
+        setting.language=request.form.get("language")
+
+        setting.welcome_message=request.form.get("welcome_message")
+
+
+        setting.show_sermons=request.form.get("show_sermons")
+
+        setting.show_events=request.form.get("show_events")
+
+        setting.prayer_requests=request.form.get("prayer_requests")
+
+        setting.visitor_registration=request.form.get("visitor_registration")
+
+
+        setting.email_notifications=request.form.get("email_notifications")
+
+        setting.prayer_notifications=request.form.get("prayer_notifications")
+
+        setting.event_notifications=request.form.get("event_notifications")
+
+        setting.newsletter_notifications=request.form.get("newsletter_notifications")
+
+        setting.system_alerts=request.form.get("system_alerts")
+
+        setting.backup_reminder=request.form.get("backup_reminder")
+
+
+        setting.session_timeout=request.form.get("session_timeout")
+
+        setting.two_factor=request.form.get("two_factor")
+
+        setting.auto_backup=request.form.get("auto_backup")
+
+
+
+        db.session.commit()
+
+
+        flash(
+            "Website settings saved successfully",
+            "success"
+        )
 
 
         return redirect(
@@ -691,7 +672,7 @@ def settings():
 
     return render_template(
         "settings.html",
-        settings=settings
+        setting=setting
     )
 
 

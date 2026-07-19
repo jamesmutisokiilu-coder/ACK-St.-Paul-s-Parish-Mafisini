@@ -468,6 +468,26 @@ def register():
 # LOGIN
 # ==========================================================
 
+
+
+
+# ==========================================================
+# CHURCH MEMBERS
+# ==========================================================
+
+@app.route("/church-users")
+@login_required
+def church_users():
+
+    users = User.query.order_by(
+        User.created_at.desc()
+    ).all()
+
+    return render_template(
+        "church_users.html",
+        users=users
+    )
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -1451,6 +1471,7 @@ def health():
         "database": "connected"
 
     })
+    
 
 
 if __name__ == "__main__":

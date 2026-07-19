@@ -104,12 +104,22 @@ class Event(db.Model):
     )
 
     date = db.Column(
-        db.String(50)
+        db.String(50),
+        nullable=False
     )
 
     description = db.Column(
-        db.Text
+        db.Text,
+        nullable=False
     )
+
+    created_at = db.Column(
+        db.DateTime,
+        default=datetime.utcnow
+    )
+
+    def __repr__(self):
+        return f"<Event {self.title}>"
 
 
 class Sermon(db.Model):

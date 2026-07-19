@@ -780,33 +780,53 @@ def dashboard():
 # REPORTS DASHBOARD
 # ==========================================================
 
+# ==========================================================
+# CHURCH REPORTS SYSTEM
+# ==========================================================
+
 @app.route("/reports")
 def reports():
 
-    members = Member.query.all()
+    # Registered church users / members
+    members = User.query.order_by(User.id.desc()).all()
 
-    events = Event.query.all()
+    # Church events
+    events = Event.query.order_by(Event.id.desc()).all()
 
-    sermons = Sermon.query.all()
+    # Sermons
+    sermons = Sermon.query.order_by(Sermon.id.desc()).all()
 
-    prayers = PrayerRequest.query.all()
+    # Prayer requests
+    prayer_requests = PrayerRequest.query.order_by(
+        PrayerRequest.id.desc()
+    ).all()
 
-    baptisms = Baptism.query.all()
+    # Baptism registrations
+    baptisms = Baptism.query.order_by(
+        Baptism.id.desc()
+    ).all()
 
-    weddings = Wedding.query.all()
+    # Wedding bookings
+    weddings = Wedding.query.order_by(
+        Wedding.id.desc()
+    ).all()
 
 
     return render_template(
         "reports.html",
+
         members=members,
+
         events=events,
+
         sermons=sermons,
-        prayers=prayers,
+
+        prayer_requests=prayer_requests,
+
         baptisms=baptisms,
+
         weddings=weddings
     )
-
-
 
 # ==========================================================
 # PDF GENERATOR FUNCTION
